@@ -9,6 +9,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
+import 'dotenv/config'
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
@@ -20,6 +21,7 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://www.paypal.com/sdk/js?client-id=ASi0nLR3W3Z5QQ-37Prv41WJ_EywNp5ttaLY2RUdVuhc_d7D17tIBZuWk3OmBhFbG31NEz2McKhVQTB9&currency=HUF"></script>
         <Meta />
         <Links />
       </head>
