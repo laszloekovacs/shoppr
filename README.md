@@ -41,3 +41,5 @@ Make sure to deploy the output of `remix build`
 [![Mongoose](https://img.shields.io/badge/Mongoose-4DB33D?style=for-the-badge&logo=mongoose)](https://mongoosejs.com/)
 [![React](https://img.shields.io/badge/React-61DBFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![Remix](https://img.shields.io/badge/Remix-cyan?style=for-the-badge&logo=remix&logoColor=black)](https://remix.run/)
+
+[![forthebadge](https://forthebadge.com/images/badges/0-percent-optimized.svg)](https://forthebadge.com)
