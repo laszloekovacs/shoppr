@@ -1,9 +1,10 @@
 import mongoose, { Schema } from 'mongoose'
 import 'dotenv/config'
+import kleur from 'kleur'
 
-const productSchema = new mongoose.Schema(
+const productSchema = new Schema(
   {
-    name: { type: Schema.Types.String, required: true },
+    name: { type: Schema.Types.String, required: true, unique: true },
     description: { type: Schema.Types.String },
   },
   {
@@ -11,13 +12,22 @@ const productSchema = new mongoose.Schema(
   }
 )
 
-export const Product = mongoose.model('Product', productSchema)
+export const Product =
+  mongoose.models.Product || mongoose.model('Product', productSchema)
 
-// initialize mongoose connection
 export const connectMongo = async () => {
   try {
+    if (!process.env.MONGO_URI) {
+      console.log(kleur.bgRed('mongoose') + ' MONGO_URI not found')
+      process.exit(1)
+    }
+
     await mongoose.connect(process.env.MONGO_URI!)
+    console.log(kleur.black().bgGreen(' mongoose ') + ' MongoDB connected')
   } catch (error) {
     console.log(error)
+    process.exit(1)
   }
 }
+
+connectMongo()

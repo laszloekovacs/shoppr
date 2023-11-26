@@ -1,5 +1,5 @@
-import { ActionFunction, json } from '@remix-run/node'
-import { Form, useActionData } from '@remix-run/react'
+import { ActionFunction, LoaderFunction, json } from '@remix-run/node'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
 import chalk from 'chalk'
 import createLogger from '~/features/logger'
 import { Product } from '~/mongo/index'
@@ -20,7 +20,16 @@ export const action: ActionFunction = async ({ request }) => {
   return null
 }
 
+export const loader: LoaderFunction = async ({ request }) => {
+  // query all products
+  const products = await Product.find()
+
+  return products
+}
+
 const ProductPage = () => {
+  const products = useLoaderData<typeof loader>()
+
   return (
     <div>
       <Form method="post">
@@ -28,6 +37,15 @@ const ProductPage = () => {
         <input type="text" name="description" placeholder="description" />
         <input type="submit" value="Submit" />
       </Form>
+      <hr />
+      <div>
+        {products.map((product) => (
+          <div key={product._id}>
+            <p>{product.name}</p>
+            <p>{product.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
