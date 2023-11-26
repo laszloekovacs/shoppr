@@ -1,7 +1,5 @@
 import { ActionFunction, LoaderFunction, json } from '@remix-run/node'
 import { Form, useActionData, useLoaderData } from '@remix-run/react'
-import chalk from 'chalk'
-import createLogger from '~/features/logger'
 import { Product } from '~/mongo/index'
 
 export const action: ActionFunction = async ({ request }) => {

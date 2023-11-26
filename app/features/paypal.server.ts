@@ -1,10 +1,5 @@
 import 'dotenv/config'
-import chalk from 'chalk'
-import createLogger from './logger'
 import assert from 'assert'
-
-const logOk = createLogger('paypal', chalk.cyan, chalk.bgCyan)
-const logError = createLogger('paypal', chalk.red, chalk.bgRed)
 
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_ENDPOINT } = process.env
 assert(PAYPAL_CLIENT_SECRET, 'Missing PAYPAL_CLIENT_SECRET')
@@ -35,7 +30,7 @@ export const getAccessToken = async () => {
 
     return data.access_token
   } catch (error) {
-    logError(error)
+    console.log(error)
   }
 }
 
@@ -45,8 +40,6 @@ export const getAccessToken = async () => {
  */
 const createOrder = async (cart: string) => {
   try {
-    logOk('Creating order ' + JSON.stringify(cart))
-
     const token = await getAccessToken()
     const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders`
     const payload = {
@@ -73,7 +66,7 @@ const createOrder = async (cart: string) => {
     const data = await res.json()
     return data
   } catch (error) {
-    logError(error)
+    process.exit(1)
   }
 }
 
@@ -97,6 +90,6 @@ const captureOrder = async (cart: string) => {
     const data = await res.json()
     return data
   } catch (error) {
-    logError(error)
+    process.exit(1)
   }
 }
