@@ -2,28 +2,34 @@ import { ActionFunction, json } from '@remix-run/node'
 import { Form, useActionData } from '@remix-run/react'
 import chalk from 'chalk'
 import createLogger from '~/features/logger'
-
-const logOk = createLogger('product', chalk.bgYellow, chalk.black)
+import { Product } from '~/mongo/index'
 
 export const action: ActionFunction = async ({ request }) => {
+  // get the inputs
   const formData = await request.formData()
   const inputs = Object.fromEntries(formData)
-  logOk(inputs)
-  return json({ ok: true })
+
+  // create a new product
+  const product = new Product({
+    name: inputs.product,
+    description: inputs.description,
+  })
+
+  product.save()
+
+  return null
 }
 
-const Product = () => {
-  const data = useActionData<typeof action>()
-
+const ProductPage = () => {
   return (
-    <Form method="post">
-      <input type="text" name="product" placeholder="product name" />
-      <input type="submit" value="Submit" />
-      <div>
-        <p>{data ? 'okay' : 'not yet'}</p>
-      </div>
-    </Form>
+    <div>
+      <Form method="post">
+        <input type="text" name="product" placeholder="product name" required />
+        <input type="text" name="description" placeholder="description" />
+        <input type="submit" value="Submit" />
+      </Form>
+    </div>
   )
 }
 
-export default Product
+export default ProductPage
