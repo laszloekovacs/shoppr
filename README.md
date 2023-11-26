@@ -41,3 +41,5 @@ Make sure to deploy the output of `remix build`
 [![React](https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-blue?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Mongoose](https://img.shields.io/badge/Mongoose-blue?style=for-the-badge&logo=mongoose&logoColor=white)](https://mongoosejs.com/)
+
+[![React](https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)

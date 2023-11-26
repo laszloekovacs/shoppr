@@ -11,10 +11,22 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 
+/*
+google fonts, move the whole shebang somewhere else
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
+
+font-family: 'Open Sans', sans-serif;
+font-family: 'Poppins', sans-serif;
+*/
+import stylesheet from '~/style.css'
+
 export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+  { rel: 'stylesheet', href: stylesheet },
 ]
 
+/* inject paypal client id */
 export const loader: LoaderFunction = async () => {
   return json({
     clientId: process.env.PAYPAL_CLIENT_ID,
