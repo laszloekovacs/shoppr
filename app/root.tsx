@@ -24,7 +24,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Link to="/buy">buy</Link>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
