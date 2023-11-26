@@ -37,9 +37,7 @@ Make sure to deploy the output of `remix build`
 - `build/`
 - `public/build/`
 
-[![Remix](https://img.shields.io/badge/Remix-blue?style=for-the-badge&logo=remix&logoColor=white)](https://remix.run/)
-[![React](https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-blue?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Mongoose](https://img.shields.io/badge/Mongoose-blue?style=for-the-badge&logo=mongoose&logoColor=white)](https://mongoosejs.com/)
-
-[![React](https://img.shields.io/badge/React-blue?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-4DB33D?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Mongoose](https://img.shields.io/badge/Mongoose-4DB33D?style=for-the-badge&logo=mongoose)](https://mongoosejs.com/)
+[![React](https://img.shields.io/badge/React-61DBFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Remix](https://img.shields.io/badge/Remix-cyan?style=for-the-badge&logo=remix&logoColor=black)](https://remix.run/)
