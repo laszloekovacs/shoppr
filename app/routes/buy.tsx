@@ -1,20 +1,14 @@
+import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js'
+
 import chalk from 'chalk'
 import createLogger from '~/features/logger'
 
-const logger = createLogger('loader', chalk.bgMagenta, chalk.black)
+const logOk = createLogger('loader', chalk.bgMagenta, chalk.black)
 
 const Buy = () => {
-  const createOrder = async (data: any, actions: any) => ''
+  const [{ isPending }] = usePayPalScriptReducer()
 
-  const onApprove = async (data: any, actions: any) => {}
-
-  //<PayPalButtons createOrder={createOrder} onApprove={onApprove} />
-  return (
-    <div>
-      <h1>Buy Stuff</h1>
-      <div></div>
-    </div>
-  )
+  return <>{!isPending && <PayPalButtons />}</>
 }
 
 export default Buy

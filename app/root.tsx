@@ -1,20 +1,29 @@
+import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { cssBundleHref } from '@remix-run/css-bundle'
-import type { LinksFunction } from '@remix-run/node'
+import { json, type LinksFunction, type LoaderFunction } from '@remix-run/node'
 import {
-  Link,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from '@remix-run/react'
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ]
 
+export const loader: LoaderFunction = async () => {
+  return json({
+    clientId: process.env.PAYPAL_CLIENT_ID,
+  })
+}
+
 export default function App() {
+  const { clientId } = useLoaderData<typeof loader>()
+
   return (
     <html lang="en">
       <head>
@@ -24,7 +33,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <PayPalScriptProvider
+          options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
+        >
+          <Outlet />
+        </PayPalScriptProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
