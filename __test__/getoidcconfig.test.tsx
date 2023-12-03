@@ -11,4 +11,10 @@ describe('get OICD config', () => {
     expect(result).toHaveProperty('jwks_uri')
     expect(result).toHaveProperty('userinfo_endpoint')
   })
+
+  it('for convinience, dumps the object to a snapshot', async () => {
+    const result = await getOIDCConfig()
+
+    expect(result).toMatchSnapshot()
+  })
 })

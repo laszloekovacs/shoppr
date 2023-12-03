@@ -1,8 +1,6 @@
 import 'dotenv/config'
 
 export const getOIDCConfig = async () => {
-  assert(process.env.AUTH0_DOMAIN)
-
   // create the endpoint url
   const url = `https://${process.env.AUTH0_DOMAIN}/.well-known/openid-configuration`
 
