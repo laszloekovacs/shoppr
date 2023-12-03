@@ -1,5 +1,4 @@
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
-import { cssBundleHref } from '@remix-run/css-bundle'
 import { json, type LinksFunction, type LoaderFunction } from '@remix-run/node'
 import {
   Links,
@@ -11,19 +10,14 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 
-/*
-google fonts, move the whole shebang somewhere else
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
-
-font-family: 'Open Sans', sans-serif;
-font-family: 'Poppins', sans-serif;
-*/
-import stylesheet from '~/style.css'
-
 export const links: LinksFunction = () => [
-  { rel: 'stylesheet', href: stylesheet },
+  {
+    rel: 'stylesheet',
+    href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
+    integrity:
+      'sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN',
+    crossOrigin: 'anonymous',
+  },
 ]
 
 /* inject paypal client id */
@@ -37,7 +31,7 @@ export default function App() {
   const { clientId } = useLoaderData<typeof loader>()
 
   return (
-    <html lang="en">
+    <html lang="en" data-bs-theme="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
