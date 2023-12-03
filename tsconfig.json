@@ -5,6 +5,9 @@
     "**/*.tsx"
   ],
   "compilerOptions": {
+    "types": [
+      "vitest/globals"
+    ],
     "lib": [
       "DOM",
       "DOM.Iterable",

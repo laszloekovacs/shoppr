@@ -1,18 +1,14 @@
-/**
- * @jest-environment jsdom
- */
-import { describe, it, expect } from 'vitest'
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import Header from '../app/components/header'
 
 describe('Header', () => {
   let container: HTMLElement
 
-  it('renders', async () => {
+  it('renders into the document', async () => {
     render(<Header />)
+    const header = document.querySelector('header')
 
-    const header = await screen.findByText('Header')
-
-    expect(header).not.toBeNull()
+    expect(header).toBeInTheDocument()
   })
 })
