@@ -30,4 +30,4 @@ export const connectMongo = async () => {
   }
 }
 
-connectMongo()
+//connectMongo()
