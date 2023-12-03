@@ -4,6 +4,8 @@ import {
   type LoaderFunction,
 } from '@remix-run/node'
 import { getSession, commitSession } from '~/services/session.server'
+import jwt from 'jsonwebtoken'
+import { config } from './api.auth.login'
 
 /* oauth redirects to here, posts the token in a form */
 export const action: ActionFunction = async ({ request }) => {
@@ -17,6 +19,8 @@ export const action: ActionFunction = async ({ request }) => {
   if (!token || !state) {
     throw new Error('Missing token or state')
   }
+
+  //jwt.verify(token.toString(), config.jwks_uri)
 
   // for now, set the token in the session
 

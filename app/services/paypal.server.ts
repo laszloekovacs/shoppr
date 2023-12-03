@@ -11,27 +11,23 @@ assert(PAYPAL_ENDPOINT, 'Missing PAYPAL_ENDPOINT')
  * @see https://developer.paypal.com/api/rest/authentication/
  */
 export const getAccessToken = async () => {
-  try {
-    const credentials = Buffer.from(
-      `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`,
-      'utf-8'
-    ).toString('base64')
+  const credentials = Buffer.from(
+    `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`,
+    'utf-8'
+  ).toString('base64')
 
-    const res = await fetch(`${PAYPAL_ENDPOINT}/v1/oauth2/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Basic ${credentials}`,
-      },
-      body: 'grant_type=client_credentials',
-    })
+  const res = await fetch(`${PAYPAL_ENDPOINT}/v1/oauth2/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Authorization: `Basic ${credentials}`,
+    },
+    body: 'grant_type=client_credentials',
+  })
 
-    const data = await res.json()
+  const data = await res.json()
 
-    return data.access_token
-  } catch (error) {
-    console.log(error)
-  }
+  return data.access_token
 }
 
 /**
@@ -39,35 +35,31 @@ export const getAccessToken = async () => {
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
 const createOrder = async (cart: string) => {
-  try {
-    const token = await getAccessToken()
-    const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders`
-    const payload = {
-      intent: 'CAPTURE',
-      purchase_units: [
-        {
-          amount: {
-            currency_code: 'HUF',
-            value: '500.00',
-          },
+  const token = await getAccessToken()
+  const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders`
+  const payload = {
+    intent: 'CAPTURE',
+    purchase_units: [
+      {
+        amount: {
+          currency_code: 'HUF',
+          value: '500.00',
         },
-      ],
-    }
-
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(payload),
-    })
-
-    const data = await res.json()
-    return data
-  } catch (error) {
-    process.exit(1)
+    ],
   }
+
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(payload),
+  })
+
+  const data = await res.json()
+  return data
 }
 
 /**
@@ -75,21 +67,17 @@ const createOrder = async (cart: string) => {
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_capture
  */
 const captureOrder = async (cart: string) => {
-  try {
-    const token = await getAccessToken()
-    const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders/${cart}/capture`
+  const token = await getAccessToken()
+  const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders/${cart}/capture`
 
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  })
 
-    const data = await res.json()
-    return data
-  } catch (error) {
-    process.exit(1)
-  }
+  const data = await res.json()
+  return data
 }

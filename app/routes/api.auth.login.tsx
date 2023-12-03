@@ -8,10 +8,11 @@ type oidc = {
   userinfo_endpoint: string
 }
 
+export const config: oidc = await getOIDCConfig()
+
 /* start the login process by redirecting to the endpoint */
 export const loader: LoaderFunction = async () => {
   try {
-    const config: oidc = await getOIDCConfig()
     const endpoint = new URL(config.authorization_endpoint)
 
     const nonce = crypto.getRandomValues(new Uint32Array(1))[0].toString()
