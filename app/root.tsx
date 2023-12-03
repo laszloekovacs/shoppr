@@ -10,6 +10,7 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 
+/* inject bootstrap */
 export const links: LinksFunction = () => [
   {
     rel: 'stylesheet',
