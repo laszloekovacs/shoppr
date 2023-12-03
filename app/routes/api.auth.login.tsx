@@ -21,7 +21,7 @@ export const loader: LoaderFunction = async () => {
     endpoint.searchParams.append('scope', 'openid profile')
     endpoint.searchParams.append('response_type', 'id_token')
     endpoint.searchParams.append('client_id', process.env.AUTH0_CLIENT_ID!)
-    //endpoint.searchParams.append('audience', process.env.AUTH0_AUDIENCE!)
+    endpoint.searchParams.append('response_mode', 'form_post')
     endpoint.searchParams.append(
       'redirect_uri',
       process.env.AUTH0_REDIRECT_URI!
