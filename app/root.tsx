@@ -39,14 +39,16 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <PayPalScriptProvider
-          options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
-        >
-          <Outlet />
-        </PayPalScriptProvider>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <div className="container-fluid">
+          <PayPalScriptProvider
+            options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
+          >
+            <Outlet />
+          </PayPalScriptProvider>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </div>
       </body>
     </html>
   )
