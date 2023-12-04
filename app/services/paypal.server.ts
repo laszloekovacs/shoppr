@@ -1,10 +1,6 @@
 import 'dotenv/config'
-import assert from 'assert'
 
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_ENDPOINT } = process.env
-assert(PAYPAL_CLIENT_SECRET, 'Missing PAYPAL_CLIENT_SECRET')
-assert(PAYPAL_CLIENT_ID, 'Missing PAYPAL_CLIENT_ID')
-assert(PAYPAL_ENDPOINT, 'Missing PAYPAL_ENDPOINT')
 
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
