@@ -1,15 +1,17 @@
 import chalk from 'chalk'
 
-export const config: Record<string, string | undefined> = {
+export const config = {
   /* auth 0  */
-  AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET!,
-  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID!,
-  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN!,
-  AUTH0_REDIRECT_URI: process.env.AUTH0_REDIRECT_URI!,
+  AUTH0_CLIENT_SECRET: process.env.AUTH0_CLIENT_SECRET || '',
+  AUTH0_CLIENT_ID: process.env.AUTH0_CLIENT_ID || '',
+  AUTH0_DOMAIN: process.env.AUTH0_DOMAIN || '',
+  AUTH0_REDIRECT_URI: process.env.AUTH0_REDIRECT_URI || '',
 
   /* paypal */
-  PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID!,
+  PAYPAL_CLIENT_ID: process.env.PAYPAL_CLIENT_ID || '',
 }
+
+export type Config = typeof config
 
 /**
  * Checks the configuration for any missing environment variables.
@@ -20,7 +22,7 @@ export const checkConfig = () => {
 
   /* loop trough keys, record missing keys */
   for (let key in config) {
-    if (config.hasOwnProperty(key) && config[key] == undefined) {
+    if (!config[key as keyof Config]) {
       missingEnvs.push(key)
     }
   }
