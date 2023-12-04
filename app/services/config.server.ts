@@ -27,11 +27,11 @@ export const checkConfig = () => {
 
   if (missingEnvs.length > 0) {
     console.log(
-      `${chalk.red('❌')} Missing environment variables: ${missingEnvs.join(
+      `${chalk.red('❌')} Undefined environment variables: ${missingEnvs.join(
         ', '
       )}`
     )
-    process.exit(1)
+    throw new Error('Missing environment variables')
   }
 }
 
