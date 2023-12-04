@@ -5,7 +5,7 @@ import { isWebKeySetSchema } from '../app/services/webkeyset.server'
 import {
   getOpenIDConfig,
   getOpenIDPublicKeys,
-} from '../app/services/openid.server'
+} from '../app/services/auth.server'
 
 describe('openid', () => {
   it('gets the configuration', async () => {
