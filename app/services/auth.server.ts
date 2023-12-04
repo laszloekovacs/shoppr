@@ -9,7 +9,7 @@ import {
   AUTH0_DOMAIN,
   AUTH0_CALLBACK_URI,
   SECRETS,
-} from '~/constants/index.server'
+} from '../constants/index.server'
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {

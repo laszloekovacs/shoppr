@@ -1,7 +1,7 @@
 import type { LoaderFunction } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
-import { auth } from '~/services/auth.server'
+import { auth } from '../services/auth.server'
 
 export const loader: LoaderFunction = async ({ request }) => {
   const profile = await auth.isAuthenticated(request, {

@@ -10,7 +10,7 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 
-import { PAYPAL_CLIENT_ID } from '~/constants/index.server'
+import { PAYPAL_CLIENT_ID } from '../app/constants/index.server'
 
 /* inject bootstrap */
 export const links: LinksFunction = () => [

@@ -1,7 +1,12 @@
 import React from 'react'
+import Session from './session'
 
 const Header = () => {
-  return <header>Header</header>
+  return (
+    <header>
+      <Session />
+    </header>
+  )
 }
 
 export default Header

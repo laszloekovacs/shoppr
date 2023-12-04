@@ -1,3 +1,4 @@
+/*
 import mongoose, { Schema } from 'mongoose'
 import 'dotenv/config'
 import kleur from 'kleur'
@@ -31,3 +32,4 @@ export const connectMongo = async () => {
 }
 
 //connectMongo()
+*/
