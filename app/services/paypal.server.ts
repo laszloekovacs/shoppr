@@ -1,6 +1,8 @@
-import 'dotenv/config'
-
-const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PAYPAL_ENDPOINT } = process.env
+import {
+  PAYPAL_CLIENT_ID,
+  PAYPAL_CLIENT_SECRET,
+  PAYPAL_ENDPOINT,
+} from 'app/constants/index.server'
 
 /**
  * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.

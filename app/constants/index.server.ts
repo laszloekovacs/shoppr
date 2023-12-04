@@ -7,3 +7,5 @@ export const AUTH0_RETURN_TO_URL = process.env.AUTH0_RETURN_TO_URL!
 export const SECRETS = process.env.SECRETS!
 
 export const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID!
+export const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET!
+export const PAYPAL_ENDPOINT = process.env.PAYPAL_ENDPOINT!
