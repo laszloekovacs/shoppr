@@ -1,14 +1,22 @@
-import { config } from './environment.server'
+import yup from 'yup'
 import chalk from 'chalk'
-
+import { getEnv } from './environment.server'
 const prefix = chalk.bgCyan('[api/auth] ')
 
-export type OpenIdConfig = {
-  authorization_endpoint: string
-  token_endpoint: string
-  jwks_uri: string
-  userinfo_endpoint: string
-}
+const configSchema = yup.object({
+  authorization_endpoint: yup.string().url().required(),
+  token_endpoint: yup.string().url().required(),
+  id_token_signing_alg_values_supported: yup
+    .array(yup.string().required())
+    .required(),
+  jwks_uri: yup.string().url().required(),
+  userinfo_endpoint: yup.string().url().required(),
+  token_endpoint_auth_signing_alg_values_supported: yup
+    .array(yup.string().required())
+    .required(),
+})
+
+export type OpenIDConfig = yup.InferType<typeof configSchema>
 
 /**
  * Checks if the given data is a valid OpenIdConfig object.
@@ -16,23 +24,8 @@ export type OpenIdConfig = {
  * @param {any} data - The data to be checked.
  * @return {boolean} Returns true if the data is a valid OpenIdConfig object, otherwise false.
  */
-const isOpenIdConfig = (data: any): data is OpenIdConfig => {
-  // is an object
-  if (typeof data !== 'object') {
-    return false
-  }
-
-  // endpoints are valid urls
-  try {
-    new URL(data.authorization_endpoint)
-    new URL(data.token_endpoint)
-    new URL(data.jwks_uri)
-    new URL(data.userinfo_endpoint)
-  } catch {
-    return false
-  }
-
-  return true
+const isOpenIDConfig = (data: any): data is OpenIDConfig => {
+  return configSchema.isValidSync(data)
 }
 
 /**
@@ -41,39 +34,38 @@ const isOpenIdConfig = (data: any): data is OpenIdConfig => {
  */
 const createOpenIDConfigFetcher = () => {
   // keep the cache in the closure
-  let cache: OpenIdConfig | null = null
+  let cache: OpenIDConfig | null = null
 
   // create the endpoint url
-  const url = `https://${config.AUTH0_DOMAIN}/.well-known/openid-configuration`
+  const url = `https://${getEnv(
+    'AUTH0_DOMAIN'
+  )}/.well-known/openid-configuration`
 
   return async () => {
     // use cache if available, the endpoints wont change a lot
     if (cache) {
-      console.log(prefix, 'Using cached config')
+      console.log(prefix + 'Using cached config')
       return cache
     }
 
-    try {
-      // fetch the config
-      const res = await fetch(url)
+    // fetch the config
+    const res = await fetch(url)
 
-      if (!res.ok) {
-        throw new Error(`Failed to fetch OIDC config: ${res.statusText}`)
-      }
+    if (!res.ok) {
+      throw new Error(
+        `${prefix} Failed to fetch OIDC config: ${res.statusText}`
+      )
+    }
 
-      // unpack
-      const data = await res.json()
+    // unpack
+    const data = await res.json()
 
-      // if the config is valid, cache and return, orherwise throw
-      if (isOpenIdConfig(data)) {
-        cache = data
-        return cache
-      }
-
-      throw new Error('Invalid OpenID Connect config')
-    } catch (error) {
-      console.log(prefix, `Failed to fetch config from ${url}`)
-      throw error
+    // if the config is valid, cache and return, orherwise throw
+    if (isOpenIDConfig(data)) {
+      cache = data
+      return cache
+    } else {
+      throw new Error(prefix + 'Invalid OpenID Connect config')
     }
   }
 }
@@ -88,6 +80,7 @@ export const getOpenIDConfig = createOpenIDConfigFetcher()
  */
 export const getOpenIDPublicKey = async () => {
   const config = await getOpenIDConfig()
+
   const res = await fetch(config.jwks_uri)
   const data = await res.json()
 
@@ -104,12 +97,15 @@ export const getOpenIDPublicKey = async () => {
   }
 }
 
-export const verifyIdToken = async (token: string) => {
-  const config = await getOpenIDConfig()
+export const verifyOpenIDToken = async (token: string) => {
+  const configPromise = getOpenIDConfig()
+  const publickeyPromise = getOpenIDPublicKey()
 
-  // get the public key from endpoint
-  const publickey = await getOpenIDPublicKey()
+  /* get the config and public key independently */
+  const [config, publickey] = await Promise.all([
+    configPromise,
+    publickeyPromise,
+  ])
 
-  // get the supported algorithms
-  //
+  //const algorithms =
 }
