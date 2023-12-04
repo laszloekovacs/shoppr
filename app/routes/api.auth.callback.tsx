@@ -6,7 +6,10 @@ import {
 import { getSession, commitSession } from '~/services/session.server'
 import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
-import { getOpenIDPublicKeys } from '~/services/openid.server'
+import {
+  getOpenIDPublicKeys,
+  verifyOpenIDToken,
+} from '~/services/openid.server'
 
 const prefix = chalk.bgYellowBright('[AUTH] ')
 
@@ -23,13 +26,16 @@ export const action: ActionFunction = async ({ request }) => {
     throw new Error('Missing token or state')
   }
 
-  /// verify token, use the jwks_uri to get the public key
-
+  // TODO: verify token
   // for now, set the token in the session
+  /*
+  if(!verifyOpenIDToken(token)) {
+    throw new Error('Invalid token')
+  }
+  */
 
   const session = await getSession(request.headers.get('Cookie'))
-
-  const data = { token: token.toString() }
+  session.set('token', token.toString())
 
   // create a redirect so we don't end up in the loader below, while also setting the session cookie
   const response = new Response(null, {

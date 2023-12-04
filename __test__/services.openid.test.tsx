@@ -1,7 +1,7 @@
 /**
  * @jest-environment node
  */
-import { isWebKeySetSchema } from '~/services/webkeyset.server'
+import { isWebKeySetSchema } from '../app/services/webkeyset.server'
 import {
   getOpenIDConfig,
   getOpenIDPublicKeys,

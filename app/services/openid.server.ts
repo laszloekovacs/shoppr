@@ -3,6 +3,7 @@ import chalk from 'chalk'
 import { getEnv } from './environment.server'
 import { isWebKeySetSchema, webKeySetSchema } from './webkeyset.server'
 const prefix = chalk.bgCyan('[api/auth] ')
+import jwt from 'jsonwebtoken'
 
 const configSchema = yup.object({
   authorization_endpoint: yup.string().url().required(),
@@ -100,13 +101,20 @@ export const getOpenIDPublicKeys = async () => {
 
 export const verifyOpenIDToken = async (token: string) => {
   const configPromise = getOpenIDConfig()
-  const publickeyPromise = getOpenIDPublicKeys()
+  const publickeysPromise = getOpenIDPublicKeys()
 
   /* get the config and public key independently */
-  const [config, publickey] = await Promise.all([
+  const [config, publickeys] = await Promise.all([
     configPromise,
-    publickeyPromise,
+    publickeysPromise,
   ])
 
-  //const algorithms =
+  /* peak into the token */
+  const decoded_token = jwt.decode(token)
+
+  if (!decoded_token) {
+    throw new Error(`${prefix} Failed to decode token`)
+  }
 }
+
+/* verify the token token.kid == publickey.kid */

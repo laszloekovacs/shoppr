@@ -1,7 +1,7 @@
 import yup from 'yup'
 
 /**
- *
+ * kid in token = kid in the keyset
  * see https://auth0.com/blog/navigating-rs256-and-jwks/
  */
 
