@@ -3,7 +3,7 @@ import 'dotenv/config'
 
 const prefix = '[Environment] '
 
-export type tokens =
+export type key =
   | 'AUTH0_CLIENT_SECRET'
   | 'AUTH0_CLIENT_ID'
   | 'AUTH0_DOMAIN'
@@ -11,7 +11,14 @@ export type tokens =
   | 'PAYPAL_CLIENT_ID'
   | 'TEST_VALUE_UNDEFINED'
 
-export const getEnv = (key: tokens) => {
+/**
+ * Safely retrieves the value of the specified environment variable.
+ *
+ * @param {key} key - The key of the environment variable to retrieve.
+ * @throws {Error} Throws an error if the process is undefined or if the environment variable is missing or empty.
+ * @return {string} The value of the specified environment variable.
+ */
+export const getEnv = (key: key) => {
   if (process === undefined) {
     throw new Error(
       `${prefix} process env undefined: are you calling from node?`
