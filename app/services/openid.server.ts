@@ -1,4 +1,4 @@
-import { config } from './config.server'
+import { config } from './environment.server'
 import chalk from 'chalk'
 
 const prefix = chalk.bgCyan('[api/auth] ')

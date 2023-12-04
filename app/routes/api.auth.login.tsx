@@ -1,6 +1,6 @@
 import { LoaderFunction, json, redirect } from '@remix-run/node'
 import { getOpenIDConfig } from '~/services/openid.server'
-import { config } from '~/services/config.server'
+import { config } from '~/services/environment.server'
 
 /* start the login process by redirecting to the endpoint */
 export const loader: LoaderFunction = async () => {
