@@ -8,7 +8,7 @@ import { auth } from '../services/auth.server'
 export const loader: LoaderFunction = async ({ request }) => {
   const profile = await auth.isAuthenticated(request)
 
-  return json({ profile })
+  return json(profile)
 }
 
 const Session = () => {
