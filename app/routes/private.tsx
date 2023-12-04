@@ -16,7 +16,7 @@ export default function Screen() {
   return (
     <>
       <Form method="post" action="/api/auth/logout">
-        <button>Log Out</button>
+        <button className="btn btn-primary btn-sm">Log Out</button>
       </Form>
 
       <hr />
