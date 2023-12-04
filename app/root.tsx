@@ -10,6 +10,8 @@ import {
   useLoaderData,
 } from '@remix-run/react'
 
+import { PAYPAL_CLIENT_ID } from '~/constants/index.server'
+
 /* inject bootstrap */
 export const links: LinksFunction = () => [
   {
@@ -24,7 +26,7 @@ export const links: LinksFunction = () => [
 /* inject paypal client id */
 export const loader: LoaderFunction = async () => {
   return json({
-    clientId: process.env.PAYPAL_CLIENT_ID,
+    clientId: PAYPAL_CLIENT_ID,
   })
 }
 
