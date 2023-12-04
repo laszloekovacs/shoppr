@@ -103,3 +103,13 @@ export const getOpenIDPublicKey = async () => {
     throw new Error(`${prefix} Possibly invalid public key: ${data}`)
   }
 }
+
+export const verifyIdToken = async (token: string) => {
+  const config = await getOpenIDConfig()
+
+  // get the public key from endpoint
+  const publickey = await getOpenIDPublicKey()
+
+  // get the supported algorithms
+  //
+}

@@ -1,4 +1,4 @@
-import { getOIDCConfig } from '../app/services/auth0.server'
+import { getOIDCConfig } from '../app/services/openid.server'
 
 describe('get OICD config', () => {
   it.skip('returns an object', async () => {

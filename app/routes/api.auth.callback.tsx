@@ -6,6 +6,7 @@ import {
 import { getSession, commitSession } from '~/services/session.server'
 import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
+import { getOpenIDPublicKey } from '~/services/openid.server'
 
 const prefix = chalk.bgYellowBright('[AUTH] ')
 
@@ -22,8 +23,7 @@ export const action: ActionFunction = async ({ request }) => {
     throw new Error('Missing token or state')
   }
 
-  /* verify the token, use the jwks_uri to get the public key */
-  //jwt.verify(token.toString(), config.jwks_uri)
+  /// verify token, use the jwks_uri to get the public key
 
   // for now, set the token in the session
 

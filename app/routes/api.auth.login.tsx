@@ -1,5 +1,5 @@
 import { LoaderFunction, json, redirect } from '@remix-run/node'
-import { getOpenIDConfig } from '~/services/auth0.server'
+import { getOpenIDConfig } from '~/services/openid.server'
 import { config } from '~/services/config.server'
 
 /* start the login process by redirecting to the endpoint */
