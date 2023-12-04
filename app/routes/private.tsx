@@ -15,7 +15,7 @@ export default function Screen() {
   const { profile } = useLoaderData<typeof loader>()
   return (
     <>
-      <Form method="post" action="/logout">
+      <Form method="post" action="/api/auth/logout">
         <button>Log Out</button>
       </Form>
 
