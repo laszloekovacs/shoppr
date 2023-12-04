@@ -21,7 +21,7 @@ export type key =
 export const getEnv = (key: key) => {
   if (process === undefined) {
     throw new Error(
-      `${prefix} process env undefined: are you calling from node?`
+      `${prefix} process is undefined: are you calling from node?`
     )
   }
 
