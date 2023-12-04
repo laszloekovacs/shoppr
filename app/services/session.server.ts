@@ -6,7 +6,7 @@ type SessionData = {
 
 const session = createCookieSessionStorage<SessionData>({
   cookie: {
-    name: '__session',
+    name: 'shoppr_session',
     httpOnly: true,
     sameSite: 'lax',
     secrets: ['s3cr3t'],

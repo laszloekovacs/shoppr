@@ -1,6 +1,6 @@
 import { LoaderFunction, json, redirect } from '@remix-run/node'
+import { getEnv } from '~/services/environment.server'
 import { getOpenIDConfig } from '~/services/openid.server'
-import { config } from '~/services/environment.server'
 
 /* start the login process by redirecting to the endpoint */
 export const loader: LoaderFunction = async () => {
@@ -17,9 +17,9 @@ export const loader: LoaderFunction = async () => {
     sp.append('state', 'unused for now')
     sp.append('scope', 'openid profile')
     sp.append('response_type', 'id_token')
-    sp.append('client_id', config.AUTH0_CLIENT_ID!)
+    sp.append('client_id', getEnv('AUTH0_CLIENT_ID'))
     sp.append('response_mode', 'form_post')
-    sp.append('redirect_uri', config.AUTH0_REDIRECT_URI!)
+    sp.append('redirect_uri', getEnv('AUTH0_REDIRECT_URI'))
     endpoint.search = sp.toString()
 
     // redirect user to 3rd party login provider

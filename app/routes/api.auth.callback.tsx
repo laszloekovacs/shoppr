@@ -4,35 +4,30 @@ import {
   type LoaderFunction,
 } from '@remix-run/node'
 import { getSession, commitSession } from '~/services/session.server'
-import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
-import {
-  getOpenIDPublicKeys,
-  verifyOpenIDToken,
-} from '~/services/openid.server'
+import { verifyOpenIDToken } from '~/services/openid.server'
 
-const prefix = chalk.bgYellowBright('[AUTH] ')
+const prefix = chalk.bgYellowBright('[api.auth.callback] ')
 
 /* oauth redirects to here, posts the token in a form */
 export const action: ActionFunction = async ({ request }) => {
   /* unpack and check if theres a token POSTed in the form */
   const form = await request.formData()
-  const token = form.get('id_token')
-  const state = form.get('state')
+  const token = form.get('id_token')?.toString()
+  const state = form.get('state')?.toString()
 
   console.log(prefix, { token, state })
 
   if (!token || !state) {
-    throw new Error('Missing token or state')
+    throw new Error(prefix + 'Missing token or state')
   }
 
   // TODO: verify token
   // for now, set the token in the session
-  /*
-  if(!verifyOpenIDToken(token)) {
+
+  if (!(await verifyOpenIDToken(token))) {
     throw new Error('Invalid token')
   }
-  */
 
   const session = await getSession(request.headers.get('Cookie'))
   session.set('token', token.toString())
