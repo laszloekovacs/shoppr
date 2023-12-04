@@ -6,7 +6,7 @@ import {
 import { getSession, commitSession } from '~/services/session.server'
 import jwt from 'jsonwebtoken'
 import chalk from 'chalk'
-import { getOpenIDPublicKey } from '~/services/openid.server'
+import { getOpenIDPublicKeys } from '~/services/openid.server'
 
 const prefix = chalk.bgYellowBright('[AUTH] ')
 

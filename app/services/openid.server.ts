@@ -1,6 +1,7 @@
 import yup from 'yup'
 import chalk from 'chalk'
 import { getEnv } from './environment.server'
+import { isWebKeySetSchema, webKeySetSchema } from './webkeyset.server'
 const prefix = chalk.bgCyan('[api/auth] ')
 
 const configSchema = yup.object({
@@ -78,28 +79,28 @@ export const getOpenIDConfig = createOpenIDConfigFetcher()
  * @return {Promise<string>} The public key as a string.
  * @throws {Error} If the fetch fails or the public key is invalid.
  */
-export const getOpenIDPublicKey = async () => {
+export const getOpenIDPublicKeys = async () => {
   const config = await getOpenIDConfig()
-
   const res = await fetch(config.jwks_uri)
-  const data = await res.json()
 
   /* fetch failed */
   if (!res.ok) {
     throw new Error(`${prefix} Failed to fetch public key: ${res.statusText}`)
   }
 
-  /* check if the public key is a string */
-  if (typeof data === 'string') {
-    return data
-  } else {
-    throw new Error(`${prefix} Possibly invalid public key: ${data}`)
+  const data = await res.json()
+
+  /* the result should be an array of key objects */
+  if (!isWebKeySetSchema(data)) {
+    throw new Error(`${prefix} Invalid public key`)
   }
+
+  return data
 }
 
 export const verifyOpenIDToken = async (token: string) => {
   const configPromise = getOpenIDConfig()
-  const publickeyPromise = getOpenIDPublicKey()
+  const publickeyPromise = getOpenIDPublicKeys()
 
   /* get the config and public key independently */
   const [config, publickey] = await Promise.all([
