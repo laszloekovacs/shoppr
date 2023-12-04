@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import 'dotenv/config'
 
-const prefix = '[Environment] '
+const prefix = chalk.bgCyan('[Environment] ')
 
 export type key =
   | 'AUTH0_CLIENT_SECRET'
