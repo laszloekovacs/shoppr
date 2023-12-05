@@ -11,11 +11,17 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
+import Header from './components/header'
+import { auth } from './services/auth.server'
 
 /* inject paypal client id */
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  // get the session
+  const session = await auth.isAuthenticated(request)
+
   return json({
     clientId: PAYPAL_CLIENT_ID,
+    session,
   })
 }
 
@@ -24,7 +30,7 @@ export const links: LinksFunction = () => [
 ]
 
 export default function App() {
-  const { clientId } = useLoaderData<typeof loader>()
+  const { clientId, session } = useLoaderData<typeof loader>()
 
   return (
     <html lang="en" data-bs-theme="dark">
@@ -39,6 +45,7 @@ export default function App() {
           <PayPalScriptProvider
             options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
           >
+            <Header session={session} />
             <Outlet />
           </PayPalScriptProvider>
           <ScrollRestoration />
