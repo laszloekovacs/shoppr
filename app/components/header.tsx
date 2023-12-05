@@ -6,10 +6,10 @@ import invariant from 'tiny-invariant'
 const AccoutMenu = ({ session }: { session: Auth0Profile }) => {
   return (
     <>
-      <Form method="post" className="flex flex-row">
-        <p>{session && session.displayName}</p>
+      <Form method="post" className="flex flex-row gap-2">
+        <span>{session && session.displayName}</span>
         {session && session.photos && (
-          <img width="50px" src={session.photos[0].value} />
+          <img width="40px" src={session.photos[0].value} />
         )}
       </Form>
     </>
@@ -24,6 +24,7 @@ const LoginButton = () => (
 const Header = ({ session }: { session: Auth0Profile | null }) => {
   return (
     <div className="p-2 flex justify-between">
+      <h1 className="text-3xl">Shoppr</h1>
       {session ? <AccoutMenu session={session} /> : <LoginButton />}
     </div>
   )
