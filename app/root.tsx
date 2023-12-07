@@ -1,3 +1,5 @@
+import { PAYPAL_CLIENT_ID } from '../app/constants/index.server'
+import stylesheet from './tailwind.css'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { json, type LinksFunction, type LoaderFunction } from '@remix-run/node'
 import {
@@ -9,29 +11,26 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from '@remix-run/react'
-
-import { PAYPAL_CLIENT_ID } from '../app/constants/index.server'
-
-/* inject bootstrap */
-export const links: LinksFunction = () => [
-  {
-    rel: 'stylesheet',
-    href: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css',
-    integrity:
-      'sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN',
-    crossOrigin: 'anonymous',
-  },
-]
+import Header from './components/header'
+import { auth } from './services/auth.server'
 
 /* inject paypal client id */
-export const loader: LoaderFunction = async () => {
+export const loader: LoaderFunction = async ({ request }) => {
+  // get the session
+  const session = await auth.isAuthenticated(request)
+
   return json({
     clientId: PAYPAL_CLIENT_ID,
+    session,
   })
 }
 
+export const links: LinksFunction = () => [
+  { rel: 'stylesheet', href: stylesheet },
+]
+
 export default function App() {
-  const { clientId } = useLoaderData<typeof loader>()
+  const { clientId, session } = useLoaderData<typeof loader>()
 
   return (
     <html lang="en" data-bs-theme="dark">
@@ -42,10 +41,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div className="container-fluid">
+        <div>
           <PayPalScriptProvider
             options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
           >
+            <Header session={session} />
             <Outlet />
           </PayPalScriptProvider>
           <ScrollRestoration />

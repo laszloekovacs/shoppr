@@ -10,9 +10,5 @@ export const meta: MetaFunction = () => {
 }
 
 export default function Index() {
-  return (
-    <section id="index">
-      <Header />
-    </section>
-  )
+  return <section id="index">content</section>
 }
