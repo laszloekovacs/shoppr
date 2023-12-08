@@ -3,7 +3,7 @@ import { SecretClient } from '@azure/keyvault-secrets'
 import { DefaultAzureCredential } from '@azure/identity'
 import { AZURE_KEYVAULT_URI } from '../constants/index.server'
 
-export const connectDatabase = async () => {
+export const connectDatabase = async (db?: string) => {
     const credentials = new DefaultAzureCredential()
     const client = new SecretClient(AZURE_KEYVAULT_URI, credentials)
 
@@ -13,7 +13,7 @@ export const connectDatabase = async () => {
         throw new Error('Please add your mongoConnectionString to keyvault')
     }
 
-    return await mongoose.connect(value)
+    return await mongoose.connect(value, { dbName: db })
 }
 
 /*  */
