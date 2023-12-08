@@ -1,15 +1,20 @@
 import React from 'react'
 import { useFetcher } from '@remix-run/react'
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
+import { createCategory } from '@/mongo/resolvers'
 
 export const action = async (params: ActionFunctionArgs) => {
     const { request } = params
     const formData = await request.formData()
-    const name = formData.get('name')
+    const name = formData.get('name')?.toString()
 
-    // TODO: send it to the database
+    if (!name) {
+        throw new Error('Name is required')
+    }
 
-    return json({ name })
+    const category = await createCategory(name)
+
+    return json({ category })
 }
 
 export const loader = async (params: LoaderFunctionArgs) => {
