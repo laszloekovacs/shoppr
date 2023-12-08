@@ -8,8 +8,8 @@ describe('mongoose', () => {
     /**
      *
      */
-    it('does not throw an error', async () => {
-        expect(await connectDatabase()).not.toThrowError()
+    it('able to connect to the database', async () => {
+        await connectDatabase()
         expect(mongoose.connection.readyState).toBe(1)
     })
 
