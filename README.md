@@ -1,5 +1,7 @@
-# Welcome to Remix!
+# Full-stack webshop
 
+## Github Project 
+https://github.com/users/laszloekovacs/projects/4
 -   [Remix Docs](https://remix.run/docs)
 
 ## Development
