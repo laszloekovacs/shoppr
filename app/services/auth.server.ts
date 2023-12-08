@@ -1,3 +1,4 @@
+/*
 import { createCookieSessionStorage } from '@remix-run/node'
 import { Authenticator } from 'remix-auth'
 import type { Auth0Profile } from 'remix-auth-auth0'
@@ -41,3 +42,4 @@ const auth0Strategy = new Auth0Strategy(
 auth.use(auth0Strategy)
 
 export const { commitSession, getSession, destroySession } = sessionStorage
+*/

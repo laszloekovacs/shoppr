@@ -10,6 +10,9 @@ const categorySchema = new Schema(
 export const Category =
     mongoose.models.Category || mongoose.model('Category', categorySchema)
 
+/**
+ *
+ */
 const productSchema = new Schema(
     {
         name: { type: Schema.Types.String, required: true, unique: true },

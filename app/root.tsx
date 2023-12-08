@@ -1,4 +1,3 @@
-import { PAYPAL_CLIENT_ID } from '../app/constants/index.server'
 import stylesheet from './tailwind.css'
 import { PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { json, type LinksFunction, type LoaderFunction } from '@remix-run/node'
@@ -20,7 +19,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     const session = await auth.isAuthenticated(request)
 
     return json({
-        clientId: PAYPAL_CLIENT_ID,
+        clientId: 'PAYPAL_CLIENT_ID',
         session,
     })
 }

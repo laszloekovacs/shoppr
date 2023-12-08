@@ -15,3 +15,8 @@ export const connectDatabase = async () => {
 
     return await mongoose.connect(value)
 }
+
+/*  */
+connectDatabase().then(() => {
+    console.log(`connected to database: ${mongoose.connection.host}`)
+})

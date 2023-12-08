@@ -2,7 +2,6 @@ import { LoaderFunction, json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import React from 'react'
 import { auth } from '../services/auth.server'
-import Login from './login'
 
 /* renders a login button if logged out, otherwise displays the account menu */
 
@@ -20,9 +19,9 @@ const Session = () => {
                 <h2>hello</h2>
                 {data && <pre>{JSON.stringify(data.profile, null, 2)}</pre>}
             </div>
-            <Login />
         </section>
     )
 }
 
+// <Login />
 export default Session

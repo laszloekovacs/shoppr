@@ -1,13 +1,10 @@
+/*
 import {
     PAYPAL_CLIENT_ID,
     PAYPAL_CLIENT_SECRET,
     PAYPAL_ENDPOINT,
 } from 'app/constants/index.server'
 
-/**
- * Generate an OAuth 2.0 access token for authenticating with PayPal REST APIs.
- * @see https://developer.paypal.com/api/rest/authentication/
- */
 export const getAccessToken = async () => {
     const credentials = Buffer.from(
         `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`,
@@ -28,10 +25,6 @@ export const getAccessToken = async () => {
     return data.access_token
 }
 
-/**
- * Create an order to start the transaction.
- * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
- */
 const createOrder = async (cart: string) => {
     const token = await getAccessToken()
     const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders`
@@ -60,10 +53,6 @@ const createOrder = async (cart: string) => {
     return data
 }
 
-/**
- * Capture payment for the created order to complete the transaction.
- * @see https://developer.paypal.com/docs/api/orders/v2/#orders_capture
- */
 const captureOrder = async (cart: string) => {
     const token = await getAccessToken()
     const url = `${PAYPAL_ENDPOINT}/v2/checkout/orders/${cart}/capture`
@@ -79,3 +68,5 @@ const captureOrder = async (cart: string) => {
     const data = await res.json()
     return data
 }
+
+*/
