@@ -1,35 +1,10 @@
-/*
-import mongoose, { Schema } from 'mongoose'
-import 'dotenv/config'
-import kleur from 'kleur'
+import mongoose from 'mongoose'
+import vars from '@/constants/index.server'
 
-const productSchema = new Schema(
-  {
-    name: { type: Schema.Types.String, required: true, unique: true },
-    description: { type: Schema.Types.String },
-  },
-  {
-    timestamps: true,
-  }
-)
-
-export const Product =
-  mongoose.models.Product || mongoose.model('Product', productSchema)
-
-export const connectMongo = async () => {
-  try {
-    if (!process.env.MONGO_URI) {
-      console.log(kleur.bgRed('mongoose') + ' MONGO_URI not found')
-      process.exit(1)
+export const connectDatabase = async () => {
+    if (!vars.MONGO_URI) {
+        throw new Error('Please add your Mongo URI to .env')
     }
 
-    await mongoose.connect(process.env.MONGO_URI!)
-    console.log(kleur.black().bgGreen(' mongoose ') + ' MongoDB connected')
-  } catch (error) {
-    console.log(error)
-    process.exit(1)
-  }
+    await mongoose.connect(vars.MONGO_URI!)
 }
-
-//connectMongo()
-*/

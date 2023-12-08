@@ -1,7 +1,9 @@
 # Full-stack webshop
 
-## Github Project 
+## Github Project
+
 https://github.com/users/laszloekovacs/projects/4
+
 -   [Remix Docs](https://remix.run/docs)
 
 ## Development
@@ -91,3 +93,12 @@ Make sure to deploy the output of `remix build`
 
 -   allow saving product for later
 -   social media integration, sharing products
+
+#### azure registration
+
+-   in azure, go to active directory (Entra) and register app
+-   configure certificates and secrets and create a new one
+-   configure app permissions, Add keyvault, storage, cosmosdb
+-   grant consent
+-   get the keyvault url from the keyvaults
+-   use client id , secret to set env variables to use default credentials
