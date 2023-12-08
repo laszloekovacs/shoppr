@@ -4,5 +4,12 @@ button {
 	@apply border px-4 py-1
 }
 
+input[type="submit"] {
+	@apply border px-4 py-1
+}
+input[type="text"] {
+	@apply border-2 border-orange-600 px-4 py-1 mx-2 
+}
+
 @tailwind components;
 @tailwind utilities;
