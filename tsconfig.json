@@ -7,7 +7,6 @@
 	"compilerOptions": {
 		"types": [
 			"vitest/globals",
-			"@testing-library/react",
 		],
 		"lib": [
 			"DOM",

@@ -24,7 +24,7 @@ const CreateCategoryPage = () => {
             <h2>Create Category</h2>
             <fetcher.Form method="POST">
                 <input type="text" name="name" />
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" role="submit" />
             </fetcher.Form>
         </div>
     )

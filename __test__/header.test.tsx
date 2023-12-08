@@ -4,7 +4,7 @@ import Header from '../app/components/header'
 
 describe.skip('header', () => {
     it('renders', () => {
-        render(<Header />)
+        render(<Header session={null} />)
 
         const element = document.querySelector('header')
 
@@ -12,7 +12,7 @@ describe.skip('header', () => {
     })
 
     it('renders with the session component', () => {
-        render(<Header />)
+        render(<Header session={null} />)
 
         const element = document.getElementById('session')
 
