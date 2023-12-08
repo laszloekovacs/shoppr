@@ -13,3 +13,5 @@ export const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET!
 export const PAYPAL_ENDPOINT = process.env.PAYPAL_ENDPOINT!
 
 export const AZURE_KEYVAULT_URI = process.env.AZURE_KEYVAULT_URI!
+
+export const MONGODB_URI = process.env.MONGODB_URI!

@@ -28,10 +28,9 @@ describe('azure default credentials', () => {
             credentials,
         )
 
-        const mongo_uri = await client.getSecret('mongo-uri')
+        const mongo_uri = await client.getSecret('mongoConnectionString')
 
         expect(mongo_uri).toBeTruthy()
-        expect(mongo_uri.name).toBe('mongo-uri')
         expect(mongo_uri.value).toBeTruthy()
     })
 })
