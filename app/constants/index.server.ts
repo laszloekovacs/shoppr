@@ -9,9 +9,3 @@ export const SECRETS = process.env.SECRETS!
 export const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID!
 export const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET!
 export const PAYPAL_ENDPOINT = process.env.PAYPAL_ENDPOINT!
-
-const vars = {
-    MONGO_URI: process.env.MONGO_URI!,
-}
-
-export default vars
