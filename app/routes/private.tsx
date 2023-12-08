@@ -1,10 +1,10 @@
-import type { LoaderFunction } from '@remix-run/node'
+import type { LoaderFunctionArgs } from '@remix-run/node'
 import { json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
 import { auth } from '../services/auth.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const profile = await auth.isAuthenticated(request, {
+export const loader = async (params: LoaderFunctionArgs) => {
+  const profile = await auth.isAuthenticated(params.request, {
     failureRedirect: '/',
   })
 

@@ -3,19 +3,19 @@ import '@testing-library/jest-dom'
 import Header from '../app/components/header'
 
 describe('header', () => {
-  it('renders', () => {
-    render(<Header />)
+    it('renders', () => {
+        render(<Header />)
 
-    const element = document.querySelector('header')
+        const element = document.querySelector('header')
 
-    expect(element).toBeInTheDocument()
-  })
+        expect(element).toBeInTheDocument()
+    })
 
-  it('renders with the session component', () => {
-    render(<Header />)
+    it('renders with the session component', () => {
+        render(<Header />)
 
-    const element = document.getElementById('session')
+        const element = document.getElementById('session')
 
-    expect(element).toBeInTheDocument()
-  })
+        expect(element).toBeInTheDocument()
+    })
 })
