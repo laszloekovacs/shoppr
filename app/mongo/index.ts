@@ -1,10 +1,17 @@
 import mongoose from 'mongoose'
-import vars from '@/constants/index.server'
+import { SecretClient } from '@azure/keyvault-secrets'
+import { DefaultAzureCredential } from '@azure/identity'
+import { AZURE_KEYVAULT_URI } from '../constants/index.server'
 
 export const connectDatabase = async () => {
-    if (!vars.MONGO_URI) {
-        throw new Error('Please add your Mongo URI to .env')
+    const credentials = new DefaultAzureCredential()
+    const client = new SecretClient(AZURE_KEYVAULT_URI, credentials)
+
+    const { value } = await client.getSecret('mongoConnectionString')
+
+    if (!value) {
+        throw new Error('Please add your mongoConnectionString to keyvault')
     }
 
-    await mongoose.connect(vars.MONGO_URI!)
+    return await mongoose.connect(value)
 }

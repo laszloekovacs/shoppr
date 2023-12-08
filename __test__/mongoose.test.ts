@@ -1,11 +1,19 @@
 /**
  * @jest-environment node
  */
-
-import '@testing-library/jest-dom'
+import mongoose from 'mongoose'
+import { connectDatabase } from '../app/mongo/index'
 
 describe('mongoose', () => {
-    it('works', () => {
-        expect(1).toBe(1)
+    /**
+     *
+     */
+    it('does not throw an error', async () => {
+        expect(await connectDatabase()).not.toThrowError()
+        expect(mongoose.connection.readyState).toBe(1)
     })
+
+    /**
+     *
+     */
 })

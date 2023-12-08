@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN!
 export const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID!
 export const AUTH0_CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET!
@@ -9,3 +11,5 @@ export const SECRETS = process.env.SECRETS!
 export const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID!
 export const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET!
 export const PAYPAL_ENDPOINT = process.env.PAYPAL_ENDPOINT!
+
+export const AZURE_KEYVAULT_URI = process.env.AZURE_KEYVAULT_URI!
