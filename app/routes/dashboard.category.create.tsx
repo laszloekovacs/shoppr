@@ -25,6 +25,8 @@ export const action = async (params: ActionFunctionArgs) => {
 }
 
 export const loader = async (params: LoaderFunctionArgs) => {
+
+	
     const categories = await (
         await CategoryModel.find<CategoryDocument>({})
     ).map((category) => {

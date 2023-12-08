@@ -69,7 +69,7 @@ describe('CreateCategoryPage', () => {
     })
 
     it('loader returns all categories', async () => {
-        // insert test data
+        // clear and insert test data
         await CategoryModel.deleteMany({})
         await db.category.create('test')
 
