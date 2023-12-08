@@ -1,22 +1,35 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
+
+/**
+ * categories
+ */
+export interface CategoryDocument extends Document {
+    name: string
+}
 
 const categorySchema = new Schema(
     {
-        name: { type: Schema.Types.String, required: true, unique: true },
+        name: { type: String, required: true, unique: true },
     },
     { timestamps: true },
 )
 
-export const Category =
-    mongoose.models.Category || mongoose.model('Category', categorySchema)
+export const CategoryModel =
+    mongoose.models.Category ||
+    mongoose.model<CategoryDocument>('Category', categorySchema)
 
 /**
- *
+ * products
  */
+export interface ProductDocument extends Document {
+    name: string
+    description: string
+}
+
 const productSchema = new Schema(
     {
-        name: { type: Schema.Types.String, required: true, unique: true },
-        description: { type: Schema.Types.String },
+        name: { type: String, required: true, unique: true },
+        description: { type: String },
     },
     {
         timestamps: true,
@@ -24,4 +37,5 @@ const productSchema = new Schema(
 )
 
 export const Product =
-    mongoose.models.Product || mongoose.model('Product', productSchema)
+    mongoose.models.Product ||
+    mongoose.model<ProductDocument>('Product', productSchema)
