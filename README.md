@@ -103,3 +103,8 @@ Make sure to deploy the output of `remix build`
 -   get the keyvault url from the keyvaults
 -   use client id , secret to set env variables to use default credentials
 -   set proper access policies in keyvault tab for the shopper principal
+
+#### cool symbols
+
+disc: 💽
+lock: 🔐

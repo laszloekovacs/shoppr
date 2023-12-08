@@ -4,11 +4,9 @@
 import { SecretClient } from '@azure/keyvault-secrets'
 import { DefaultAzureCredential } from '@azure/identity'
 import 'dotenv/config'
+import { getKeyFromKeyVault, initKeyvault } from '../app/services/azure.server'
 
 describe('azure default credentials', () => {
-    /**
-     *
-     */
     it('creates a default credential', () => {
         const credentials = new DefaultAzureCredential()
 
@@ -17,9 +15,6 @@ describe('azure default credentials', () => {
         //expect(cred).toMatchFileSnapshot('../__snapshots__/azure-cred.json')
     })
 
-    /**
-     *
-     */
     it('can get a key from keyvault', async () => {
         const credentials = new DefaultAzureCredential()
 
@@ -32,5 +27,17 @@ describe('azure default credentials', () => {
 
         expect(mongo_uri).toBeTruthy()
         expect(mongo_uri.value).toBeTruthy()
+    })
+
+    it('successfully initializes keyvault', async () => {
+        const client = initKeyvault()
+
+        expect(client.vaultUrl).toBeTruthy()
+    })
+
+    it('can get a key from keyvault', async () => {
+        const key = getKeyFromKeyVault('mongoConnectionString')
+
+        expect(key).toBeTruthy()
     })
 })

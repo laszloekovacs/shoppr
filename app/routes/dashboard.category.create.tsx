@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFetcher } from '@remix-run/react'
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
-import { createCategory } from '@/mongo/resolvers'
+import { createCategory } from '../mongo/resolvers'
 
 export const action = async (params: ActionFunctionArgs) => {
     const { request } = params

@@ -3,7 +3,7 @@
  */
 import mongoose from 'mongoose'
 import { connectDatabase } from '../app/mongo/index'
-import { Category } from '../app/mongo/schema'
+import { CategoryModel } from '../app/mongo/schema'
 
 describe('mongoose', () => {
     /**
@@ -18,7 +18,9 @@ describe('mongoose', () => {
      *
      */
     it('can create a category entry in the database', async () => {
-        const category = new Category({ name: 'test' + Date.now().toString() })
+        const category = new CategoryModel({
+            name: 'test' + Date.now().toString(),
+        })
         await category.save()
         expect(category._id).toBeTruthy()
     })
