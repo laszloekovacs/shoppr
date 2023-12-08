@@ -3,10 +3,12 @@ import CreateCategoryPage, {
     loader,
     action,
 } from '../app/routes/dashboard.category.create'
-import { ActionFunctionArgs, json } from '@remix-run/node'
 
+import { ActionFunctionArgs, json } from '@remix-run/node'
 import { createRemixStub } from '@remix-run/testing'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import db from '../app/mongo'
+import { CategoryModel } from '../app/mongo/schema'
 
 describe('CreateCategoryPage', () => {
     const RemixStub = createRemixStub([
@@ -64,5 +66,21 @@ describe('CreateCategoryPage', () => {
             /* expect the action to be called */
             expect(fakeAction).toHaveBeenCalled()
         })
+    })
+
+    it('loader returns all categories', async () => {
+        // insert test data
+        await CategoryModel.deleteMany({})
+        await db.category.create('test')
+
+        render(<RemixStub />)
+
+        await waitFor(async () => {
+            /* document shoud contain test string */
+            expect(await screen.getByText('test')).toBeInTheDocument()
+        })
+
+        // clear db
+        await CategoryModel.deleteMany({})
     })
 })

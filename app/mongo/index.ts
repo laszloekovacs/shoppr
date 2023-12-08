@@ -1,22 +1,26 @@
 import mongoose from 'mongoose'
-import { SecretClient } from '@azure/keyvault-secrets'
-import { DefaultAzureCredential } from '@azure/identity'
-import { AZURE_KEYVAULT_URI } from '../constants/index.server'
+import { getKeyFromKeyVault } from 'app/services/azure.server'
 
 export const connectDatabase = async (db?: string) => {
-    const credentials = new DefaultAzureCredential()
-    const client = new SecretClient(AZURE_KEYVAULT_URI, credentials)
+    const key = await getKeyFromKeyVault('mongoConnectionString')
 
-    const { value } = await client.getSecret('mongoConnectionString')
-
-    if (!value) {
+    if (!key || !key.value) {
         throw new Error('Please add your mongoConnectionString to keyvault')
+    } else {
+        return await mongoose.connect(key.value, { dbName: db })
     }
-
-    return await mongoose.connect(value, { dbName: db })
 }
 
-/*  */
+/* don't catch, let it fail */
 connectDatabase().then(() => {
-    console.log(`connected to database: ${mongoose.connection.host}`)
+    console.log(`💽 connected to database: ${mongoose.connection.host}`)
 })
+
+/* reexport resolvers */
+import { category } from './resolvers'
+
+const db = {
+    category,
+}
+
+export default db
