@@ -10,7 +10,7 @@ export const connectDatabase = async () => {
 
     /* check if we are already have a connection */
     if (mongoose.connections[0].readyState) {
-        console.log(mp + '💽 already connected to db')
+        console.log(mp + 'already connected to db')
         return
     }
 
