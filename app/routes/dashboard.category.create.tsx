@@ -3,60 +3,60 @@ import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
 import { CategoryDocument, CategoryModel } from '@/models/schema.server'
 
 export const action = async (params: ActionFunctionArgs) => {
-    const { request } = params
-    const formData = await request.formData()
-    const name = formData.get('name')?.toString()
+	const { request } = params
+	const formData = await request.formData()
+	const name = formData.get('name')?.toString()
 
-    if (!name) {
-        throw new Error('Name is required')
-    }
+	if (!name) {
+		throw new Error('Name is required')
+	}
 
-    const category = await CategoryModel.create({ name })
+	const category = await CategoryModel.create({ name })
 
-    return json({ category })
+	return json({ category })
 }
 
 export const loader = async (params: LoaderFunctionArgs) => {
-    /* query all categories, serialize it */
-    const categories = await (
-        await CategoryModel.find<CategoryDocument>({})
-    ).map((category) => {
-        return {
-            _id: category._id,
-            name: category.name,
-        }
-    })
+	/* query all categories, serialize it */
+	const categories = await (
+		await CategoryModel.find<CategoryDocument>({})
+	).map((category) => {
+		return {
+			_id: category._id,
+			name: category.name,
+		}
+	})
 
-    if (!categories) {
-        throw new Error('No categories found')
-    }
+	if (!categories) {
+		throw new Error('No categories found')
+	}
 
-    return json({ categories })
+	return json({ categories })
 }
 
 const CreateCategoryPage = () => {
-    const fetcher = useFetcher<typeof loader>()
-    const { categories } = useLoaderData<typeof loader>()
+	const fetcher = useFetcher<typeof loader>()
+	const { categories } = useLoaderData<typeof loader>()
 
-    return (
-        <div>
-            <h2>Create Category</h2>
-            <fetcher.Form method="POST">
-                <input type="text" name="name" />
-                <input type="submit" value="Submit" role="submit" />
-            </fetcher.Form>
-            <p>test</p>
-            {categories ? (
-                <ul>
-                    {categories.map((category) => (
-                        <li key={category._id}>{category.name}</li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No categories found, add some!</p>
-            )}
-        </div>
-    )
+	return (
+		<div>
+			<h2>Create Category</h2>
+			<fetcher.Form method="POST">
+				<input type="text" name="name" />
+				<input type="submit" value="Submit" role="submit" />
+			</fetcher.Form>
+			<p>test</p>
+			{categories ? (
+				<ul>
+					{categories.map((category) => (
+						<li key={category._id}>{category.name}</li>
+					))}
+				</ul>
+			) : (
+				<p>No categories found, add some!</p>
+			)}
+		</div>
+	)
 }
 
 export default CreateCategoryPage
