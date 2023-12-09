@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema } from 'mongoose'
-import '.'
-console.log('connected to mongo')
+console.log('mongo schema loaded')
+
 /**
  * categories
  */

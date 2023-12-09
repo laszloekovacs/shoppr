@@ -3,10 +3,10 @@ import { MONGODB_URI } from '@/constants'
 
 console.log(`💽 connecting to database: ${MONGODB_URI}`)
 
-export const connectDatabase = () => {
-    mongoose.connect(MONGODB_URI).then(() => {
-        console.log(`💽 connected to database: ${mongoose.connection.host}`)
-    })
+export const connectDatabase = async (db?: string) => {
+    await mongoose.connect(MONGODB_URI, { dbName: db })
 }
 
-connectDatabase()
+connectDatabase().then(() => {
+    console.log(`💽 connected to database: ${mongoose.connection.host}`)
+})
