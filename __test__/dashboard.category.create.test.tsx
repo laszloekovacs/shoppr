@@ -7,8 +7,8 @@ import CreateCategoryPage, {
 import { ActionFunctionArgs, json } from '@remix-run/node'
 import { createRemixStub } from '@remix-run/testing'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import db from '../app/mongo'
-import { CategoryModel } from '../app/mongo/schema'
+import db from '../app/services/mongoose.server'
+import { CategoryModel } from '../app/models/schema.server'
 
 describe('CreateCategoryPage', () => {
     const RemixStub = createRemixStub([

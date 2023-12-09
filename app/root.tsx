@@ -9,6 +9,10 @@ import {
     ScrollRestoration,
     useLoaderData,
 } from '@remix-run/react'
+import { connectDatabase } from './services/mongoose.server'
+
+/* conect to mongodb */
+connectDatabase()
 
 /* inject tailwind style sheet */
 export const links: LinksFunction = () => [

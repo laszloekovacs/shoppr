@@ -1,6 +1,7 @@
 import mongoose, { Document, Schema } from 'mongoose'
-console.log('mongo schema loaded')
-
+import chalk from 'chalk'
+const mp = `${chalk.bgGreenBright(' schema ')} `
+console.log(mp + 'mongo schema loaded')
 /**
  * categories
  */

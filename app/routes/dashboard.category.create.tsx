@@ -1,6 +1,6 @@
 import { useFetcher, useLoaderData } from '@remix-run/react'
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
-import { CategoryDocument, CategoryModel } from '@/mongo/schema'
+import { CategoryDocument, CategoryModel } from '@/models/schema.server'
 
 export const action = async (params: ActionFunctionArgs) => {
     const { request } = params
@@ -36,7 +36,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
 
 const CreateCategoryPage = () => {
     const fetcher = useFetcher<typeof loader>()
-    const { categories } = fetcher.data || {} //useLoaderData<typeof loader>()
+    const { categories } = useLoaderData<typeof loader>()
 
     return (
         <div>

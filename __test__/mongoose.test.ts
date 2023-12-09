@@ -2,9 +2,9 @@
  * @jest-environment node
  */
 import mongoose from 'mongoose'
-import { connectDatabase } from '../app/mongo'
-import { CategoryModel } from '../app/mongo/schema'
-import db from '../app/mongo'
+import { connectDatabase } from '../app/services/mongoose.server'
+import { CategoryModel } from '../app/models/schema.server'
+import db from '../app/services/mongoose.server'
 
 describe('mongoose', () => {
     beforeEach(async () => {
