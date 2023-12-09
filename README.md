@@ -1,4 +1,4 @@
-# Full-stack webshop
+# Full-stack webshop with remix 🛒
 
 [![Remix](https://img.shields.io/badge/Remix-cyan?style=for-the-badge&logo=remix&logoColor=black)](https://remix.run/)
 [![React](https://img.shields.io/badge/React-61DBFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
