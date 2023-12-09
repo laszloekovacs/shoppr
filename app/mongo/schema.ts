@@ -1,3 +1,4 @@
+import '@/mongo/index.server'
 import mongoose, { Document, Schema } from 'mongoose'
 
 /**

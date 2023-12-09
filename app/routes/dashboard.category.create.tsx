@@ -1,13 +1,6 @@
-import React from 'react'
 import { useFetcher, useLoaderData } from '@remix-run/react'
-import {
-    ActionFunctionArgs,
-    LoaderFunction,
-    LoaderFunctionArgs,
-    json,
-} from '@remix-run/node'
-import db from '../mongo'
-import { CategoryDocument, CategoryModel } from '../mongo/schema'
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
+import { CategoryDocument, CategoryModel } from '@/mongo/schema'
 
 export const action = async (params: ActionFunctionArgs) => {
     const { request } = params
@@ -18,15 +11,13 @@ export const action = async (params: ActionFunctionArgs) => {
         throw new Error('Name is required')
     }
 
-    /* create a new category in db */
-    const category = await db.category.create(name)
+    const category = await CategoryModel.create({ name })
 
     return json({ category })
 }
 
 export const loader = async (params: LoaderFunctionArgs) => {
-
-	
+    /* query all categories, serialize it */
     const categories = await (
         await CategoryModel.find<CategoryDocument>({})
     ).map((category) => {
@@ -45,7 +36,7 @@ export const loader = async (params: LoaderFunctionArgs) => {
 
 const CreateCategoryPage = () => {
     const fetcher = useFetcher<typeof loader>()
-    const { categories } = useLoaderData<typeof loader>()
+    const { categories } = fetcher.data || {} //useLoaderData<typeof loader>()
 
     return (
         <div>

@@ -23,8 +23,13 @@
 		"strict": true,
 		"allowJs": true,
 		"forceConsistentCasingInFileNames": true,
-		"baseUrl": ".",
+		"baseUrl": "app",
 		// Remix takes care of building everything in `remix build`.
 		"noEmit": true,
+		"paths": {
+			"@/*": [
+				"./*"
+			],
+		}
 	}
 }
