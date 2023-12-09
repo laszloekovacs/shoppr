@@ -1,5 +1,10 @@
-import { useFetcher, useLoaderData } from '@remix-run/react'
-import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
+import { useActionData, useFetcher, useLoaderData } from '@remix-run/react'
+import {
+	ActionFunctionArgs,
+	LoaderFunction,
+	LoaderFunctionArgs,
+	json,
+} from '@remix-run/node'
 import { CategoryDocument, CategoryModel } from '@/models/schema.server'
 
 export const action = async (params: ActionFunctionArgs) => {
@@ -8,28 +13,25 @@ export const action = async (params: ActionFunctionArgs) => {
 	const name = formData.get('name')?.toString()
 
 	if (!name) {
-		throw new Error('Name is required')
+		return json({ errors: { name: 'Name is required' } })
 	}
 
 	const category = await CategoryModel.create({ name })
 
-	return json({ category })
+	return json({ name: category.name })
 }
 
-export const loader = async (params: LoaderFunctionArgs) => {
+export const loader: LoaderFunction = async (params: LoaderFunctionArgs) => {
 	/* query all categories, serialize it */
-	const categories = await (
-		await CategoryModel.find<CategoryDocument>({})
-	).map((category) => {
+
+	const query = await CategoryModel.find<CategoryDocument>({})
+
+	const categories = query.map((category) => {
 		return {
 			_id: category._id,
 			name: category.name,
 		}
 	})
-
-	if (!categories) {
-		throw new Error('No categories found')
-	}
 
 	return json({ categories })
 }
@@ -37,15 +39,17 @@ export const loader = async (params: LoaderFunctionArgs) => {
 const CreateCategoryPage = () => {
 	const fetcher = useFetcher<typeof loader>()
 	const { categories } = useLoaderData<typeof loader>()
+	const actionData = useActionData<typeof action>()
 
 	return (
 		<div>
 			<h2>Create Category</h2>
 			<fetcher.Form method="POST">
 				<input type="text" name="name" />
+				<span>{actionData?.errors?.name}</span>
 				<input type="submit" value="Submit" role="submit" />
 			</fetcher.Form>
-			<p>test</p>
+
 			{categories ? (
 				<ul>
 					{categories.map((category) => (
@@ -55,6 +59,8 @@ const CreateCategoryPage = () => {
 			) : (
 				<p>No categories found, add some!</p>
 			)}
+
+			<pre>{JSON.stringify(fetcher.data, null, 2)}</pre>
 		</div>
 	)
 }
