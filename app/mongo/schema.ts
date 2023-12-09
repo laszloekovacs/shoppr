@@ -1,6 +1,6 @@
-import '@/mongo/index.server'
 import mongoose, { Document, Schema } from 'mongoose'
-
+import './connect'
+console.log('connected to mongo')
 /**
  * categories
  */

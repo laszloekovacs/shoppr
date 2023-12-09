@@ -10,8 +10,6 @@ import {
     useLoaderData,
 } from '@remix-run/react'
 
-import '@/constants/index.server'
-
 /* inject tailwind style sheet */
 export const links: LinksFunction = () => [
     { rel: 'stylesheet', href: stylesheet },
