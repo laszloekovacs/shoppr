@@ -1,5 +1,5 @@
 import stylesheet from './tailwind.css'
-import type { LinksFunction } from '@remix-run/node'
+import { json, type LinksFunction } from '@remix-run/node'
 import {
 	Links,
 	LiveReload,
@@ -11,13 +11,17 @@ import {
 } from '@remix-run/react'
 import { connectDatabase } from './services/mongoose.server'
 
-/* conect to mongodb */
-connectDatabase()
-
 /* inject tailwind style sheet */
 export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: stylesheet },
 ]
+
+export const loader = async () => {
+	/* conect to mongodb */
+	connectDatabase()
+
+	return json({})
+}
 
 export default function App() {
 	return (

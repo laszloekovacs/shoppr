@@ -1,10 +1,7 @@
 import '@testing-library/jest-dom'
 import { render, screen, waitFor } from '@testing-library/react'
 import { createRemixStub } from '@remix-run/testing'
-import CreateCategoryPage, {
-	loader,
-	action,
-} from '@/routes/dashboard.category.create'
+import CreateCategoryPage, { loader, action } from '@/routes/dashboard.category'
 import App from '@/root'
 
 describe('dashboard.category.create', () => {

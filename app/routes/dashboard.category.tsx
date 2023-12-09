@@ -4,24 +4,24 @@ import {
 	LoaderFunction,
 	LoaderFunctionArgs,
 	json,
+	redirect,
 } from '@remix-run/node'
 import { CategoryDocument, CategoryModel } from '@/models/schema.server'
 
-export const action = async (params: ActionFunctionArgs) => {
-	const { request } = params
+export const action = async ({ request }: ActionFunctionArgs) => {
 	const formData = await request.formData()
-	const name = formData.get('name')?.toString()
+	const name = String(formData.get('name'))
 
-	if (!name) {
+	if (name.length == 0) {
 		return json({ errors: { name: 'Name is required' } })
 	}
 
 	const category = await CategoryModel.create({ name })
 
-	return json({ name: category.name })
+	return json({ errors: null, category })
 }
 
-export const loader: LoaderFunction = async (params: LoaderFunctionArgs) => {
+export const loader = async (params: LoaderFunctionArgs) => {
 	/* query all categories, serialize it */
 
 	const query = await CategoryModel.find<CategoryDocument>({})
@@ -46,7 +46,7 @@ const CreateCategoryPage = () => {
 			<h2>Create Category</h2>
 			<fetcher.Form method="POST">
 				<input type="text" name="name" />
-				<span>{actionData?.errors?.name}</span>
+				{actionData?.errors?.name ? <em>{actionData?.errors.name}</em> : null}
 				<input type="submit" value="Submit" role="submit" />
 			</fetcher.Form>
 
