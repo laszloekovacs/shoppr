@@ -5,7 +5,7 @@ const CardBase = ({
 	product,
 	price,
 }: {
-	className: string
+	className?: string
 	product: string
 	price: string
 }) => {
@@ -36,5 +36,13 @@ export default styled(CardBase)`
 		justify-content: space-between;
 		align-items: flex-end;
 		padding: 1px;
+		overflow: hidden;
+		gap: 1ch;
+	}
+	.info h3 {
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 `

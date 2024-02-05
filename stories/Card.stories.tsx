@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
 	args: {
-		product: 'Shoes',
+		product: 'Very long text and Shoes dm next level thing and more',
 		price: '$100',
 	},
 }
