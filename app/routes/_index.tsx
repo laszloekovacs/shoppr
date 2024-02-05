@@ -1,5 +1,5 @@
 import type { MetaFunction } from '@remix-run/node'
-import Button from '../components/Button'
+import Navigation from '~/components/Navigation'
 
 export const meta: MetaFunction = () => {
 	return [
@@ -37,7 +37,7 @@ export default function Index() {
 					</a>
 				</li>
 			</ul>
-			<Button>stylish</Button>
+			<Navigation />
 		</div>
 	)
 }
