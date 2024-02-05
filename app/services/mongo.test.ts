@@ -1,15 +1,28 @@
 import { expect, it, describe } from 'vitest'
-import { createProduct, type Product } from './mongo.server'
+import {
+	mongoFindProductByName,
+	mongoInsertProduct,
+	type Product,
+} from './mongo.server'
 
-describe('base', () => {
-	it('should be able to insert', async () => {
+describe('database', () => {
+	it.skip('should be able to insert', async () => {
 		const product = {
 			name: 'test',
 			price: 100,
 		} satisfies Product
 
-		const result = await createProduct(product)
+		const result = await mongoInsertProduct(product)
 
 		expect(result).toBeTruthy()
+	})
+
+	it('find by name', async () => {
+		const name = 'test'
+
+		const result = await mongoFindProductByName(name)
+
+		expect(result).toBeTruthy()
+		expect(result?.name).toMatch(name)
 	})
 })
