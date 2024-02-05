@@ -1,0 +1,11 @@
+:root {
+	box-sizing: border-box;
+	background-color: antiquewhite;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+	margin: 0;
+}

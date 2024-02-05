@@ -11,5 +11,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
-	render: () => <Card />,
+	args: {
+		product: 'Shoes',
+		price: '$100',
+	},
 }
