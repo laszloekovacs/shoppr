@@ -1,13 +1,19 @@
 import { Link } from '@remix-run/react'
+import styled from '@emotion/styled'
 
-const Navigation = () => {
+const NavigationBase = ({ className }: { className?: string }) => {
 	return (
-		<div>
+		<div className={className}>
 			<Link to="/dashboard">Dashboard</Link>
 			<Link to="/dashboard/products">Products</Link>
-			<Link to="/dashboard/products/create">Create</Link>
+			<Link to="/dashboard/products/new">Create</Link>
 		</div>
 	)
 }
 
-export default Navigation
+export default styled(NavigationBase)`
+	/* Add your styles here */
+	display: flex;
+	flex-direction: row;
+	gap: 1ch;
+`

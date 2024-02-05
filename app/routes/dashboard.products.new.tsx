@@ -1,5 +1,6 @@
-import { redirect, type ActionFunctionArgs } from '@remix-run/node'
-import { Form, useNavigation } from '@remix-run/react'
+import { redirect, type ActionFunctionArgs, json } from '@remix-run/node'
+import { Form, useActionData, useNavigation } from '@remix-run/react'
+import { mongoInsertProduct } from '../services/mongo.server'
 
 // https://remix.run/docs/en/main/discussion/form-vs-fetcher
 
@@ -7,7 +8,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 	const formData = await request.formData()
 
 	// process and validate formData
-	console.log(formData)
+	const result = await mongoInsertProduct({
+		name: formData.get('product') as string,
+		price: Number(formData.get('price')),
+	})
+
+	if (!result) {
+		return json({ errors: 'Failed to create product' })
+	}
 
 	return redirect('/dashboard/products')
 }
@@ -15,9 +23,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 const CreateProductPage = () => {
 	const navigation = useNavigation()
 	const isPending = navigation.formAction === '/dashboard/products/new'
+	const actionData = useActionData<typeof action>()
 
 	return (
 		<>
+			{actionData && <p>{actionData?.errors}</p>}
+
 			<h2>Create new product</h2>
 			<Form method="post">
 				<label>

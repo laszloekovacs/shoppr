@@ -35,6 +35,7 @@ export const mongoInsertProduct = async (product: Product) => {
 	}
 }
 
+// find by name
 export const mongoFindProductByName = async (name: string) => {
 	const client = new MongoClient(MONGODB_URI)
 
@@ -45,6 +46,32 @@ export const mongoFindProductByName = async (name: string) => {
 
 		// find
 		const result = await products.findOne({ name })
+
+		return result
+	} catch (error) {
+		console.log(error)
+	} finally {
+		await client.close()
+	}
+}
+
+// return all products
+export const mongoFindAllProducts = async ({
+	skip = 0,
+	limit = 10,
+}: {
+	skip: number
+	limit: number
+}) => {
+	const client = new MongoClient(MONGODB_URI)
+
+	try {
+		// connect, get the database and collection
+		const database = client.db(DB)
+		const products = database.collection<Product>('products')
+
+		// return product array
+		const result = await products.find().skip(skip).limit(limit).toArray()
 
 		return result
 	} catch (error) {
