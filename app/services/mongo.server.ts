@@ -1,4 +1,4 @@
-import { MONGODB_URI, DB } from './constants.server'
+import { MONGODB_URI, DBNAME } from './constants.server'
 import { MongoClient } from 'mongodb'
 
 // schema
@@ -14,7 +14,7 @@ export const mongoInsertProduct = async (product: Product) => {
 
 	try {
 		// connect, get the database and collection
-		const database = client.db(DB)
+		const database = client.db(DBNAME)
 		const products = database.collection<Product>('products')
 
 		// make sure name is unique
@@ -41,7 +41,7 @@ export const mongoFindProductByName = async (name: string) => {
 
 	try {
 		// connect, get the database and collection
-		const database = client.db(DB)
+		const database = client.db(DBNAME)
 		const products = database.collection<Product>('products')
 
 		// find
@@ -67,7 +67,7 @@ export const mongoFindAllProducts = async ({
 
 	try {
 		// connect, get the database and collection
-		const database = client.db(DB)
+		const database = client.db(DBNAME)
 		const products = database.collection<Product>('products')
 
 		// return product array

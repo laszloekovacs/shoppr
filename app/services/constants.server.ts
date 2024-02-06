@@ -8,10 +8,10 @@ if (!MONGODB_URI) {
 	)
 }
 
-const DB = process.env.DB!
+const DBNAME = process.env.DBNAME!
 
-if (!DB) {
+if (!DBNAME) {
 	throw new Error('Please define the DB environment variable inside .env.local')
 }
 
-export { MONGODB_URI, DB }
+export { MONGODB_URI, DBNAME }

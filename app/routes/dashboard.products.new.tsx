@@ -19,6 +19,13 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 	return redirect('/dashboard/products')
 }
+/*
+export const loader = async () => {
+	return json({
+
+	})
+}
+*/
 
 const CreateProductPage = () => {
 	const navigation = useNavigation()
