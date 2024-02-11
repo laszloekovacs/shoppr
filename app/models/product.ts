@@ -1,25 +1,16 @@
-import { z } from 'zod'
+export interface ProductSchema {
+	_id: string
+	product: string
+	price: string
+	type: 'shoes' | 'watches'
+}
 
-// https://zod.dev/
+export interface WatchesSchema extends ProductSchema {
+	type: 'watches'
+	movement: string
+}
 
-const baseProductSchema = z.object({
-	name: z.string(),
-	brand: z.string(),
-	department: z.string(),
-})
-
-// extend base schema
-const watchSchema = baseProductSchema.extend({
-	price: z.number(),
-	movement: z.string(),
-	color: z.string(),
-})
-
-const mywatch = watchSchema.parse({
-	name: 'My watch',
-	brand: 'My brand',
-	department: 'My department',
-	price: 100,
-	movement: 'My movement',
-	color: 'My color',
-})
+export interface ShoesSchema extends ProductSchema {
+	type: 'shoes'
+	size: number
+}
