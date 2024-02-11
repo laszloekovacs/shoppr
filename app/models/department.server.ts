@@ -6,3 +6,5 @@ export interface Department extends WithId<Document> {
 }
 
 export default Department
+
+// todo add yup validator
