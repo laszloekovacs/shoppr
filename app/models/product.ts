@@ -1,5 +1,4 @@
 import { z } from 'zod'
-import { ObjectId } from '~/services/db.server'
 
 /* base product */
 export interface ProductSchema {
@@ -28,14 +27,3 @@ export interface ProductOption {
 	sku: string
 	stock: number
 }
-
-const productOptionSchema = z.object({
-	name: z.string().min(3),
-	price: z.number().gt(0).int(),
-	discount: z.number().gt(1).int().optional(),
-	isDiscounted: z.boolean(),
-	sku: z.string().min(3),
-	stock: z.number().int(),
-})
-
-export type ProductOptionSchema = z.infer<typeof productOptionSchema>

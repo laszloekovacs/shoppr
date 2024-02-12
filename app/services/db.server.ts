@@ -8,8 +8,8 @@ if (!DATABASE) {
 	throw new Error('Missing DATABASE environment variable')
 }
 
-const connectionString: string = process.env.CONNECTION_STRING as string | ''
-if (!connectionString) {
+const CONNECTION_STRING: string = process.env.CONNECTION_STRING as string | ''
+if (!CONNECTION_STRING) {
 	throw new Error('Missing CONNECTION_STRING environment variable')
 }
 
@@ -21,10 +21,10 @@ declare global {
 }
 
 if (process.env.NODE_ENV === 'production') {
-	mongodb = new MongoClient(connectionString)
+	mongodb = new MongoClient(CONNECTION_STRING)
 } else {
 	if (!global.__db) {
-		global.__db = new MongoClient(connectionString)
+		global.__db = new MongoClient(CONNECTION_STRING)
 	}
 	mongodb = global.__db
 }
