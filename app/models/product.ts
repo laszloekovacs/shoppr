@@ -20,9 +20,9 @@ export function isProductSchema(obj: any): obj is ProductSchema {
 		Array.isArray(obj.images) &&
 		obj.images.every((i: any) => typeof i == 'string') &&
 		Array.isArray(obj.attributes) &&
-		obj.attributes.every(isAttribute) &&
+		obj.attributes.every(isProductAttribute) &&
 		Array.isArray(obj.options) &&
-		obj.options.every(isOption)
+		obj.options.every(isProductOption)
 	) {
 		return true
 	}
@@ -37,7 +37,7 @@ export interface ProductAttribute {
 	unit?: string
 }
 
-export function isAttribute(obj: any): obj is ProductAttribute {
+export function isProductAttribute(obj: any): obj is ProductAttribute {
 	if (
 		typeof obj.name == 'string' &&
 		typeof obj.displayName == 'string' &&
@@ -59,7 +59,7 @@ export interface ProductOption {
 	stock: number
 }
 
-export function isOption(obj: any): obj is ProductOption {
+export function isProductOption(obj: any): obj is ProductOption {
 	if (
 		typeof obj.name == 'string' &&
 		typeof obj.price == 'number' &&
