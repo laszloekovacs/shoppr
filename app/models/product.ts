@@ -1,5 +1,3 @@
-import { z } from 'zod'
-
 /* base product */
 export interface ProductSchema {
 	name: string
