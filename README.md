@@ -14,3 +14,4 @@ https://developer.paypal.com/integration-builder/
 - paypal integration
 - add proper indices, seeding, migration to the database
 - tooltips and toast
+- caching of social shared links
