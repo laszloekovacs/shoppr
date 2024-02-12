@@ -12,3 +12,5 @@ https://developer.paypal.com/integration-builder/
 - check types and validate inputs
 - login and accounts
 - paypal integration
+- add proper indices, seeding, migration to the database
+- tooltips and toast

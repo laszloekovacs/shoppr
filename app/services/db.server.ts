@@ -15,7 +15,7 @@ if (!CONNECTION_STRING) {
 
 let mongodb: MongoClient
 
-export const documents = (name: 'products' | 'orders') =>
+export const documents = (name: 'products' | 'orders' | 'attributes') =>
 	mongodb.db(DATABASE).collection(name)
 
 /* extend global type, cant use let or const, var gets complains */

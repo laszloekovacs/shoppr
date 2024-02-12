@@ -5,8 +5,40 @@ export interface ProductSchema {
 	department: string
 	isPublished?: boolean
 	images?: Array<string>
-	attributes?: Array<ProductAttribute>
-	options?: Array<ProductOption>
+	attributes?: Array<ProductAttributeSchema>
+	options?: Array<ProductOptionSchema>
+}
+
+/* attributes like storage size, material, movement etc. */
+export interface ProductAttributeSchema {
+	name: string
+	displayName: string
+	value: string | number | boolean
+	unit?: string
+}
+
+/* various options for a product like XL shirt, M shirt */
+export interface ProductOptionSchema {
+	name: string
+	price: number
+	discount?: number
+	isDiscounted: boolean
+	sku: string
+	stock: number
+}
+
+export function isProductOption(obj: any): obj is ProductOptionSchema {
+	if (
+		typeof obj.name == 'string' &&
+		typeof obj.price == 'number' &&
+		('discount' in obj ? typeof obj.discount == 'number' : true) &&
+		typeof obj.isDiscounted == 'boolean' &&
+		typeof obj.sku == 'string' &&
+		typeof obj.stock == 'number'
+	) {
+		return true
+	}
+	return false
 }
 
 export function isProductSchema(obj: any): obj is ProductSchema {
@@ -27,44 +59,12 @@ export function isProductSchema(obj: any): obj is ProductSchema {
 	return false
 }
 
-/* attributes like storage size, material, movement etc. */
-export interface ProductAttribute {
-	name: string
-	displayName: string
-	value: string | number | boolean
-	unit?: string
-}
-
-export function isProductAttribute(obj: any): obj is ProductAttribute {
+export function isProductAttribute(obj: any): obj is ProductAttributeSchema {
 	if (
 		typeof obj.name == 'string' &&
 		typeof obj.displayName == 'string' &&
 		['string', 'number', 'boolean'].includes(typeof obj.value) &&
 		('unit' in obj ? typeof obj.unit == 'string' : true)
-	) {
-		return true
-	}
-	return false
-}
-
-/* various options for a product like XL shirt, M shirt */
-export interface ProductOption {
-	name: string
-	price: number
-	discount?: number
-	isDiscounted: boolean
-	sku: string
-	stock: number
-}
-
-export function isProductOption(obj: any): obj is ProductOption {
-	if (
-		typeof obj.name == 'string' &&
-		typeof obj.price == 'number' &&
-		('discount' in obj ? typeof obj.discount == 'number' : true) &&
-		typeof obj.isDiscounted == 'boolean' &&
-		typeof obj.sku == 'string' &&
-		typeof obj.stock == 'number'
 	) {
 		return true
 	}

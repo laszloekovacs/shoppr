@@ -1,11 +1,5 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
-import {
-	useFetcher,
-	Form,
-	useLoaderData,
-	useActionData,
-	useNavigation,
-} from '@remix-run/react'
+import { useFetcher, useLoaderData, useActionData } from '@remix-run/react'
 import { useState } from 'react'
 import { ProductSchema } from '~/models/product'
 import { documents, WithId } from '~/services/db.server'
