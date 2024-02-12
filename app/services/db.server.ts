@@ -1,5 +1,12 @@
 /* eslint-disable no-var */
 import { MongoClient, BSON } from 'mongodb'
+export type { WithId } from 'mongodb'
+
+const DATABASE = process.env.DATABASE as string | ''
+
+if (!DATABASE) {
+	throw new Error('Missing DATABASE environment variable')
+}
 
 const connectionString: string = process.env.CONNECTION_STRING as string | ''
 if (!connectionString) {
@@ -24,4 +31,4 @@ if (process.env.NODE_ENV === 'production') {
 
 let ObjectId: BSON.ObjectId
 
-export { mongodb, ObjectId }
+export { mongodb, ObjectId, DATABASE }

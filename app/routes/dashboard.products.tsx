@@ -1,9 +1,7 @@
 import { json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
-import { DATABASE } from '~/services/constants.server'
-import { mongodb } from '~/services/db.server'
-import { WithId } from 'mongodb'
-import { ProductSchema } from '~/models/product'
+import { mongodb, DATABASE, WithId } from '~/services/db.server'
+import { ProductSchema } from '~/models/product.server'
 
 export const loader = async () => {
 	// get the last 10 product from the database
