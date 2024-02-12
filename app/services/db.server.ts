@@ -15,6 +15,9 @@ if (!CONNECTION_STRING) {
 
 let mongodb: MongoClient
 
+export const documents = (name: 'products' | 'orders') =>
+	mongodb.db(DATABASE).collection(name)
+
 /* extend global type, cant use let or const, var gets complains */
 declare global {
 	var __db: MongoClient | undefined
