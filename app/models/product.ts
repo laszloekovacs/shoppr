@@ -5,10 +5,10 @@ export interface ProductSchema {
 	name: string
 	brand: string
 	department: string
-	isPublished: boolean
-	images: Array<string>
-	attributes: Array<ProductAttribute>
-	options: Array<ProductOption>
+	isPublished?: boolean
+	images?: Array<string>
+	attributes?: Array<ProductAttribute>
+	options?: Array<ProductOption>
 }
 
 export function isProductSchema(obj: any): obj is ProductSchema {

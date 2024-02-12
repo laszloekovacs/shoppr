@@ -1,7 +1,7 @@
 /* eslint-disable no-var */
 import { MongoClient, BSON } from 'mongodb'
 export type { WithId } from 'mongodb'
-
+export { MongoServerError } from 'mongodb'
 const DATABASE = process.env.DATABASE as string | ''
 
 if (!DATABASE) {
