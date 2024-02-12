@@ -1,9 +1,14 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
-import { useFetcher, useLoaderData } from '@remix-run/react'
-import { useRef, useState } from 'react'
+import {
+	useFetcher,
+	Form,
+	useLoaderData,
+	useActionData,
+	useNavigation,
+} from '@remix-run/react'
+import { useState } from 'react'
 import { ProductSchema } from '~/models/product'
 import { documents, WithId } from '~/services/db.server'
-import { ObjectId } from 'mongodb'
 
 // find the product by name in the database
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -34,15 +39,18 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 
 	if (typeof name == 'string' && name.length > 0) {
 		const filter = { name }
-		const update = { brand, department }
-		const updateResult = documents('products').updateOne(filter, update)
+		const update = { $set: { brand, department } }
+		const updateResult = await documents('products').updateOne(filter, update)
 	}
+
+	return json({ status: 'ok' })
 }
 
 const ProductDetailsPage = () => {
 	const { item } = useLoaderData<typeof loader>()
-	const fetcher = useFetcher()
 	const [isEditing, setEditing] = useState(false)
+	const fetcher = useFetcher()
+	const actionData = useActionData<typeof action>()
 
 	const toggleEditing = (e: any) => {
 		setEditing((state) => !state)
@@ -50,6 +58,7 @@ const ProductDetailsPage = () => {
 
 	return (
 		<div>
+			<p>{fetcher.state}</p>
 			<h3>Product Details for</h3>
 			<h1>{item.name}</h1>
 			{!isEditing && <button onClick={toggleEditing}>Edit product</button>}
