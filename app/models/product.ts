@@ -10,6 +10,23 @@ export interface ProductSchema {
 	options: Array<ProductOption>
 }
 
+export function isProductSchema(product: any): product is ProductSchema {
+	if (
+		'name' in product &&
+		'brand' in product &&
+		'department' in product &&
+		'isPublished' in product &&
+		'attribute' in product &&
+		'options' in product &&
+		Array.isArray(product['attribute']) &&
+		Array.isArray(product['options'])
+	) {
+		return true
+	}
+
+	return false
+}
+
 /* attributes like storage size, material, movement etc. */
 export interface ProductAttribute {
 	name: string
