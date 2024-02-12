@@ -1,13 +1,18 @@
-import { useLocation } from '@remix-run/react'
-import React from 'react'
+import { LoaderFunctionArgs, json } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
+import { mongodb } from '~/services/db.server'
+
+export const loader = async ({ params }: LoaderFunctionArgs) => {
+	return json({ item: params.item })
+}
 
 const ProductDetailsPage = () => {
-	const location = useLocation
+	const { item } = useLoaderData<typeof loader>()
 
 	return (
 		<div>
-			<h2>ProductDetails</h2>
-			<pre>{JSON.stringify(location)}</pre>
+			<h2>Product Details for {item}</h2>
+			<pre>{item}</pre>
 		</div>
 	)
 }
