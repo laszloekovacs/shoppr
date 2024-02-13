@@ -11,6 +11,7 @@ const NavigationBase = ({ className }: { className?: string }) => {
 			<Link to="/dashboard">Dashboard</Link>
 			<Link to="/dashboard/products/attributes">Attributes</Link>
 			<Link to="/dashboard/login">Login</Link>
+			<Link to="/dashboard/payout">pay with paypal</Link>
 		</div>
 	)
 }
