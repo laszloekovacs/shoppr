@@ -1,6 +1,5 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
-import React from 'react'
 import { authenticator } from '~/services/session.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {
