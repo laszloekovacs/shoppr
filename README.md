@@ -17,3 +17,7 @@ https://developer.paypal.com/integration-builder/
 - caching of social shared links
 - upload provider -> context inside dasboard component
 - implement useAsyncDispatch hook
+
+## Notes
+
+- Storybook has some dependency issues, it's safe to ignore
