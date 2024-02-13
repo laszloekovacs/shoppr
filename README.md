@@ -16,4 +16,4 @@ https://developer.paypal.com/integration-builder/
 - tooltips and toast
 - caching of social shared links
 - upload provider -> context inside dasboard component
-- implement useAsyncFispatch hook
+- implement useAsyncDispatch hook

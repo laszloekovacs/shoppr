@@ -1,18 +1,18 @@
-import { Link } from '@remix-run/react'
+import { NavLink } from '@remix-run/react'
 import styled from '@emotion/styled'
 
 const NavigationBase = ({ className }: { className?: string }) => {
 	return (
 		<div className={className}>
-			<Link to="/">Home</Link>
-			<Link to="/dashboard/products/list">product List</Link>
-			<Link to="/dashboard/products/new">Create product</Link>
-			<Link to="/dashboard/products">Products</Link>
-			<Link to="/dashboard">Dashboard</Link>
-			<Link to="/dashboard/products/attributes">Attributes</Link>
-			<Link to="/dashboard/login">Login</Link>
-			<Link to="/dashboard/payout">pay with paypal</Link>
-			<Link to="/dashboard/uploader">Upload</Link>
+			<NavLink to="/">Home</NavLink>
+			<NavLink to="/dashboard/products/list">product List</NavLink>
+			<NavLink to="/dashboard/products/new">Create product</NavLink>
+			<NavLink to="/dashboard/products">Products</NavLink>
+			<NavLink to="/dashboard">Dashboard</NavLink>
+			<NavLink to="/dashboard/products/attributes">Attributes</NavLink>
+			<NavLink to="/login">Login</NavLink>
+			<NavLink to="/dashboard/payout">pay with paypal</NavLink>
+			<NavLink to="/dashboard/uploader">Upload</NavLink>
 		</div>
 	)
 }
