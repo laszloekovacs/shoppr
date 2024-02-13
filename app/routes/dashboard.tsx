@@ -6,11 +6,10 @@ import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request, {
-		successRedirect: '/dashboard',
 		failureRedirect: '/login',
 	})
 
-	return null
+	return user
 }
 
 const dashboard = () => {

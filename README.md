@@ -17,6 +17,7 @@ https://developer.paypal.com/integration-builder/
 - caching of social shared links
 - upload provider -> context inside dasboard component
 - implement useAsyncDispatch hook
+- copy over emotion caching
 
 ## Notes
 
