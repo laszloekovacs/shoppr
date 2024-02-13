@@ -13,6 +13,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@azure/identity": "^4.0.1",
+    "@azure/storage-blob": "^12.17.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@paypal/react-paypal-js": "^8.1.3",
