@@ -10,6 +10,7 @@ const NavigationBase = ({ className }: { className?: string }) => {
 			<Link to="/dashboard/products">Products</Link>
 			<Link to="/dashboard">Dashboard</Link>
 			<Link to="/dashboard/products/attributes">Attributes</Link>
+			<Link to="/dashboard/login">Login</Link>
 		</div>
 	)
 }
