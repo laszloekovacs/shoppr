@@ -22,6 +22,8 @@ const UploaderPage = () => {
 	const [error, setError] = React.useState<string | null>(null)
 	const { data } = useLoaderData<typeof loader>()
 	const [bytes, setBytes] = React.useState(0)
+	const imgRef = React.useRef<HTMLInputElement>(null)
+	const [list, setList] = React.useState<any[]>([])
 
 	const handleChange = (event: any) => {
 		console.log(event)
@@ -37,10 +39,19 @@ const UploaderPage = () => {
 		const blobServiceClient = new BlobServiceClient(data.blobConnectionString)
 
 		const containerClient = blobServiceClient.getContainerClient('memes')
-
+		/*
+		const t = []
+		for await (const item of containerClient.listBlobsFlat()) {
+			t.push(item)
+		}
+		setList(t)
+*/
 		for (const file of files) {
 			const blockBlobClient = containerClient.getBlockBlobClient(file.name)
 			await blockBlobClient.uploadData(file, {
+				blobHTTPHeaders: {
+					blobContentType: file.type,
+				},
 				onProgress: (ev) => {
 					setBytes(ev.loadedBytes)
 				},
@@ -52,17 +63,31 @@ const UploaderPage = () => {
 			setError((error as Error).message)
 		} finally {
 			setIsPending(false)
+			setFiles([])
+			imgRef.current && (imgRef.current.value = '')
 		}
 	}
 
 	return (
 		<div>
 			<p>Uploaded {bytes} bytes</p>
-			<input type="file" multiple onChange={handleChange} />
+			<input
+				ref={imgRef}
+				type="file"
+				multiple
+				onChange={handleChange}
+				disabled={isPending}
+				accept="image/*"
+			/>
 			<button onClick={uploadFiles} disabled={isPending}>
 				{isPending ? 'Uploading...' : 'Upload Files'}
 			</button>
 			{error && <p style={{ color: 'red' }}>Error: {error}</p>}
+
+			{files.length > 0 && <pre>{JSON.stringify(files[0].type, null, 2)}</pre>}
+
+			<p>blobs</p>
+			<pre>{JSON.stringify(list, null, 2)}</pre>
 		</div>
 	)
 }
