@@ -5,14 +5,10 @@
 	"type": "module",
 	"scripts": {
 		"dev": "remix dev --manual",
-		"storybook": "storybook dev -p 6006",
 		"test": "vitest",
 		"vitestUI": "vitest --ui",
 		"build": "remix build",
-		"lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
-		"start": "remix-serve ./build/index.js",
-		"typecheck": "tsc",
-		"build-storybook": "storybook build"
+		"start": "remix-serve ./build/index.js"
 	},
 	"dependencies": {
 		"@emotion/react": "^11.11.3",
@@ -24,8 +20,6 @@
 		"@testing-library/jest-dom": "^6.4.2",
 		"@testing-library/react": "^14.2.1",
 		"isbot": "^4.1.0",
-		"jsdom": "^24.0.0",
-		"json-schema-to-ts": "^3.0.0",
 		"mongodb": "^6.3.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -36,20 +30,12 @@
 	},
 	"devDependencies": {
 		"@remix-run/dev": "^2.6.0",
-		"@storybook/addon-essentials": "^7.6.12",
-		"@storybook/addon-interactions": "^7.6.12",
-		"@storybook/addon-links": "^7.6.12",
-		"@storybook/addon-onboarding": "^1.0.11",
-		"@storybook/blocks": "^7.6.12",
-		"@storybook/react": "^7.6.12",
-		"@storybook/react-vite": "^7.6.12",
-		"@storybook/test": "^7.6.12",
 		"@types/react": "^18.2.20",
 		"@types/react-dom": "^18.2.7",
 		"@vitest/ui": "^1.2.2",
-		"storybook": "7.6.12",
+		"jsdom": "^24.0.0",
 		"typescript": "^5.1.6",
-		"vite": "^5.0.12",
+		"vite": "^5.1.1",
 		"vitest": "^1.2.2"
 	},
 	"engines": {
