@@ -11,7 +11,7 @@ https://github.com/danestves/remix-auth-auth0/tree/main
 
 export const sessionStorage = createCookieSessionStorage({
 	cookie: {
-		name: '__session',
+		name: 'shoppr__session',
 		sameSite: 'lax',
 		path: '/',
 		httpOnly: true,
