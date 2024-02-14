@@ -21,6 +21,7 @@ https://developer.paypal.com/integration-builder/
 - create CRON job to clear database, migrate
 - deployment scripts, CI/CD
 - general stats like page views, favorites, etc
+- prefetc and cache error page
 
 ## Notes
 
