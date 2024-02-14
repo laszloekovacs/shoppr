@@ -15,9 +15,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 const dashboard = () => {
 	return (
 		<div>
-			<Navigation />
-			<h1>Dashboard</h1>
 			<UploadProvider>
+				<Navigation />
+				<h1>Dashboard</h1>
 				<Outlet />
 			</UploadProvider>
 		</div>
