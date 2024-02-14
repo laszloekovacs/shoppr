@@ -26,18 +26,9 @@ const ProductsListPage = () => {
 						<li key={product.name}>
 							<pre>{JSON.stringify(product, null, 2)}</pre>
 							<Link
-								to={`/dashboard/products/${encodeURIComponent(
-									product.name
-								)}/edit`}
+								to={`/dashboard/products/${encodeURIComponent(product.name)}`}
 							>
 								edit
-							</Link>
-							<Link
-								to={`/dashboard/products/${encodeURIComponent(
-									product.name
-								)}/attributes`}
-							>
-								attributes
 							</Link>
 						</li>
 					))}

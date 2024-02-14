@@ -1,4 +1,4 @@
-import { Outlet } from '@remix-run/react'
+import { Outlet, useLocation } from '@remix-run/react'
 
 const ProductsPage = () => {
 	return (
