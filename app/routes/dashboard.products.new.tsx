@@ -1,14 +1,13 @@
 import { ActionFunction, ActionFunctionArgs } from '@remix-run/node'
-import {
-	Form,
-	json,
-	redirect,
-	useActionData,
-	useLoaderData,
-} from '@remix-run/react'
+import { Form, json, redirect, useActionData } from '@remix-run/react'
+import { Link } from '@remix-run/react'
 
 import { ProductSchema, isProductSchema } from '~/models/product'
 import { DATABASE, mongodb, MongoServerError } from '~/services/db.server'
+
+export const handle = {
+	breadcrumb: () => <Link to="/dashboard/products/new">new product</Link>,
+}
 
 export async function loader() {
 	return json({})

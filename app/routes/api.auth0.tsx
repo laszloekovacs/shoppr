@@ -13,5 +13,5 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 /* initialize login process, call this from a form from the website */
 export const action = async ({ request }: ActionFunctionArgs) => {
-	authenticator.authenticate('auth0', request)
+	return authenticator.authenticate('auth0', request)
 }

@@ -2,9 +2,9 @@ import { NavLink, useLocation } from '@remix-run/react'
 import React from 'react'
 import { useEffect } from 'react'
 
-const Breadcrumps = ({ location }: { location: string }) => {
+const Breadcrumps = ({ pathname }: { pathname: string }) => {
 	// decode pathname
-	const pathname = decodeURIComponent(window.location.pathname)
+	const path = decodeURIComponent(pathname)
 
 	return (
 		<div>

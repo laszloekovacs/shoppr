@@ -2,6 +2,10 @@ import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import { documents } from '~/services/db.server'
 
+export const handle = {
+	breadcrumb: () => <Link to="/dashboard/products">Some Route</Link>,
+}
+
 export const loader = async ({ params }: LoaderFunctionArgs) => {
 	const collection = documents('products')
 
@@ -18,18 +22,14 @@ const ProductsListPage = () => {
 	const { products } = useLoaderData<typeof loader>()
 
 	return (
-		<div>
-			<h2>ProductsList</h2>
+		<div data-page={ProductsListPage.name}>
+			<h2>Products</h2>
 			<ul>
 				{products &&
 					products.map((product) => (
 						<li key={product.name}>
 							<pre>{JSON.stringify(product, null, 2)}</pre>
-							<Link
-								to={`/dashboard/products/${encodeURIComponent(product.name)}`}
-							>
-								edit
-							</Link>
+							<Link to={`${encodeURIComponent(product.name)}`}>edit</Link>
 						</li>
 					))}
 			</ul>

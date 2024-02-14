@@ -21,7 +21,7 @@ const dashboard = () => {
 			<UploadProvider>
 				<Navigation />
 				<h1>Dashboard</h1>
-				<Breadcrumps location={location.pathname} />
+				<Breadcrumps pathname={location.pathname} />
 				<Outlet />
 			</UploadProvider>
 		</div>
