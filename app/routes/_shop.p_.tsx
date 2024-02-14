@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
+import Card from '~/components/Card'
 import { documents } from '~/services/db.server'
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -17,7 +18,11 @@ export default function ShopList() {
 		<div>
 			<ul>
 				{list.map((product) => (
-					<li key={product.name}>{product.name}</li>
+					<li key={product.name}>
+						<Link to={encodeURIComponent(product.name)}>
+							<Card name={product.name} />
+						</Link>
+					</li>
 				))}
 			</ul>
 

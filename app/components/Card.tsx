@@ -2,20 +2,18 @@ import styled from '@emotion/styled'
 
 const CardBase = ({
 	className,
-	product,
-	price,
+	name,
 }: {
 	className?: string
-	product: string
-	price: string
+	name: string
 }) => {
 	return (
 		<div className={className}>
-			<img src="https://picsum.photos/200" alt={product} height={200} />
+			<img src="https://picsum.photos/200" alt={name} height={200} />
 
 			<div className="info">
-				<h3>{product}</h3>
-				<p>{price}</p>
+				<h3>{name}</h3>
+				<p>400</p>
 			</div>
 		</div>
 	)
