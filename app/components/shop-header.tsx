@@ -28,7 +28,9 @@ const ShopHeader = () => {
 						justifyContent: 'space-between',
 					}}
 				>
-					<h1>logo</h1>
+					<Link to="/">
+						<img src="https://picsum.photos/70/40" alt="logo" />
+					</Link>
 					<input type="search" />
 					<button>Basket</button>
 				</div>

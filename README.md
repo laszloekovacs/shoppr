@@ -18,6 +18,8 @@ https://developer.paypal.com/integration-builder/
 - upload provider -> context inside dasboard component
 - implement useAsyncDispatch hook
 - copy over emotion caching
+- create CRON job to clear database, migrate
+- deployment scripts, CI/CD
 
 ## Notes
 
