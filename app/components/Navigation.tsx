@@ -5,7 +5,7 @@ const NavigationBase = ({ className }: { className?: string }) => {
 	return (
 		<div className={className}>
 			<NavLink to="/">Home</NavLink>
-			<NavLink to="/dashboard/products/list">product List</NavLink>
+
 			<NavLink to="/dashboard/products/new">Create product</NavLink>
 			<NavLink to="/dashboard/products">Products</NavLink>
 			<NavLink to="/dashboard">Dashboard</NavLink>

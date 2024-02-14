@@ -1,10 +1,12 @@
-import { Link, Outlet } from '@remix-run/react'
-import AccountsBar from '~/components/accounts-bar'
+import { Outlet } from '@remix-run/react'
+import CategoriesBar from '~/components/categories-bar'
+import ShopHeader from '~/components/shop-header'
 
 const Shop = () => {
 	return (
 		<>
-			<AccountsBar />
+			<ShopHeader />
+			<CategoriesBar />
 			<Outlet />
 		</>
 	)
