@@ -4,8 +4,9 @@ import React from 'react'
 import invariant from 'tiny-invariant'
 import { ProductSchema } from '~/models/product'
 import { documents } from '~/services/db.server'
+import { authenticator } from '~/services/session.server'
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 	invariant(params, 'params.item is required')
 
 	const item = await documents('products').findOne<ProductSchema>({
@@ -44,4 +45,33 @@ export default function ShopItemPage() {
 			<pre>{JSON.stringify(item, null, 2)}</pre>
 		</div>
 	)
+}
+
+export async function action({ request }: LoaderFunctionArgs) {
+	invariant(request, 'request is required')
+	const formData = await request.formData()
+	const user = await authenticator.isAuthenticated(request)
+
+	const name = formData.get('name')
+	const intent = formData.get('intent')
+
+	switch (intent) {
+		case 'ADD_TO_CART':
+			if (user) {
+				// FIX THIS
+				documents('accounts').insertOne({
+					$where: { _id: user.id },
+					$push: { cart: { name } },
+				})
+			}
+			break
+
+		case 'FAVORITE':
+			break
+
+		default:
+			break
+	}
+
+	return json({})
 }

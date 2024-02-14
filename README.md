@@ -20,6 +20,7 @@ https://developer.paypal.com/integration-builder/
 - copy over emotion caching
 - create CRON job to clear database, migrate
 - deployment scripts, CI/CD
+- general stats like page views, favorites, etc
 
 ## Notes
 
