@@ -1,16 +1,12 @@
 import { LoaderFunctionArgs, json, redirect } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
+import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	const user = await authenticator.isAuthenticated(request)
 
-	// user already signed in, send him back home
-	if (user) {
-		return redirect('/')
-	}
-
-	return {}
+	return redirect('/')
 }
 
 const LoginPage = () => {
