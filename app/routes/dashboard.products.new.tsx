@@ -65,7 +65,7 @@ export async function action({ request }: ActionFunctionArgs) {
 	}
 	// go to second stage to fill out extra data
 	const path = encodeURIComponent(product.name!)
-	return redirect(`/dashboard/products/${path}`)
+	return redirect(`/dashboard/products/${path}/edit`)
 }
 
 export default function NewProductPage() {
@@ -76,16 +76,16 @@ export default function NewProductPage() {
 		<div>
 			<h2>Create New Product</h2>
 			<Form method="POST" action="/dashboard/products/new">
-				<label htmlFor="name">name</label>
+				<label htmlFor="name">Termék neve</label>
 				<input type="text" name="name" />
 
-				<label htmlFor="brand">brand</label>
+				<label htmlFor="brand">Gyártó</label>
 				<input type="text" name="brand" />
 
-				<label htmlFor="department">department</label>
+				<label htmlFor="department">Kategória</label>
 				<input type="text" name="department" />
 
-				<input type="submit" />
+				<input type="submit" value="Létrehozás" />
 			</Form>
 			<pre>{actionData && JSON.stringify(actionData)}</pre>
 		</div>
