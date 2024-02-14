@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs } from '@remix-run/node'
 import { Outlet, useLocation } from '@remix-run/react'
 import Navigation from '~/components/Navigation'
+import Breadcrumps from '~/components/breadcrumps'
 import UploadProvider from '~/components/upload-provider'
 import { authenticator } from '~/services/session.server'
 
@@ -20,7 +21,7 @@ const dashboard = () => {
 			<UploadProvider>
 				<Navigation />
 				<h1>Dashboard</h1>
-				<p>{location.pathname}</p>
+				<Breadcrumps location={location.pathname} />
 				<Outlet />
 			</UploadProvider>
 		</div>
