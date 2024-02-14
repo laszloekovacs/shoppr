@@ -22,7 +22,9 @@ https://developer.paypal.com/integration-builder/
 - deployment scripts, CI/CD
 - general stats like page views, favorites, etc
 - prefetc and cache error page
-
+- CRON job for creating orders for statistics
+- soft deletion of products
+- stats on products
 ## Notes
 
 - Storybook has some dependency issues, it's safe to ignore
