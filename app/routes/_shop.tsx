@@ -18,12 +18,23 @@ export const loader = async () => {
 					path: '$attributes',
 				},
 			},
+			{
+				$group: {
+					_id: null,
+					attributes: {
+						$addToSet: '$attributes',
+					},
+				},
+			},
+			{
+				$project: {
+					attributes: 1,
+				},
+			},
 		])
 		.toArray()
 
-	console.log(attributes)
-
-	return json({ brands, departments })
+	return json({ brands, departments, attributes })
 }
 
 const Shop = () => {

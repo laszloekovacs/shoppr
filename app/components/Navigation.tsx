@@ -13,6 +13,7 @@ const NavigationBase = ({ className }: { className?: string }) => {
 			<NavLink to="/login">Login</NavLink>
 			<NavLink to="/dashboard/payout">pay with paypal</NavLink>
 			<NavLink to="/dashboard/uploader">Upload</NavLink>
+			<NavLink to="/p">shopping list</NavLink>
 		</div>
 	)
 }

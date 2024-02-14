@@ -6,7 +6,7 @@ export default function BrowsingBar({
 	data: {
 		brands: string[]
 		departments: string[]
-		attributes: string[]
+		attributes: any
 	}
 }) {
 	return (
@@ -26,7 +26,8 @@ export default function BrowsingBar({
 			</ul>
 
 			<hr />
-			<pre>{JSON.stringify(data, null, 2)}</pre>
 		</div>
 	)
 }
+
+//<pre>{JSON.stringify(data, null, 2)}</pre>
