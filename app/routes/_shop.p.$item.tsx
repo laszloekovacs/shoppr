@@ -65,13 +65,10 @@ export async function action({ request }: LoaderFunctionArgs) {
 
 	switch (intent) {
 		case 'ADD_TO_CART':
-			if (user) {
-				addToFavorites(user, name)
-			}
-
 			break
 
 		case 'FAVORITE':
+			addToFavorites(user, name)
 			break
 
 		default:

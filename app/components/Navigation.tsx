@@ -1,4 +1,4 @@
-import { NavLink } from '@remix-run/react'
+import { Form, NavLink } from '@remix-run/react'
 import styled from '@emotion/styled'
 
 const NavigationBase = ({ className }: { className?: string }) => {
@@ -14,6 +14,9 @@ const NavigationBase = ({ className }: { className?: string }) => {
 			<NavLink to="/dashboard/payout">pay with paypal</NavLink>
 			<NavLink to="/dashboard/uploader">Upload</NavLink>
 			<NavLink to="/p">shopping list</NavLink>
+			<Form action="/api/auth0/logout" method="post">
+				<button type="submit">Logout</button>
+			</Form>
 		</div>
 	)
 }

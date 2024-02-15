@@ -4,7 +4,7 @@ import { documents } from '~/services/db.server'
 
 export default async function addToFavorites(user: Auth0Profile, name: string) {
 	await documents('accounts').updateOne(
-		{ _id: new ObjectId(user.id) },
+		{ user: user.id },
 		{
 			$push: { cart: { name } },
 		}
