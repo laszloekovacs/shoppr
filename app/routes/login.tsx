@@ -1,6 +1,10 @@
 import { LoaderFunctionArgs, json, redirect } from '@remix-run/node'
-import { Form, useLoaderData } from '@remix-run/react'
+import { Form, Link, useLoaderData } from '@remix-run/react'
 import { authenticator } from '~/services/session.server'
+
+export const handle = {
+	breadcrumb: () => <Link to="/login">Some Route</Link>,
+}
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	const user = await authenticator.isAuthenticated(request)

@@ -6,6 +6,10 @@ import { authenticator } from '~/services/session.server'
 import RawData from '~/components/raw-data'
 import Card from '~/components/Card'
 
+export const handle = {
+	breadcrumb: () => <Link to="/account/favorites">Some Route</Link>,
+}
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request, {
 		failureRedirect: '/login',

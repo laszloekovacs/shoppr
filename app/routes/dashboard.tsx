@@ -1,7 +1,11 @@
 import { LoaderFunctionArgs } from '@remix-run/node'
-import { Outlet, useLocation } from '@remix-run/react'
+import { Link, Outlet, useLocation } from '@remix-run/react'
 import Navigation from '~/components/Navigation'
 import { authenticator } from '~/services/session.server'
+
+export const handle = {
+	breadcrumb: () => <Link to="/dashboard">Some Route</Link>,
+}
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request, {

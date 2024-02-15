@@ -26,6 +26,8 @@ https://developer.paypal.com/integration-builder/
 - soft deletion of products
 - stats on products
 - encode user id
+- add custom not-found page
+- tooltips
 
 ## Notes
 

@@ -1,5 +1,10 @@
 import type { MetaFunction } from '@remix-run/node'
+import { Link } from '@remix-run/react'
 import Navigation from '~/components/Navigation'
+
+export const handle = {
+	breadcrumb: () => <Link to="/">Some Route</Link>,
+}
 
 export const meta: MetaFunction = () => {
 	return [

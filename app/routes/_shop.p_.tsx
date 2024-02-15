@@ -1,6 +1,5 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import invariant from 'tiny-invariant'
 import Card from '~/components/Card'
 import { documents } from '~/services/db.server'
 
