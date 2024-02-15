@@ -6,7 +6,7 @@ import { ProductSchema, isProductSchema } from '~/db/product'
 import { DATABASE, mongodb, MongoServerError } from '~/services/db.server'
 
 export const handle = {
-	breadcrumb: () => <Link to="/dashboard/products/new">new product</Link>,
+	breadcrumb: () => <Link to="/dashboard/products/new">new</Link>,
 }
 
 export async function loader() {

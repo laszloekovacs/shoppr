@@ -5,10 +5,12 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useMatches,
 } from '@remix-run/react'
-import type { LinksFunction } from '@remix-run/node' // or cloudflare/deno
-import styles from './styles.css'
+import type { LinksFunction } from '@remix-run/node'
 import UploadProvider from './components/upload-provider'
+import styles from './styles.css'
+import Breadcrumps from './components/breadcrumps'
 
 export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: styles },
@@ -18,7 +20,9 @@ export const links: LinksFunction = () => [
 	},
 ]
 
-export default function App() {
+export default function Root() {
+	const matches = useMatches()
+
 	return (
 		<html lang="en">
 			<head>
@@ -36,6 +40,7 @@ export default function App() {
 					<ScrollRestoration />
 					<Scripts />
 					<LiveReload />
+					<Breadcrumps matches={matches} />
 				</UploadProvider>
 			</body>
 		</html>

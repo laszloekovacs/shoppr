@@ -15,7 +15,7 @@ const ShopHeader = () => {
 					<Link to="/dashboard">Dashboard</Link>
 				</div>
 				<div>
-					<Link to="/favorites">Kedvencek</Link>
+					<Link to="/account/favorites">Kedvencek</Link>
 					<Link to="/account">Fiókom</Link>
 					<Link to="/api/auth0/logout">Jelentkezz ki</Link>
 				</div>

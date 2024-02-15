@@ -7,7 +7,7 @@ import RawData from '~/components/raw-data'
 import Card from '~/components/Card'
 
 export const handle = {
-	breadcrumb: () => <Link to="/account/favorites">Some Route</Link>,
+	breadcrumb: () => <Link to="/account/favorites">favorites</Link>,
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

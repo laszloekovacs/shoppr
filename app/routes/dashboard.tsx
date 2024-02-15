@@ -4,7 +4,7 @@ import Navigation from '~/components/Navigation'
 import { authenticator } from '~/services/session.server'
 
 export const handle = {
-	breadcrumb: () => <Link to="/dashboard">Some Route</Link>,
+	breadcrumb: () => <Link to="/dashboard">dashboard</Link>,
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

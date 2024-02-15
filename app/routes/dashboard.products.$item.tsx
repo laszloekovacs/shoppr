@@ -1,5 +1,5 @@
 import React from 'react'
-import { Outlet } from '@remix-run/react'
+import { Link, Outlet } from '@remix-run/react'
 
 const ItemPage = () => {
 	return (

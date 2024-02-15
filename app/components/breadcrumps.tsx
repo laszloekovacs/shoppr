@@ -1,14 +1,22 @@
-import { NavLink, useLocation } from '@remix-run/react'
-import React from 'react'
-import { useEffect } from 'react'
+import { UIMatch } from '@remix-run/react'
+import RawData from './raw-data'
 
-const Breadcrumps = ({ pathname }: { pathname: string }) => {
-	// decode pathname
-	const path = decodeURIComponent(pathname)
+interface Props {
+	matches: UIMatch<unknown, any>[]
+}
 
+const Breadcrumps = ({ matches }: Props) => {
 	return (
 		<div>
-			<pre>{JSON.stringify(pathname, null, 2)}</pre>
+			<ol style={{ display: 'flex', flexDirection: 'row', listStyle: 'none' }}>
+				{matches
+					.filter((match) => match.handle && match.handle.breadcrumb)
+					.map((match, index) => (
+						<li key={index}>{match.handle.breadcrumb(match)}</li>
+					))}
+			</ol>
+
+			<RawData data={matches} />
 		</div>
 	)
 }

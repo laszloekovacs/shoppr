@@ -1,8 +1,11 @@
-import { Outlet, json, useLoaderData } from '@remix-run/react'
+import { Link, Outlet, json, useLoaderData } from '@remix-run/react'
 import BrowsingBar from '~/components/browsing-bar'
 import ShopHeader from '~/components/shop-header'
 import { documents } from '~/services/db.server'
 
+export const handle = {
+	breadcrumb: () => <Link to="/">shop</Link>,
+}
 export const loader = async () => {
 	// query the brands
 	const brands = await documents('products').distinct('brand')

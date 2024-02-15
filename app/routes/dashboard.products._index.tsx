@@ -2,10 +2,6 @@ import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import { documents } from '~/services/db.server'
 
-export const handle = {
-	breadcrumb: () => <Link to="/dashboard/products">Some Route</Link>,
-}
-
 export const loader = async ({ params }: LoaderFunctionArgs) => {
 	const collection = documents('products')
 
