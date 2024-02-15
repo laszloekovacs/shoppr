@@ -1,8 +1,6 @@
 import { LoaderFunctionArgs } from '@remix-run/node'
 import { Outlet, useLocation } from '@remix-run/react'
 import Navigation from '~/components/Navigation'
-import Breadcrumps from '~/components/breadcrumps'
-import UploadProvider from '~/components/upload-provider'
 import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {

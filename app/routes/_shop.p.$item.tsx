@@ -72,12 +72,7 @@ export async function action({ request }: LoaderFunctionArgs) {
 
 			const result = await documents('accounts').updateOne(
 				{ user: user.id }, // find by user
-				[
-					{ $set: { user: user.id } },
-					{ $set: { cart: { $concatArrays: [[name], '$cart'] } } },
-					//{ $set: { cart: [name] } },
-				], // update document if it exists
-				{ upsert: true } // insert if no document matches
+				{ $push: { cart: { name } } } // update document if it exists
 			)
 
 			if (result.upsertedCount) {

@@ -25,6 +25,8 @@ https://developer.paypal.com/integration-builder/
 - CRON job for creating orders for statistics
 - soft deletion of products
 - stats on products
+- encode user id
+
 ## Notes
 
 - Storybook has some dependency issues, it's safe to ignore
