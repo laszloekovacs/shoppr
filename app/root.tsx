@@ -8,6 +8,7 @@ import {
 } from '@remix-run/react'
 import type { LinksFunction } from '@remix-run/node' // or cloudflare/deno
 import styles from './styles.css'
+import UploadProvider from './components/upload-provider'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
 
@@ -22,10 +23,12 @@ export default function App() {
 				<Links />
 			</head>
 			<body>
-				<Outlet />
-				<ScrollRestoration />
-				<Scripts />
-				<LiveReload />
+				<UploadProvider>
+					<Outlet />
+					<ScrollRestoration />
+					<Scripts />
+					<LiveReload />
+				</UploadProvider>
 			</body>
 		</html>
 	)

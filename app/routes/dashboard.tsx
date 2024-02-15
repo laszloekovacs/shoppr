@@ -18,12 +18,10 @@ const dashboard = () => {
 
 	return (
 		<div>
-			<UploadProvider>
-				<Navigation />
-				<h1>Dashboard</h1>
-				<Breadcrumps pathname={location.pathname} />
-				<Outlet />
-			</UploadProvider>
+			<Navigation />
+			<h1>Dashboard</h1>
+
+			<Outlet />
 		</div>
 	)
 }

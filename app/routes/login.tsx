@@ -6,7 +6,11 @@ import { authenticator } from '~/services/session.server'
 export async function loader({ request }: LoaderFunctionArgs) {
 	const user = await authenticator.isAuthenticated(request)
 
-	return redirect('/')
+	if (user) {
+		return redirect('/')
+	}
+
+	return {}
 }
 
 const LoginPage = () => {

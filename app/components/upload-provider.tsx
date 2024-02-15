@@ -10,7 +10,7 @@ const UploadProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<>
 			<p>upload context</p>
-			<UploadContext.Provider value={{ upload: () => {} }}>
+			<UploadContext.Provider value={{ upload: () => console.log() }}>
 				{children}
 			</UploadContext.Provider>
 		</>
