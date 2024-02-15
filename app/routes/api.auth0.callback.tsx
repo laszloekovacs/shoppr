@@ -1,14 +1,11 @@
-import { LoaderFunctionArgs } from '@remix-run/node'
+import { LoaderFunctionArgs, redirect } from '@remix-run/node'
+import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
-/* this will be called by Auth0, register it */
+/* this will be called by Auth0, it should not return, but will redirect */
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-	let user = await authenticator.authenticate('auth0', request, {
+	await authenticator.authenticate('auth0', request, {
 		successRedirect: '/',
-		failureRedirect: '/',
+		failureRedirect: '/login',
 	})
-
-	/* when returning from auth0, check if the user has an account */
-
-	return user
 }

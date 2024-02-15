@@ -1,12 +1,20 @@
-const RawData = ({ data }: { data: any }) => (
-	<details>
-		<summary>Raw Data</summary>
+import { useEffect } from 'react'
 
-		<pre className="json">
-			<code>{JSON.stringify(data, null, 2)}</code>
-			<script defer>hljs.highlightAll();</script>
-		</pre>
-	</details>
-)
+const RawData = ({ data }: { data: any }) => {
+	useEffect(() => {
+		// @ts-ignore
+		hljs.highlightAll()
+	}, [])
+
+	return (
+		<details>
+			<summary>Raw Data</summary>
+
+			<pre className="json">
+				<code>{JSON.stringify(data, null, 2)}</code>
+			</pre>
+		</details>
+	)
+}
 
 export default RawData

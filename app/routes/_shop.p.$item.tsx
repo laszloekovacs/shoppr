@@ -68,7 +68,22 @@ export async function action({ request }: LoaderFunctionArgs) {
 			break
 
 		case 'FAVORITE':
-			addToFavorites(user, name)
+			console.log('adding to cart' + ' ' + name)
+
+			const result = await documents('accounts').updateOne(
+				{ user: user.id }, // find by user
+				[
+					{ $set: { user: user.id } },
+					{ $set: { cart: { $concatArrays: [[name], '$cart'] } } },
+					//{ $set: { cart: [name] } },
+				], // update document if it exists
+				{ upsert: true } // insert if no document matches
+			)
+
+			if (result.upsertedCount) {
+				console.log('upserted')
+			}
+
 			break
 
 		default:
