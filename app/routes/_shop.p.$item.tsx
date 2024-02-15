@@ -1,9 +1,12 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
+import { ObjectId } from 'mongodb'
 import React from 'react'
 import invariant from 'tiny-invariant'
-import { ProductSchema } from '~/models/product'
+import addToFavorites from '~/db/add-to-favorites.server'
+import { ProductSchema } from '~/db/product'
 import { documents } from '~/services/db.server'
+
 import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
@@ -52,18 +55,20 @@ export async function action({ request }: LoaderFunctionArgs) {
 	const formData = await request.formData()
 	const user = await authenticator.isAuthenticated(request)
 
-	const name = formData.get('name')
-	const intent = formData.get('intent')
+	const name = formData.get('name') as string
+	const intent = formData.get('intent')?.toString()
+
+	if (!user || name.length == 0) {
+		console.log('failed to fetch item')
+		return
+	}
 
 	switch (intent) {
 		case 'ADD_TO_CART':
 			if (user) {
-				// FIX THIS
-				documents('accounts').insertOne({
-					$where: { _id: user.id },
-					$push: { cart: { name } },
-				})
+				addToFavorites(user, name)
 			}
+
 			break
 
 		case 'FAVORITE':

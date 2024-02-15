@@ -1,6 +1,6 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
 import { useFetcher, useLoaderData, useActionData } from '@remix-run/react'
-import { ProductSchema } from '~/models/product'
+import { ProductSchema } from '~/db/product'
 import { documents, WithId } from '~/services/db.server'
 import invariant from 'tiny-invariant'
 

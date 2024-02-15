@@ -2,7 +2,7 @@ import { ActionFunction, ActionFunctionArgs } from '@remix-run/node'
 import { Form, json, redirect, useActionData } from '@remix-run/react'
 import { Link } from '@remix-run/react'
 
-import { ProductSchema, isProductSchema } from '~/models/product'
+import { ProductSchema, isProductSchema } from '~/db/product'
 import { DATABASE, mongodb, MongoServerError } from '~/services/db.server'
 
 export const handle = {
