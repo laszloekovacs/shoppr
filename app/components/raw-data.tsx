@@ -7,7 +7,7 @@ const RawData = ({ data }: { data: any }) => {
 	}, [])
 
 	return (
-		<details>
+		<details open>
 			<summary>Raw Data</summary>
 
 			<pre className="json">
