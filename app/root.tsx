@@ -10,7 +10,13 @@ import type { LinksFunction } from '@remix-run/node' // or cloudflare/deno
 import styles from './styles.css'
 import UploadProvider from './components/upload-provider'
 
-export const links: LinksFunction = () => [{ rel: 'stylesheet', href: styles }]
+export const links: LinksFunction = () => [
+	{ rel: 'stylesheet', href: styles },
+	{
+		rel: 'stylesheet',
+		href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css',
+	},
+]
 
 export default function App() {
 	return (
@@ -21,6 +27,8 @@ export default function App() {
 				<meta name="title" content="Shoppr" />
 				<Meta />
 				<Links />
+				<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+				<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/json.min.js"></script>
 			</head>
 			<body>
 				<UploadProvider>
