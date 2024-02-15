@@ -1,5 +1,7 @@
-import { Link, Outlet, json, useLoaderData } from '@remix-run/react'
+import { Link, Outlet, json, useLoaderData, useMatches } from '@remix-run/react'
+import Breadcrumps from '~/components/breadcrumps'
 import BrowsingBar from '~/components/browsing-bar'
+import DebugLinks from '~/components/debug-links'
 import ShopHeader from '~/components/shop-header'
 import { documents } from '~/services/db.server'
 
@@ -42,11 +44,14 @@ export const loader = async () => {
 
 const Shop = () => {
 	const data = useLoaderData<typeof loader>()
+	const matches = useMatches()
 
 	return (
 		<>
+			<DebugLinks />
 			<ShopHeader />
 			<BrowsingBar data={data} />
+			<Breadcrumps matches={matches} />
 			<Outlet />
 		</>
 	)

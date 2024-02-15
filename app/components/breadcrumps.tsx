@@ -8,7 +8,15 @@ interface Props {
 const Breadcrumps = ({ matches }: Props) => {
 	return (
 		<div>
-			<ol style={{ display: 'flex', flexDirection: 'row', listStyle: 'none' }}>
+			<ol
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					listStyle: 'none',
+					padding: '1ch',
+					border: '1px solid rgba(0,0,0,0.2)',
+				}}
+			>
 				{matches
 					.filter((match) => match.handle && match.handle.breadcrumb)
 					.map((match, index) => (

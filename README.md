@@ -28,6 +28,7 @@ https://developer.paypal.com/integration-builder/
 - encode user id
 - add custom not-found page
 - tooltips
+- clean up imports, reexport from index file
 
 ## Notes
 

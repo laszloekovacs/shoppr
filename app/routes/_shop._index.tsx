@@ -1,6 +1,6 @@
 import type { MetaFunction } from '@remix-run/node'
 import { Link } from '@remix-run/react'
-import Navigation from '~/components/Navigation'
+import Navigation from '~/components/debug-links'
 
 export const meta: MetaFunction = () => {
 	return [
@@ -38,7 +38,6 @@ export default function Index() {
 					</a>
 				</li>
 			</ul>
-			<Navigation />
 		</div>
 	)
 }

@@ -21,8 +21,6 @@ export const links: LinksFunction = () => [
 ]
 
 export default function Root() {
-	const matches = useMatches()
-
 	return (
 		<html lang="en">
 			<head>
@@ -40,7 +38,6 @@ export default function Root() {
 					<ScrollRestoration />
 					<Scripts />
 					<LiveReload />
-					<Breadcrumps matches={matches} />
 				</UploadProvider>
 			</body>
 		</html>

@@ -1,7 +1,7 @@
 import { Form, NavLink } from '@remix-run/react'
 import styled from '@emotion/styled'
 
-const NavigationBase = ({ className }: { className?: string }) => {
+const DebugLinks = ({ className }: { className?: string }) => {
 	return (
 		<div className={className}>
 			<NavLink to="/">Home</NavLink>
@@ -21,7 +21,7 @@ const NavigationBase = ({ className }: { className?: string }) => {
 	)
 }
 
-export default styled(NavigationBase)`
+export default styled(DebugLinks)`
 	/* Add your styles here */
 	display: flex;
 	flex-direction: row;

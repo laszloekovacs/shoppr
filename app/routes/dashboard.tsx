@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
-import Navigation from '~/components/Navigation'
+import { Link, Outlet, useMatches } from '@remix-run/react'
+import DebugLinks from '~/components/debug-links'
+import Breadcrumps from '~/components/breadcrumps'
 import { authenticator } from '~/services/session.server'
 
 export const handle = {
@@ -16,12 +17,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 }
 
 const dashboard = () => {
-	const location = useLocation()
+	const matches = useMatches()
 
 	return (
 		<div>
-			<Navigation />
+			<DebugLinks />
 			<h1>Dashboard</h1>
+			<Breadcrumps matches={matches} />
 
 			<Outlet />
 		</div>
