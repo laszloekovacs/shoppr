@@ -24,7 +24,6 @@ const ProductsListPage = () => {
 				{products &&
 					products.map((product) => (
 						<li key={product.name}>
-							<pre>{JSON.stringify(product, null, 2)}</pre>
 							<Link to={`${encodeURIComponent(product.name)}`}>edit</Link>
 						</li>
 					))}

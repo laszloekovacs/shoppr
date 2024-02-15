@@ -5,12 +5,10 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
-	useMatches,
 } from '@remix-run/react'
 import type { LinksFunction } from '@remix-run/node'
 import UploadProvider from './components/upload-provider'
 import styles from './styles.css'
-import Breadcrumps from './components/breadcrumps'
 
 export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: styles },

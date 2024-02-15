@@ -86,7 +86,6 @@ export default function NewProductPage() {
 
 				<input type="submit" value="Létrehozás" />
 			</Form>
-			<pre>{actionData && JSON.stringify(actionData)}</pre>
 		</div>
 	)
 }

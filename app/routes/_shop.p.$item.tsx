@@ -44,8 +44,6 @@ export default function ShopItemPage() {
 					favorite
 				</button>
 			</Form>
-
-			<pre>{JSON.stringify(item, null, 2)}</pre>
 		</div>
 	)
 }

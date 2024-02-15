@@ -1,5 +1,4 @@
 import { UIMatch } from '@remix-run/react'
-import RawData from './raw-data'
 
 interface Props {
 	matches: UIMatch<unknown, any>[]
@@ -23,8 +22,6 @@ const Breadcrumps = ({ matches }: Props) => {
 						<li key={index}>{match.handle.breadcrumb(match)}</li>
 					))}
 			</ol>
-
-			<RawData data={matches} />
 		</div>
 	)
 }

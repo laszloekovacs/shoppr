@@ -78,8 +78,6 @@ export default function ProductDetailsPage() {
 					</button>
 				</>
 			</fetcher.Form>
-
-			<pre>{JSON.stringify(item, null, 2)}</pre>
 		</div>
 	)
 }

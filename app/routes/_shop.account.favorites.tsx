@@ -42,8 +42,6 @@ export default function FavoritesPage() {
 					</li>
 				))}
 			</ul>
-
-			<RawData data={items} />
 		</div>
 	)
 }

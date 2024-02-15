@@ -1,6 +1,5 @@
 import { LoaderFunctionArgs, json, redirect } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import RawData from '~/components/raw-data'
 import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -29,8 +28,6 @@ export default function AccountPage() {
 			</h1>
 
 			{user._json?.picture && <img src={user._json?.picture} width={45} />}
-
-			<RawData data={user} />
 		</div>
 	)
 }

@@ -37,8 +37,6 @@ export default function RegisterPage() {
 				</button>
 			</Form>
 			<Link to="/api/auth0/logout">inkább nem</Link>
-
-			<RawData data={user} />
 		</div>
 	)
 }

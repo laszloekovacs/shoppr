@@ -16,6 +16,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 	return user
 }
 
+const dashboardLinks = [{ name: 'products', href: '/dashboard/products' }]
+
 const dashboard = () => {
 	const matches = useMatches()
 
@@ -24,6 +26,14 @@ const dashboard = () => {
 			<DebugLinks />
 			<h1>Dashboard</h1>
 			<Breadcrumps matches={matches} />
+
+			<ul>
+				{dashboardLinks.map((link) => (
+					<Link key={link.name} to={link.href}>
+						{link.name}
+					</Link>
+				))}
+			</ul>
 
 			<Outlet />
 		</div>

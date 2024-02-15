@@ -8,12 +8,15 @@ export const UploadContext = createContext({
 
 const UploadProvider = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<>
-			<p>upload context</p>
+		<div
+			style={{
+				border: '3px solid rgba(126,80,0,0.2)',
+			}}
+		>
 			<UploadContext.Provider value={{ upload: () => console.log() }}>
 				{children}
 			</UploadContext.Provider>
-		</>
+		</div>
 	)
 }
 

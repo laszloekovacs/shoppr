@@ -87,7 +87,6 @@ const UploaderPage = () => {
 			{files.length > 0 && <pre>{JSON.stringify(files[0].type, null, 2)}</pre>}
 
 			<p>blobs</p>
-			<pre>{JSON.stringify(list, null, 2)}</pre>
 		</div>
 	)
 }

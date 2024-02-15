@@ -26,4 +26,5 @@ export default styled(DebugLinks)`
 	display: flex;
 	flex-direction: row;
 	gap: 1ch;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 `

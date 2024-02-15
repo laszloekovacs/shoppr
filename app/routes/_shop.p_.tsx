@@ -24,8 +24,6 @@ export default function ShopList() {
 					</li>
 				))}
 			</ul>
-
-			<pre>{JSON.stringify(list, null, 2)}</pre>
 		</div>
 	)
 }
