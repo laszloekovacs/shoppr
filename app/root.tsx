@@ -6,12 +6,10 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from '@remix-run/react'
-import type { LinksFunction } from '@remix-run/node'
-import { cssBundleHref } from '@remix-run/css-bundle'
 
-export const links: LinksFunction = () => [
-	...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
-]
+import { GlobalStyles } from './components/global-css'
+import ThemeProviderWrapper from './components/theme-provider'
+
 export default function App() {
 	return (
 		<html lang="en">
@@ -22,7 +20,10 @@ export default function App() {
 				<Links />
 			</head>
 			<body>
-				<Outlet />
+				<ThemeProviderWrapper>
+					<GlobalStyles />
+					<Outlet />
+				</ThemeProviderWrapper>
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />
