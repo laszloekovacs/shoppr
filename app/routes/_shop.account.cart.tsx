@@ -1,12 +1,12 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import { Form, Link, useLoaderData } from '@remix-run/react'
 import React from 'react'
 import Card from '~/components/Card'
 import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export const handle = {
-	breadcrumb: () => <Link to="/account/favorites">favorites</Link>,
+	breadcrumb: () => <Link to="/account/cart">cart</Link>,
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -31,6 +31,12 @@ export default function CartPage() {
 	return (
 		<div>
 			<h1>Kosar</h1>
+
+			<Form method="POST">
+				<button type="submit" name="intent" value="TO_CHECKOUT">
+					tovább a penztarhoz
+				</button>
+			</Form>
 
 			<ul>
 				{items?.cart?.map((item: { name: string }) => (

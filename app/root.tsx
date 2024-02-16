@@ -6,17 +6,9 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from '@remix-run/react'
-import type { LinksFunction } from '@remix-run/node'
-import UploadProvider from './components/upload-provider'
-import styles from './styles.css'
 
-export const links: LinksFunction = () => [
-	{ rel: 'stylesheet', href: styles },
-	{
-		rel: 'stylesheet',
-		href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css',
-	},
-]
+import UploadProvider from './components/upload-provider'
+import GlobalStyles from './components/global-styles'
 
 export default function Root() {
 	return (
@@ -27,11 +19,10 @@ export default function Root() {
 				<meta name="title" content="Shoppr" />
 				<Meta />
 				<Links />
-				<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
-				<script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/languages/json.min.js"></script>
 			</head>
 			<body>
 				<UploadProvider>
+					<GlobalStyles />
 					<Outlet />
 					<ScrollRestoration />
 					<Scripts />

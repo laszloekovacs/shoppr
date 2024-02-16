@@ -17,6 +17,7 @@ const DebugLinks = ({ className }: { className?: string }) => {
 			<Form action="/api/auth0/logout" method="post">
 				<button type="submit">Logout</button>
 			</Form>
+			<NavLink to="/account/cart">cart</NavLink>
 		</div>
 	)
 }
