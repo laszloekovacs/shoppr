@@ -9,10 +9,9 @@ import {
 
 import { withEmotionCache } from '@emotion/react'
 import { useContext, useEffect, useRef } from 'react'
-import ServerStyleContext from './services/emotion/server.context'
-import ClientStyleContext from './services/emotion/client.context'
-import GlobalStyles from './services/emotion/global-styles'
-import { Body } from './components/typography'
+import ServerStyleContext from './emotion/server.context'
+import ClientStyleContext from './emotion/client.context'
+import { GlobalStyles } from './components/global-style'
 
 interface DocumentProps {
 	children: React.ReactNode

@@ -4,8 +4,8 @@ import { renderToString } from 'react-dom/server'
 
 import { CacheProvider } from '@emotion/react'
 import createEmotionServer from '@emotion/server/create-instance'
-import createEmotionCache from '~/services/emotion/createEmotionCache'
-import ServerStyleContext from '~/services/emotion/server.context'
+import createEmotionCache from '~/emotion/createEmotionCache'
+import ServerStyleContext from '~/emotion/server.context'
 
 export default function handleRequest(
 	request: Request,

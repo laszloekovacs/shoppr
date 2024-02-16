@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { H1, H2, H3 } from '../app/components/typography'
+import { H1, H2, H3 } from '../app/components/text'
 import Flex from '../app/components/flex-box'
 
 const meta = {

@@ -1,0 +1,23 @@
+import { Global, css } from '@emotion/react'
+
+export const GlobalStyles = () => {
+	return (
+		<Global
+			styles={css`
+				* {
+					box-sizing: border-box;
+					margin: 0;
+					padding: 0;
+				}
+				body {
+					background-color: #f5f5f5;
+					font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+						Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+				}
+				li {
+					list-style-type: none;
+				}
+			`}
+		/>
+	)
+}

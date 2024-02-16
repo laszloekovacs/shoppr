@@ -1,5 +1,7 @@
 https://developer.paypal.com/integration-builder/
 https://github.com/remix-run/examples/tree/main/emotion
+https://react.fluentui.dev/?path=/docs/theme-fonts--page
+https://chakra-ui.com/
 
 ## TODO
 

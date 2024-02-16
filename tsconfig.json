@@ -3,8 +3,6 @@
 		"remix.env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"app/hooks/useAsyncReducer.test.jsx",
-		"app/hooks/useAsyncReducer.js"
 	],
 	"compilerOptions": {
 		"lib": [
