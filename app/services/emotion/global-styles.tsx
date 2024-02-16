@@ -8,28 +8,23 @@ export const mq = facepaint(
 	breakpoints.map((bp) => `@media (min-width: ${bp}px)`)
 )
 
-const GlobalStyles = () => {
-	return (
-		<>
-			<Global
-				styles={css`
-					* {
-						box-sizing: border-box;
-					}
-					body {
-						margin: 0;
-						background-color: #f9f9f9;
-						font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-							Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-							sans-serif;
-					}
-					li {
-						list-style-type: none;
-					}
-				`}
-			/>
-		</>
-	)
-}
+const GlobalStyles = () => (
+	<Global
+		styles={css`
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				background-color: #f9f9f9;
+				font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+					Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			}
+			li {
+				list-style-type: none;
+			}
+		`}
+	/>
+)
 
 export default GlobalStyles

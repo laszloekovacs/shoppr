@@ -11,9 +11,6 @@ import { withEmotionCache } from '@emotion/react'
 import { useContext, useEffect, useRef } from 'react'
 import ServerStyleContext from './services/emotion/server.context'
 import ClientStyleContext from './services/emotion/client.context'
-
-/* might need to move these */
-import UploadProvider from './components/upload-provider'
 import GlobalStyles from './services/emotion/global-styles'
 
 interface DocumentProps {
@@ -61,6 +58,7 @@ const Document = withEmotionCache(
 					))}
 				</head>
 				<body>
+					<GlobalStyles />
 					{children}
 					<ScrollRestoration />
 					<Scripts />
