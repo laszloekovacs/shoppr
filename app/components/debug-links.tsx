@@ -1,5 +1,5 @@
 import { Form, NavLink } from '@remix-run/react'
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 
 const DebugLinks = ({ className }: { className?: string }) => {
 	return (
