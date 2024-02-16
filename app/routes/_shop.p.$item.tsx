@@ -1,12 +1,8 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
-import { ObjectId } from 'mongodb'
-import React from 'react'
 import invariant from 'tiny-invariant'
-import addToFavorites from '~/db/add-to-favorites.server'
 import { ProductSchema } from '~/db/product'
 import { documents } from '~/services/db.server'
-
 import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
@@ -63,20 +59,27 @@ export async function action({ request }: LoaderFunctionArgs) {
 
 	switch (intent) {
 		case 'ADD_TO_CART':
+			console.log('adding to cart' + ' ' + name)
+			{
+				const result = await documents('accounts').updateOne(
+					{ user: user.id }, // find by user
+					{ $push: { cart: { name } } } // push into cart
+				)
+			}
 			break
 
 		case 'FAVORITE':
-			console.log('adding to cart' + ' ' + name)
+			console.log('adding to favorites' + ' ' + name)
+			{
+				const result = await documents('accounts').updateOne(
+					{ user: user.id }, // find by user
+					{ $push: { favorites: { name } } } // push into favorites
+				)
 
-			const result = await documents('accounts').updateOne(
-				{ user: user.id }, // find by user
-				{ $push: { cart: { name } } } // update document if it exists
-			)
-
-			if (result.upsertedCount) {
-				console.log('upserted')
+				if (result.upsertedCount) {
+					console.log('upserted')
+				}
 			}
-
 			break
 
 		default:

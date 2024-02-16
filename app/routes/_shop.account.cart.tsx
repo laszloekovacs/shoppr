@@ -1,8 +1,9 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { documents } from '~/services/db.server'
 import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { authenticator } from '~/services/session.server'
+import { Link, useLoaderData } from '@remix-run/react'
+import React from 'react'
 import Card from '~/components/Card'
+import { documents } from '~/services/db.server'
+import { authenticator } from '~/services/session.server'
 
 export const handle = {
 	breadcrumb: () => <Link to="/account/favorites">favorites</Link>,
@@ -18,21 +19,21 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 			user: user?.id,
 		},
 		{
-			projection: { favorites: 1 },
+			projection: { cart: 1 },
 		}
 	)
 
 	return json({ items })
 }
 
-export default function FavoritesPage() {
+export default function CartPage() {
 	const { items } = useLoaderData<typeof loader>()
 	return (
 		<div>
-			<h1>Kedvencek</h1>
+			<h1>Kosar</h1>
 
 			<ul>
-				{items?.favorites?.map((item: { name: string }) => (
+				{items?.cart?.map((item: { name: string }) => (
 					<li key={item.name}>
 						<Link to={`/p/${encodeURIComponent(item.name)}`}>
 							<Card name={item.name} />
