@@ -1,5 +1,4 @@
 import { Form, NavLink } from '@remix-run/react'
-import styled from 'styled-components'
 
 const DebugLinks = ({ className }: { className?: string }) => {
 	return (
@@ -22,10 +21,4 @@ const DebugLinks = ({ className }: { className?: string }) => {
 	)
 }
 
-export default styled(DebugLinks)`
-	/* Add your styles here */
-	display: flex;
-	flex-direction: row;
-	gap: 1ch;
-	border: 1px solid rgba(0, 0, 0, 0.2);
-`
+export default DebugLinks
