@@ -1,5 +1,11 @@
+import MyHeader from '../components/MyHeader'
+
 const StyleBook = () => {
-	return <div></div>
+	return (
+		<div>
+			<MyHeader>Hello</MyHeader>
+		</div>
+	)
 }
 
 export default StyleBook
