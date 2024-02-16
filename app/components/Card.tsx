@@ -1,5 +1,3 @@
-import styled from 'styled-components'
-
 const Card = ({ className, name }: { className?: string; name: string }) => {
 	return (
 		<div className={className}>
