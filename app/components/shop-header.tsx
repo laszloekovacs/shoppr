@@ -32,7 +32,7 @@ const ShopHeader = () => {
 						<img src="https://picsum.photos/70/40" alt="logo" />
 					</Link>
 					<input type="search" />
-					<button>Basket</button>
+					<Link to="/account/cart">Kosar</Link>
 				</div>
 			</div>
 		</div>
