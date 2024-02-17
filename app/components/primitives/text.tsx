@@ -4,9 +4,11 @@ import { Theme } from './theme-provider'
 type Props = {
 	fontSize?: keyof Theme['fontSize']
 	theme?: Theme
+	bold?: boolean
 }
 
-export const Text = styled.span<Props>((props) => ({
-	color: props.theme.color.text,
-	fontSize: props.theme.fontSize[props.fontSize ?? 'base'],
-}))
+export const Text = styled.span<Props>`
+	color: ${(props) => props.theme.color.text};
+	font-size: ${(props) => props.theme.fontSize[props.fontSize ?? 'base']};
+	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};
+`

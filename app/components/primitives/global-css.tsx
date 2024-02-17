@@ -20,6 +20,11 @@ export const GlobalStyles = () => (
 			ol {
 				list-style: none;
 			}
+
+			img {
+				max-width: 100%;
+				max-height: auto;
+			}
 		`}
 	/>
 )

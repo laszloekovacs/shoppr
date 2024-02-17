@@ -19,10 +19,38 @@ const StyleBook = () => {
 
 			<Text>Font sizes</Text>
 			<Flex dir="column">
+				<Text fontSize="xs">extra small</Text>
+				<Text fontSize="sm">small</Text>
 				<Text fontSize="base">base</Text>
-				<Text fontSize="lg">lg</Text>
-				<Text fontSize="2xl">2xl</Text>
-				<Text fontSize="4xl">4xl</Text>
+				<Text fontSize="lg">large</Text>
+				<Text fontSize="2xl">2xl size</Text>
+				<Text fontSize="4xl">4xl size</Text>
+				<Text fontSize="6xl">6xl size</Text>
+			</Flex>
+
+			<Text>Font sizes with bold</Text>
+			<Flex dir="column">
+				<Text bold fontSize="xs">
+					extra small
+				</Text>
+				<Text bold fontSize="sm">
+					small
+				</Text>
+				<Text bold fontSize="base">
+					base
+				</Text>
+				<Text bold fontSize="lg">
+					large
+				</Text>
+				<Text bold fontSize="2xl">
+					2xl size
+				</Text>
+				<Text bold fontSize="4xl">
+					4xl size
+				</Text>
+				<Text bold fontSize="6xl">
+					6xl size
+				</Text>
 			</Flex>
 		</div>
 	)
