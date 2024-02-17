@@ -26,6 +26,27 @@ export const GlobalStyles = () => (
 				max-width: 100%;
 				max-height: auto;
 			}
+
+			a {
+				color: inherit;
+				text-decoration: none;
+				font-weight: 600;
+			}
+
+			button,
+			input {
+				font-size: inherit;
+				font-weight: inherit;
+				font-family: inherit;
+				line-height: inherit;
+				cursor: pointer;
+				border: none;
+				border-radius: 0;
+			}
+
+			input {
+				border: 1px solid gray;
+			}
 		`}
 	/>
 )

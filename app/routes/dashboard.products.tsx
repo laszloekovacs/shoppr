@@ -4,12 +4,6 @@ export const handle = {
 	breadcrumb: () => <Link to="/dashboard/products">products</Link>,
 }
 
-const ProductsPage = () => {
-	return (
-		<div>
-			<Outlet />
-		</div>
-	)
-}
+const ProductsPage = () => <Outlet />
 
 export default ProductsPage
