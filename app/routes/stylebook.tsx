@@ -1,6 +1,6 @@
 import { Flex } from '~/components/primitives/flexbox'
 import { Text } from '../components/primitives/text'
-import Card from '~/components/cards'
+import Card from '~/components/card'
 
 const StyleBook = () => {
 	return (

@@ -31,7 +31,6 @@ const Shop = () => {
 
 	return (
 		<>
-			<DebugLinks />
 			<ShopHeader user={data?.user} />
 			<BrowsingBar data={data} />
 			<Breadcrumps matches={matches} />

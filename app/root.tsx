@@ -10,6 +10,7 @@ import {
 import { GlobalStyles } from './components/primitives/global-css'
 import ThemeProviderWrapper from './components/primitives/theme-provider'
 import Container from './components/primitives/container'
+import DebugLinks from './components/debug-links'
 
 export default function App() {
 	return (
@@ -21,15 +22,16 @@ export default function App() {
 				<Links />
 			</head>
 			<body>
-				<Container>
-					<ThemeProviderWrapper>
+				<ThemeProviderWrapper>
+					<Container>
 						<GlobalStyles />
 						<Outlet />
-					</ThemeProviderWrapper>
-					<ScrollRestoration />
-					<Scripts />
-					<LiveReload />
-				</Container>
+						<DebugLinks />
+					</Container>
+				</ThemeProviderWrapper>
+				<ScrollRestoration />
+				<Scripts />
+				<LiveReload />
 			</body>
 		</html>
 	)

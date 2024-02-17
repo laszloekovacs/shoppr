@@ -2,7 +2,8 @@ import { Link, useLoaderData } from '@remix-run/react'
 import { documents } from '~/services/db.server'
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { authenticator } from '~/services/session.server'
-import Card from '~/components/cards'
+import Card from '~/components/card'
+import { Text } from '~/components/primitives/text'
 
 export const handle = {
 	breadcrumb: () => <Link to="/account/favorites">favorites</Link>,
@@ -29,8 +30,7 @@ export default function FavoritesPage() {
 	const { items } = useLoaderData<typeof loader>()
 	return (
 		<div>
-			<h1>Kedvencek</h1>
-
+			<Text fontSize="4xl">Kedvencek</Text>
 			<ul>
 				{items?.favorites?.map((item: { name: string }) => (
 					<li key={item.name}>

@@ -16,24 +16,31 @@ const styles = css`
 	flex-direction: row;
 	gap: 1ch;
 `
+const container = css`
+	position: sticky;
+	bottom: 0;
+	margin-top: auto;
+`
 
 const DebugLinks = () => {
 	return (
-		<Box>
-			<Flex dir="row" gap="1rem">
-				<Form action="/api/auth0/logout" method="post">
-					<Button type="submit">Logout</Button>
-				</Form>
+		<div className={container}>
+			<Box>
+				<Flex dir="row" gap="1rem">
+					<Form action="/api/auth0/logout" method="post">
+						<Button type="submit">Logout</Button>
+					</Form>
 
-				<ul className={styles}>
-					{links.map((link) => (
-						<li key={link.to}>
-							<NavLink to={link.to}>{link.label}</NavLink>
-						</li>
-					))}
-				</ul>
-			</Flex>
-		</Box>
+					<ul className={styles}>
+						{links.map((link) => (
+							<li key={link.to}>
+								<NavLink to={link.to}>{link.label}</NavLink>
+							</li>
+						))}
+					</ul>
+				</Flex>
+			</Box>
+		</div>
 	)
 }
 

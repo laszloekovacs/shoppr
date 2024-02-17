@@ -17,6 +17,7 @@ export const GlobalStyles = () => (
 			}
 
 			ul,
+			li,
 			ol {
 				list-style: none;
 			}

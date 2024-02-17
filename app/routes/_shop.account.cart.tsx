@@ -1,7 +1,8 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, Link, useLoaderData } from '@remix-run/react'
-import React from 'react'
-import Card from '~/components/cards'
+import { Text } from '~/components/primitives/text'
+import Card from '~/components/card'
+import { Flex } from '~/components/primitives/flexbox'
 import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
@@ -29,16 +30,17 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function CartPage() {
 	const { items } = useLoaderData<typeof loader>()
 	return (
-		<div>
-			<h1>Kosar</h1>
+		<Flex dir="column">
+			<Flex dir="column" gap="0.2rem" justifyContent="flex-start">
+				<Text fontSize="4xl">Kosar</Text>
+				<Form method="POST">
+					<button type="submit" name="intent" value="TO_CHECKOUT">
+						tovább a penztarhoz
+					</button>
+				</Form>
+			</Flex>
 
-			<Form method="POST">
-				<button type="submit" name="intent" value="TO_CHECKOUT">
-					tovább a penztarhoz
-				</button>
-			</Form>
-
-			<ul>
+			<Flex dir="row">
 				{items?.cart?.map((item: { name: string }) => (
 					<li key={item.name}>
 						<Link to={`/p/${encodeURIComponent(item.name)}`}>
@@ -46,7 +48,7 @@ export default function CartPage() {
 						</Link>
 					</li>
 				))}
-			</ul>
-		</div>
+			</Flex>
+		</Flex>
 	)
 }
