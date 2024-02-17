@@ -1,9 +1,14 @@
 import { Flex } from '~/components/primitives/flexbox'
 import { Text } from '../components/primitives/text'
+import Card from '~/components/cards'
 
 const StyleBook = () => {
 	return (
 		<div>
+			<div style={{ maxWidth: '200px' }}>
+				<Card name={'something'} />
+			</div>
+
 			<Text>row</Text>
 			<Flex dir="row">
 				<Text as="h3">Hello</Text>

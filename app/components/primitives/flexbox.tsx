@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 interface Props {
 	dir?: 'row' | 'column'
 	gap?: string
+	pad?: string
 	justifyContent?:
 		| 'center'
 		| 'space-between'
@@ -15,6 +16,7 @@ interface Props {
 export const Flex = styled.div<Props>`
 	display: flex;
 	flex-direction: ${({ dir }) => dir ?? 'row'};
-	gap: ${({ gap }) => gap ?? '1rem'};
 	justify-content: ${({ justifyContent }) => justifyContent ?? 'flex-start'};
+	gap: ${({ gap }) => gap};
+	padding: ${({ pad }) => pad};
 `

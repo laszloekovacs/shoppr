@@ -1,6 +1,6 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import Card from '~/components/primitives/cards'
+import Card from '~/components/cards'
 import { documents } from '~/services/db.server'
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
