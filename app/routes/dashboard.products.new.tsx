@@ -1,6 +1,7 @@
 import { ActionFunction, ActionFunctionArgs } from '@remix-run/node'
 import { Form, json, redirect, useActionData } from '@remix-run/react'
 import { Link } from '@remix-run/react'
+import { Typography } from '~/components/primitives'
 
 import { ProductSchema, isProductSchema } from '~/db/product'
 import { DATABASE, mongodb, MongoServerError } from '~/services/db.server'
@@ -73,16 +74,13 @@ export default function NewProductPage() {
 
 	return (
 		<div>
-			<h2>Create New Product</h2>
+			<Typography fontSize="4xl">Uj termék letrehozasa</Typography>
 			<Form method="POST" action="/dashboard/products/new">
-				<label htmlFor="name">Termék neve</label>
-				<input type="text" name="name" />
+				<input type="text" name="name" placeholder="termek neve" />
 
-				<label htmlFor="brand">Gyártó</label>
-				<input type="text" name="brand" />
+				<input type="text" name="brand" placeholder="gyarto" />
 
-				<label htmlFor="department">Kategória</label>
-				<input type="text" name="department" />
+				<input type="text" name="department" placeholder="kategoria" />
 
 				<input type="submit" value="Létrehozás" />
 			</Form>

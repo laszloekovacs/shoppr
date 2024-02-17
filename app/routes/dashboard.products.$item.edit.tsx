@@ -3,6 +3,7 @@ import { useFetcher, useLoaderData, useActionData } from '@remix-run/react'
 import { ProductSchema } from '~/db/product'
 import { documents, WithId } from '~/services/db.server'
 import invariant from 'tiny-invariant'
+import { Flex, Typography } from '~/components/primitives'
 
 // find the product by name in the database
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -25,11 +26,12 @@ export default function ProductDetailsPage() {
 
 	return (
 		<div>
-			<h1>{item.name}</h1>
-			<h2>{item.brand}</h2>
-			<p>
-				<span>{item.department}</span>
-			</p>
+			<Flex dir="column">
+				<Typography fontSize="4xl">{item.name}</Typography>
+				<Typography>gyarto: {item.brand}</Typography>
+				<Typography>termek csoport: {item.department}</Typography>
+			</Flex>
+
 			<p>
 				<span>adatbázis index: </span>
 				<span>{item._id}</span>
@@ -61,7 +63,7 @@ export default function ProductDetailsPage() {
 			</fetcher.Form>
 			<hr />
 
-			<h3>Termék adatok</h3>
+			<Typography fontSize="2xl">Termek attribútumok</Typography>
 			<fetcher.Form method="post">
 				<label>
 					kulcs
