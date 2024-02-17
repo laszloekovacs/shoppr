@@ -9,6 +9,7 @@ import {
 
 import { GlobalStyles } from './components/primitives/global-css'
 import ThemeProviderWrapper from './components/primitives/theme-provider'
+import Container from './components/primitives/container'
 
 export default function App() {
 	return (
@@ -20,13 +21,15 @@ export default function App() {
 				<Links />
 			</head>
 			<body>
-				<ThemeProviderWrapper>
-					<GlobalStyles />
-					<Outlet />
-				</ThemeProviderWrapper>
-				<ScrollRestoration />
-				<Scripts />
-				<LiveReload />
+				<Container>
+					<ThemeProviderWrapper>
+						<GlobalStyles />
+						<Outlet />
+					</ThemeProviderWrapper>
+					<ScrollRestoration />
+					<Scripts />
+					<LiveReload />
+				</Container>
 			</body>
 		</html>
 	)
