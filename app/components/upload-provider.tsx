@@ -1,4 +1,4 @@
-import { createContext, Provider } from 'react'
+import { createContext } from 'react'
 
 export const UploadContext = createContext({
 	upload: () => {

@@ -1,6 +1,5 @@
-import { Link } from '@remix-run/react'
-import { Flex } from './primitives/flexbox'
-import { Text } from './primitives/text'
+import { Flex } from './primitives/flex'
+import { Typography } from './primitives'
 
 interface Props {
 	name: string
@@ -13,10 +12,10 @@ const Card = (props: Props) => {
 			<img src="https://picsum.photos/200" alt={props.name} height={200} />
 
 			<Flex dir="column">
-				<Text bold fontSize="lg">
+				<Typography bold fontSize="lg">
 					{props.name}
-				</Text>
-				<Text fontSize="base">400Ft</Text>
+				</Typography>
+				<Typography fontSize="base">400Ft</Typography>
 			</Flex>
 		</Flex>
 	)

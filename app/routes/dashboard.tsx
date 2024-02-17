@@ -3,6 +3,7 @@ import { Link, Outlet, useMatches } from '@remix-run/react'
 import DebugLinks from '~/components/debug-links'
 import Breadcrumps from '~/components/breadcrumps'
 import { authenticator } from '~/services/session.server'
+import { Typography } from '~/components/primitives'
 
 export const handle = {
 	breadcrumb: () => <Link to="/dashboard">dashboard</Link>,
@@ -23,8 +24,7 @@ const dashboard = () => {
 
 	return (
 		<div>
-			<DebugLinks />
-			<h1>Dashboard</h1>
+			<Typography fontSize="4xl">Dashboard</Typography>
 			<Breadcrumps matches={matches} />
 
 			<ul>

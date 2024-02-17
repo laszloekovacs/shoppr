@@ -1,6 +1,7 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
+import { Button, Flex, Typography } from '~/components/primitives'
 import { ProductSchema } from '~/db/product'
 import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
@@ -24,21 +25,23 @@ export default function ShopItemPage() {
 
 	return (
 		<div>
-			<h1>{item.name}</h1>
-			<h2>{item.brand}</h2>
-			<p>{item.department}</p>
+			<Flex dir="column">
+				<Typography fontSize="4xl">{item.name}</Typography>
+				<Typography fontSize="lg">{item.brand}</Typography>
+				<Typography>{item.department}</Typography>
+			</Flex>
 			<div>
 				<img src="https://picsum.photos/200" />
 			</div>
 
 			<Form method="post">
 				<input type="hidden" name="name" value={item.name} />
-				<button type="submit" name="intent" value="ADD_TO_CART">
-					kosárba
-				</button>
-				<button type="submit" name="intent" value="FAVORITE">
+				<Button type="submit" name="intent" value="FAVORITE">
 					favorite
-				</button>
+				</Button>
+				<Button type="submit" name="intent" value="ADD_TO_CART">
+					kosárba
+				</Button>
 			</Form>
 		</div>
 	)

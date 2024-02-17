@@ -3,7 +3,7 @@ import { documents } from '~/services/db.server'
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { authenticator } from '~/services/session.server'
 import Card from '~/components/card'
-import { Text } from '~/components/primitives/text'
+import { Typography } from '~/components/primitives/typography'
 
 export const handle = {
 	breadcrumb: () => <Link to="/account/favorites">favorites</Link>,
@@ -30,7 +30,7 @@ export default function FavoritesPage() {
 	const { items } = useLoaderData<typeof loader>()
 	return (
 		<div>
-			<Text fontSize="4xl">Kedvencek</Text>
+			<Typography fontSize="4xl">Kedvencek</Typography>
 			<ul>
 				{items?.favorites?.map((item: { name: string }) => (
 					<li key={item.name}>

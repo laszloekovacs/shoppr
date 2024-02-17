@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
-import { Text } from './primitives/text'
-import { Flex } from './primitives/flexbox'
+import { Flex, Typography } from './primitives'
 
 interface Props {
 	data: {
@@ -17,9 +16,9 @@ const Container = styled.div`
 
 export default function BrowsingBar({ data }: Props) {
 	const groups = ['brands', 'departments'].map((group) => (
-		<Text key={group} fontSize="2xl">
+		<Typography key={group} fontSize="2xl">
 			{group}
-		</Text>
+		</Typography>
 	))
 
 	return (

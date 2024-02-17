@@ -1,8 +1,7 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, Link, useLoaderData } from '@remix-run/react'
-import { Text } from '~/components/primitives/text'
 import Card from '~/components/card'
-import { Flex } from '~/components/primitives/flexbox'
+import { Flex, Typography } from '~/components/primitives'
 import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
@@ -32,7 +31,7 @@ export default function CartPage() {
 	return (
 		<Flex dir="column">
 			<Flex dir="column" gap="0.2rem" justifyContent="flex-start">
-				<Text fontSize="4xl">Kosar</Text>
+				<Typography fontSize="4xl">Kosar</Typography>
 				<Form method="POST">
 					<button type="submit" name="intent" value="TO_CHECKOUT">
 						tovább a penztarhoz

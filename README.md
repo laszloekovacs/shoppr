@@ -33,6 +33,7 @@ https://styled-components.com/docs/basics#getting-started
 - add custom not-found page
 - tooltips
 - clean up imports, reexport from index file
+- image popping prevention, add lazy loading
 
 ## Notes
 

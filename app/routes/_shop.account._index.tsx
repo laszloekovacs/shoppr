@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, json, redirect } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import { authenticator } from '~/services/session.server'
-import { Text } from '../components/primitives/text'
-import { Flex } from '~/components/primitives/flexbox'
+import { Typography } from '../components/primitives/typography'
+import { Flex } from '~/components/primitives/flex'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request)
@@ -24,9 +24,9 @@ export default function AccountPage() {
 			<div>
 				{user._json?.picture && <img src={user._json?.picture} width={45} />}
 			</div>
-			<Text fontSize="4xl">
+			<Typography fontSize="4xl">
 				Üdvözlünk, {user?.name?.givenName || user?.displayName}
-			</Text>
+			</Typography>
 		</Flex>
 	)
 }

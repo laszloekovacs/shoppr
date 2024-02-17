@@ -1,6 +1,6 @@
 import { Form, Link } from '@remix-run/react'
-import { Flex } from './primitives/flexbox'
 import { Auth0Profile } from 'remix-auth-auth0'
+import { Flex } from './primitives'
 
 const ShopHeader = ({ user }: { user: Auth0Profile | null }) => {
 	return (

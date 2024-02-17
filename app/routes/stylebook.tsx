@@ -1,5 +1,5 @@
-import { Flex } from '~/components/primitives/flexbox'
-import { Text } from '../components/primitives/text'
+import { Flex } from '~/components/primitives/flex'
+import { Typography } from '../components/primitives/typography'
 import Card from '~/components/card'
 
 const StyleBook = () => {
@@ -9,53 +9,53 @@ const StyleBook = () => {
 				<Card name={'something'} />
 			</div>
 
-			<Text>row</Text>
+			<Typography>row</Typography>
 			<Flex dir="row">
-				<Text as="h3">Hello</Text>
-				<Text as="h3">Hello</Text>
-				<Text as="h3">Hello</Text>
+				<Typography as="h3">Hello</Typography>
+				<Typography as="h3">Hello</Typography>
+				<Typography as="h3">Hello</Typography>
 			</Flex>
-			<Text>column</Text>
+			<Typography>column</Typography>
 			<Flex dir="column">
-				<Text as="h3">Hello</Text>
-				<Text as="h3">Hello</Text>
-				<Text as="h3">Hello</Text>
-			</Flex>
-
-			<Text>Font sizes</Text>
-			<Flex dir="column">
-				<Text fontSize="xs">extra small</Text>
-				<Text fontSize="sm">small</Text>
-				<Text fontSize="base">base</Text>
-				<Text fontSize="lg">large</Text>
-				<Text fontSize="2xl">2xl size</Text>
-				<Text fontSize="4xl">4xl size</Text>
-				<Text fontSize="6xl">6xl size</Text>
+				<Typography as="h3">Hello</Typography>
+				<Typography as="h3">Hello</Typography>
+				<Typography as="h3">Hello</Typography>
 			</Flex>
 
-			<Text>Font sizes with bold</Text>
+			<Typography>Font sizes</Typography>
 			<Flex dir="column">
-				<Text bold fontSize="xs">
+				<Typography fontSize="xs">extra small</Typography>
+				<Typography fontSize="sm">small</Typography>
+				<Typography fontSize="base">base</Typography>
+				<Typography fontSize="lg">large</Typography>
+				<Typography fontSize="2xl">2xl size</Typography>
+				<Typography fontSize="4xl">4xl size</Typography>
+				<Typography fontSize="6xl">6xl size</Typography>
+			</Flex>
+
+			<Typography>Font sizes with bold</Typography>
+			<Flex dir="column">
+				<Typography bold fontSize="xs">
 					extra small
-				</Text>
-				<Text bold fontSize="sm">
+				</Typography>
+				<Typography bold fontSize="sm">
 					small
-				</Text>
-				<Text bold fontSize="base">
+				</Typography>
+				<Typography bold fontSize="base">
 					base
-				</Text>
-				<Text bold fontSize="lg">
+				</Typography>
+				<Typography bold fontSize="lg">
 					large
-				</Text>
-				<Text bold fontSize="2xl">
+				</Typography>
+				<Typography bold fontSize="2xl">
 					2xl size
-				</Text>
-				<Text bold fontSize="4xl">
+				</Typography>
+				<Typography bold fontSize="4xl">
 					4xl size
-				</Text>
-				<Text bold fontSize="6xl">
+				</Typography>
+				<Typography bold fontSize="6xl">
 					6xl size
-				</Text>
+				</Typography>
 			</Flex>
 		</div>
 	)

@@ -7,7 +7,7 @@ type Props = {
 	bold?: boolean
 }
 
-export const Text = styled.span<Props>`
+export const Typography = styled.span<Props>`
 	color: ${(props) => props.theme.color.text};
 	font-size: ${(props) => props.theme.fontSize[props.fontSize ?? 'base']};
 	font-weight: ${(props) => (props.bold ? 'bold' : 'normal')};

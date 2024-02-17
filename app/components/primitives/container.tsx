@@ -1,10 +1,8 @@
 import styled from '@emotion/styled'
 
-const Container = styled.div`
+export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	padding: 1rem;
 	min-height: 100vh;
 `
-
-export default Container

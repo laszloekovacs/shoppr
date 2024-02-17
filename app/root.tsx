@@ -7,9 +7,9 @@ import {
 	ScrollRestoration,
 } from '@remix-run/react'
 
-import { GlobalStyles } from './components/primitives/global-css'
+import { GlobalStyles } from './components/primitives/global-styles'
 import ThemeProviderWrapper from './components/primitives/theme-provider'
-import Container from './components/primitives/container'
+import { Container } from './components/primitives'
 import DebugLinks from './components/debug-links'
 
 export default function App() {

@@ -1,6 +1,6 @@
 import { Link, Outlet } from '@remix-run/react'
-import { Box } from '~/components/primitives/basebox'
-import { Flex } from '~/components/primitives/flexbox'
+import { Box } from '~/components/primitives/box'
+import { Flex } from '~/components/primitives/flex'
 
 export const handle = {
 	breadcrumb: () => <Link to="/account">account</Link>,

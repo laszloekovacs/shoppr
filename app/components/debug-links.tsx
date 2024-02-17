@@ -1,8 +1,6 @@
 import { css } from '@emotion/css'
 import { Form, NavLink } from '@remix-run/react'
-import Button from './primitives/button'
-import { Flex } from './primitives/flexbox'
-import { Box } from './primitives/basebox'
+import { Box, Button, Flex } from './primitives'
 
 const links = [
 	{ to: '/', label: 'Home' },
