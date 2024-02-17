@@ -1,41 +1,27 @@
 import { Link } from '@remix-run/react'
+import { Flex } from './primitives/flexbox'
 
 const ShopHeader = () => {
 	return (
-		<div>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'row',
-					gap: '1ch',
-					justifyContent: 'space-between',
-				}}
-			>
+		<Flex dir="column">
+			<Flex dir="row" justifyContent="space-between">
 				<div>
 					<Link to="/dashboard">Dashboard</Link>
 				</div>
-				<div>
+				<Flex dir="row">
 					<Link to="/account/favorites">Kedvencek</Link>
 					<Link to="/account">Fiókom</Link>
 					<Link to="/api/auth0/logout">Jelentkezz ki</Link>
-				</div>
-
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'row',
-						gap: '1ch',
-						justifyContent: 'space-between',
-					}}
-				>
-					<Link to="/">
-						<img src="https://picsum.photos/70/40" alt="logo" />
-					</Link>
-					<input type="search" />
-					<Link to="/account/cart">Kosar</Link>
-				</div>
-			</div>
-		</div>
+				</Flex>
+			</Flex>
+			<Flex justifyContent="space-between">
+				<Link to="/">
+					<img src="https://picsum.photos/70/40" alt="logo" />
+				</Link>
+				<input type="search" placeholder="kereses" />
+				<Link to="/account/cart">Kosar</Link>
+			</Flex>
+		</Flex>
 	)
 }
 

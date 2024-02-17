@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, Link, useLoaderData } from '@remix-run/react'
 import React from 'react'
-import Card from '~/components/Card'
+import Card from '~/components/primitives/cards'
 import { documents } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 

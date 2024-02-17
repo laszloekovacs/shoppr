@@ -1,6 +1,8 @@
 import { css } from '@emotion/css'
 import { Form, NavLink } from '@remix-run/react'
-import Button from './button'
+import Button from './primitives/button'
+import { Flex } from './primitives/flexbox'
+import { Box } from './primitives/Box'
 
 const links = [
 	{ to: '/', label: 'Home' },
@@ -17,19 +19,21 @@ const styles = css`
 
 const DebugLinks = () => {
 	return (
-		<div>
-			<Form action="/api/auth0/logout" method="post">
-				<Button type="submit">Logout</Button>
-			</Form>
+		<Box>
+			<Flex dir="row" gap="1rem">
+				<Form action="/api/auth0/logout" method="post">
+					<Button type="submit">Logout</Button>
+				</Form>
 
-			<ul className={styles}>
-				{links.map((link) => (
-					<li key={link.to}>
-						<NavLink to={link.to}>{link.label}</NavLink>
-					</li>
-				))}
-			</ul>
-		</div>
+				<ul className={styles}>
+					{links.map((link) => (
+						<li key={link.to}>
+							<NavLink to={link.to}>{link.label}</NavLink>
+						</li>
+					))}
+				</ul>
+			</Flex>
+		</Box>
 	)
 }
 

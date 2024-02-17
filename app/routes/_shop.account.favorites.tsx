@@ -2,7 +2,7 @@ import { Link, useLoaderData } from '@remix-run/react'
 import { documents } from '~/services/db.server'
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { authenticator } from '~/services/session.server'
-import Card from '~/components/Card'
+import Card from '~/components/primitives/cards'
 
 export const handle = {
 	breadcrumb: () => <Link to="/account/favorites">favorites</Link>,

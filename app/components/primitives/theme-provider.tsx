@@ -28,7 +28,10 @@ const theme = {
 	},
 }
 
-export type Theme = typeof theme
+export interface Theme {
+	color: (typeof theme)['color']
+	fontSize: (typeof theme)['fontSize']
+}
 
 export default function ThemeProviderWrapper({
 	children,
