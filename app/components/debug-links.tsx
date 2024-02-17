@@ -13,6 +13,7 @@ const styles = css`
 	display: flex;
 	flex-direction: row;
 	gap: 1ch;
+	align-items: center;
 `
 const container = css`
 	position: sticky;
