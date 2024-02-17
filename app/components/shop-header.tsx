@@ -1,7 +1,8 @@
-import { Link } from '@remix-run/react'
+import { Form, Link } from '@remix-run/react'
 import { Flex } from './primitives/flexbox'
+import { Auth0Profile } from 'remix-auth-auth0'
 
-const ShopHeader = () => {
+const ShopHeader = ({ user }: { user: Auth0Profile | null }) => {
 	return (
 		<Flex dir="column">
 			<Flex dir="row" justifyContent="space-between">
@@ -9,9 +10,16 @@ const ShopHeader = () => {
 					<Link to="/dashboard">Dashboard</Link>
 				</div>
 				<Flex dir="row">
+					{user && <span>{user.displayName}</span>}
 					<Link to="/account/favorites">Kedvencek</Link>
 					<Link to="/account">Fiókom</Link>
-					<Link to="/api/auth0/logout">Jelentkezz ki</Link>
+					{user ? (
+						<Form action="/api/auth0/logout" method="post">
+							<input type="submit" value="Jelentkezz ki" />
+						</Form>
+					) : (
+						<Link to="/login">bejelentkezés</Link>
+					)}
 				</Flex>
 			</Flex>
 			<Flex justifyContent="space-between">

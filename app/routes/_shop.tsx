@@ -1,45 +1,28 @@
+import { LoaderFunctionArgs } from '@remix-run/node'
 import { Link, Outlet, json, useLoaderData, useMatches } from '@remix-run/react'
 import Breadcrumps from '~/components/breadcrumps'
 import BrowsingBar from '~/components/browsing-bar'
 import DebugLinks from '~/components/debug-links'
 import ShopHeader from '~/components/shop-header'
 import { documents } from '~/services/db.server'
+import { authenticator } from '~/services/session.server'
 
 export const handle = {
 	breadcrumb: () => <Link to="/">shop</Link>,
 }
-export const loader = async () => {
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+	// get the user if logged in
+	const user = await authenticator.isAuthenticated(request)
+
 	// query the brands
 	const brands = await documents('products').distinct('brand')
 
 	// query departments
 	const departments = await documents('products').distinct('department')
 
-	// query all attibute keys in all products
-	const attributes = await documents('products')
-		.aggregate([
-			{
-				$unwind: {
-					path: '$attributes',
-				},
-			},
-			{
-				$group: {
-					_id: null,
-					attributes: {
-						$addToSet: '$attributes',
-					},
-				},
-			},
-			{
-				$project: {
-					attributes: 1,
-				},
-			},
-		])
-		.toArray()
+	// TODO: get special queries
 
-	return json({ brands, departments, attributes })
+	return json({ user, brands, departments })
 }
 
 const Shop = () => {
@@ -49,7 +32,7 @@ const Shop = () => {
 	return (
 		<>
 			<DebugLinks />
-			<ShopHeader />
+			<ShopHeader user={data?.user} />
 			<BrowsingBar data={data} />
 			<Breadcrumps matches={matches} />
 			<Outlet />
