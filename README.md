@@ -35,7 +35,8 @@ https://styled-components.com/docs/basics#getting-started
 - clean up imports, reexport from index file
 - image popping prevention, add lazy loading
 - support for no account sessionStorage flow
-- set mongodb collation, utf8 check, undefined checking 
+- set mongodb collation, utf8 check, undefined checking
+- trim inputs
 
 ## Notes
 

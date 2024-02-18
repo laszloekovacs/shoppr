@@ -248,7 +248,7 @@ describe('mongodb queries', () => {
 			}
 		)
 
-		// pull last element
+		// pop last element
 		await collection.updateOne(
 			{},
 			{
@@ -341,6 +341,26 @@ describe('mongodb queries', () => {
 
 		expect(result?.posts[1]?.hidden).toBe(true)
 		//
+	})
+
+	it('inserts when it isnt found in the database', async () => {
+		const result = await collection.updateOne(
+			{ url: 'blog' },
+			{ $inc: { pageviews: 1 } },
+			{ upsert: true }
+		)
+
+		expect(result.upsertedCount).toBe(1)
+	})
+
+	it('sets only on creation', async () => {
+		const result = await collection.updateOne(
+			{},
+			{ $setOnInsert: { createdAt: new Date() } },
+			{ upsert: true }
+		)
+
+		expect(result.upsertedCount).toBe(1)
 	})
 
 	// end
