@@ -11,7 +11,7 @@ describe('mongodb queries', () => {
 
 	beforeAll(async () => {
 		client = new MongoClient('mongodb://localhost:27017')
-		//await client.connect()
+
 		const db = client.db('test')
 		collection = db.collection('test')
 	})
@@ -381,6 +381,34 @@ describe('mongodb queries', () => {
 
 		expect(result?.status).toBe('READY')
 		expect(after?.status).toBe('IN_PROGRESS')
+	})
+
+	it('updates with $currentDate', async () => {
+		const data = {
+			status: 'a',
+			lastModified: new Date('2013-10-10:10:10.98Z'),
+		}
+
+		await collection.insertOne(data)
+
+		const result = await collection.findOneAndUpdate(
+			{},
+			{
+				$currentDate: {
+					// @ts-ignore
+					lastModified: true,
+					// @ts-ignore
+
+					'cancellation.date': { $type: 'timestamp' },
+				},
+				$set: {
+					'cancellation.reason': 'user request',
+					status: 'b',
+				},
+			}
+		)
+		// @ts-ignore
+		expect(result?.lastModified).not.toBeNull()
 	})
 
 	// end
