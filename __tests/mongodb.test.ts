@@ -363,5 +363,25 @@ describe('mongodb queries', () => {
 		expect(result.upsertedCount).toBe(1)
 	})
 
+	it('sets one document and returns it before updating', async () => {
+		const data = {
+			status: 'READY',
+		}
+
+		await collection.insertOne(data)
+
+		const result = await collection.findOneAndUpdate(
+			{ status: 'READY' },
+			{
+				$set: { status: 'IN_PROGRESS' },
+			}
+		)
+
+		const after = await collection.findOne({})
+
+		expect(result?.status).toBe('READY')
+		expect(after?.status).toBe('IN_PROGRESS')
+	})
+
 	// end
 })
