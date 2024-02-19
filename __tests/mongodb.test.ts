@@ -472,8 +472,41 @@ describe('mongodb queries', () => {
 		// or skip / limit
 		docs.findOne({ comments: { $slice: [12, -3] } })
 
-		// TODO FIX: matching array element operator $
+		// TODO FIX: matching array element operator $, returns the document with first matched comment
 		//docs.find({ 'comments.name': 'bob' }, { 'comments.$': 1 })
+
+		// element match this wont work, will match all array elements, only works if x is !array
+		docs.find({ x: { $gt: 10, $lt: 20 } })
+
+		// use this instead, wont match non array elements
+		docs.find({ x: { $elemMatch: { $gt: 10, $lt: 20 } } })
+	})
+
+	it.skip('subdocument queries', async () => {
+		const user = {
+			name: {
+				first: 'Joe',
+				last: 'Schmoe',
+			},
+			age: 30,
+			comments: [{ author: 'joe', score: 4 }],
+		}
+
+		// only finds document when subdocument has exact shape of the object in the query,
+		// if middlename is added, it wont match anymore
+		docs.find({ name: { first: 'Joe', last: 'Schmoe' } })
+		// use dot notation instead
+		docs.find({ 'name.first': 'joe', 'name.last': 'Schmoe' })
+
+		// use elem match to group criteria for subdocuments
+		docs.find({
+			comments: {
+				$elemMatch: {
+					author: 'joe',
+					score: { $gt: 5 },
+				},
+			},
+		})
 	})
 
 	// end
