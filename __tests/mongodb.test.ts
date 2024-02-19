@@ -511,6 +511,7 @@ describe('mongodb queries', () => {
 			.sort({ author: -1 })
 			.skip(2)
 			.limit(12)
+			.explain('executionStats')
 
 		// end
 	})
