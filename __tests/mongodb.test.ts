@@ -499,14 +499,20 @@ describe('mongodb queries', () => {
 		docs.find({ 'name.first': 'joe', 'name.last': 'Schmoe' })
 
 		// use elem match to group criteria for subdocuments
-		docs.find({
-			comments: {
-				$elemMatch: {
-					author: 'joe',
-					score: { $gt: 5 },
+		docs
+			.find({
+				comments: {
+					$elemMatch: {
+						author: 'joe',
+						score: { $gt: 5 },
+					},
 				},
-			},
-		})
+			})
+			.sort({ author: -1 })
+			.skip(2)
+			.limit(12)
+
+		// end
 	})
 
 	// end
