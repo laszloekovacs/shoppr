@@ -411,5 +411,28 @@ describe('mongodb queries', () => {
 		expect(result?.lastModified).not.toBeNull()
 	})
 
+	it.skip('does vairous things', async () => {
+		// find someone with a date before 2013-10-10:10:10.98Z
+		collection.find({ registeres: { $lte: new Date('2013-10-10:10:10.98Z') } })
+
+		// age between 18 and 35
+		collection.find({ age: { $gt: 18, $lt: 35 } })
+
+		// anyone but joe
+		collection.find({ name: { $ne: 'joe' } })
+
+		// find winning tickets
+		collection.find({ ticket_no: { $in: [12, 22, 23, 'winner'] } })
+
+		// non winners
+		collection.find({ ticket_no: { $nin: [12, 22, 23, 'winner'] } })
+
+		// or operator. ticket num above 12 or winner key
+		collection.find({ $or: [{ ticket: { $gt: 12 } }, { ticket: 'winner' }] })
+
+		// $not meta operator
+		collection.find({ id_num: { $not: { $mod: [5, 3] } } })
+	})
+
 	// end
 })
