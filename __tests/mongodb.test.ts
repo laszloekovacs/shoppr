@@ -3,7 +3,7 @@ import { MongoClient } from 'mongodb'
 
 describe('mongodb queries', () => {
 	let client: MongoClient
-	let collection: Collection<any>
+	let docs: Collection<any>
 
 	it('vitest is set up properly', () => {
 		expect(true).toBe(true)
@@ -13,7 +13,7 @@ describe('mongodb queries', () => {
 		client = new MongoClient('mongodb://localhost:27017')
 
 		const db = client.db('test')
-		collection = db.collection('test')
+		docs = db.collection('test')
 	})
 
 	afterAll(async () => {
@@ -27,16 +27,16 @@ describe('mongodb queries', () => {
 	it('can connect to test database', async () => {
 		const data = {}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		const result = await collection.findOne(data)
+		const result = await docs.findOne(data)
 		expect(result).toBeTruthy()
 	})
 
 	it('can insert many', async () => {
 		const data = [{ name: 'test1' }, { name: 'test2' }]
 
-		const result = await collection.insertMany(data, { ordered: false })
+		const result = await docs.insertMany(data, { ordered: false })
 
 		expect(result.acknowledged).toBe(true)
 	})
@@ -49,9 +49,9 @@ describe('mongodb queries', () => {
 			{ name: 'four' },
 		]
 
-		await collection.insertMany(data, { ordered: true })
+		await docs.insertMany(data, { ordered: true })
 
-		const result = await collection.deleteOne({ name: 'four' })
+		const result = await docs.deleteOne({ name: 'four' })
 
 		expect(result.deletedCount).toBe(1)
 	})
@@ -64,9 +64,9 @@ describe('mongodb queries', () => {
 			{ name: 'deleteme' },
 		]
 
-		await collection.insertMany(data, { ordered: true })
+		await docs.insertMany(data, { ordered: true })
 
-		const result = await collection.deleteMany({ name: 'deleteme' })
+		const result = await docs.deleteMany({ name: 'deleteme' })
 
 		expect(result.deletedCount).toBe(2)
 	})
@@ -78,8 +78,8 @@ describe('mongodb queries', () => {
 			switcheroo: true,
 		}
 
-		await collection.insertOne(data)
-		const result = collection.updateOne(
+		await docs.insertOne(data)
+		const result = docs.updateOne(
 			{ url: 'test' },
 			{
 				$inc: { switcheroo: 1 },
@@ -95,9 +95,9 @@ describe('mongodb queries', () => {
 			count: 0,
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		const result = await collection.updateOne(
+		const result = await docs.updateOne(
 			{ url: 'test' },
 			{
 				$inc: { 'stats.count': 1 },
@@ -132,9 +132,9 @@ describe('mongodb queries', () => {
 			],
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		const result = await collection.updateOne(
+		const result = await docs.updateOne(
 			{
 				name: 'test',
 			},
@@ -153,9 +153,9 @@ describe('mongodb queries', () => {
 			name: 'star wars episode 1',
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		await collection.updateOne(
+		await docs.updateOne(
 			{ name: 'star wars episode 1' },
 			{
 				$push: {
@@ -167,7 +167,7 @@ describe('mongodb queries', () => {
 			}
 		)
 
-		const result = await collection.findOne({ name: 'star wars episode 1' })
+		const result = await docs.findOne({ name: 'star wars episode 1' })
 
 		expect(result?.comments).toHaveLength(1)
 	})
@@ -178,9 +178,9 @@ describe('mongodb queries', () => {
 			scores: [],
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		await collection.updateOne(
+		await docs.updateOne(
 			{ name: 'steeve' },
 			{
 				$push: {
@@ -193,7 +193,7 @@ describe('mongodb queries', () => {
 			}
 		)
 
-		const result = await collection.findOne({ name: 'steeve' })
+		const result = await docs.findOne({ name: 'steeve' })
 
 		expect(result?.scores).toHaveLength(3)
 		expect(result?.scores).toContain(3)
@@ -208,16 +208,16 @@ describe('mongodb queries', () => {
 			},
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		await collection.updateOne(
+		await docs.updateOne(
 			{ 'favorites.books': { $ne: 'three' } },
 			{
 				$addToSet: { 'favorites.books': { $each: ['three', 'five'] } },
 			}
 		)
 
-		await collection.updateOne(
+		await docs.updateOne(
 			{
 				'favorites.books': { $ne: 'four' },
 			},
@@ -228,7 +228,7 @@ describe('mongodb queries', () => {
 			}
 		)
 
-		const result = await collection.findOne({ name: 'steeve' })
+		const result = await docs.findOne({ name: 'steeve' })
 
 		expect(result?.favorites.books).toContain('three')
 		expect(result?.favorites.books).toContain('four')
@@ -239,9 +239,9 @@ describe('mongodb queries', () => {
 			tasks: ['dishes', 'laundry', 'cooking'],
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		await collection.updateOne(
+		await docs.updateOne(
 			{},
 			{
 				$pull: { tasks: 'dishes' },
@@ -249,14 +249,14 @@ describe('mongodb queries', () => {
 		)
 
 		// pop last element
-		await collection.updateOne(
+		await docs.updateOne(
 			{},
 			{
 				$pop: { tasks: -1 },
 			}
 		)
 
-		const result = await collection.findOne<typeof data>({})
+		const result = await docs.findOne<typeof data>({})
 
 		expect(result?.tasks).not.toContain('dishes')
 		expect(result?.tasks).toHaveLength(1)
@@ -289,10 +289,10 @@ describe('mongodb queries', () => {
 			],
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
 		// increment blog post vote by index
-		await collection.updateOne(
+		await docs.updateOne(
 			{ content: 'the content' },
 			{
 				$inc: { 'comments.0.votes': 1 },
@@ -300,12 +300,12 @@ describe('mongodb queries', () => {
 		)
 
 		// increment by finding the author
-		await collection.updateOne(
+		await docs.updateOne(
 			{ 'comments.author': 'Lynn' },
 			{ $set: { 'comments.$.votes': 10 } }
 		)
 
-		const result = await collection.findOne<typeof data>({})
+		const result = await docs.findOne<typeof data>({})
 
 		expect(result?.comments[3].votes).toBe(10)
 		expect(result?.comments[0].votes).toBe(1)
@@ -325,9 +325,9 @@ describe('mongodb queries', () => {
 			],
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		await collection.updateOne(
+		await docs.updateOne(
 			{},
 			{
 				$set: { 'posts.$[elem].hidden': true },
@@ -337,14 +337,14 @@ describe('mongodb queries', () => {
 			}
 		)
 
-		const result = await collection.findOne({})
+		const result = await docs.findOne({})
 
 		expect(result?.posts[1]?.hidden).toBe(true)
 		//
 	})
 
 	it('inserts when it isnt found in the database', async () => {
-		const result = await collection.updateOne(
+		const result = await docs.updateOne(
 			{ url: 'blog' },
 			{ $inc: { pageviews: 1 } },
 			{ upsert: true }
@@ -354,7 +354,7 @@ describe('mongodb queries', () => {
 	})
 
 	it('sets only on creation', async () => {
-		const result = await collection.updateOne(
+		const result = await docs.updateOne(
 			{},
 			{ $setOnInsert: { createdAt: new Date() } },
 			{ upsert: true }
@@ -368,16 +368,16 @@ describe('mongodb queries', () => {
 			status: 'READY',
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		const result = await collection.findOneAndUpdate(
+		const result = await docs.findOneAndUpdate(
 			{ status: 'READY' },
 			{
 				$set: { status: 'IN_PROGRESS' },
 			}
 		)
 
-		const after = await collection.findOne({})
+		const after = await docs.findOne({})
 
 		expect(result?.status).toBe('READY')
 		expect(after?.status).toBe('IN_PROGRESS')
@@ -389,9 +389,9 @@ describe('mongodb queries', () => {
 			lastModified: new Date('2013-10-10:10:10.98Z'),
 		}
 
-		await collection.insertOne(data)
+		await docs.insertOne(data)
 
-		const result = await collection.findOneAndUpdate(
+		const result = await docs.findOneAndUpdate(
 			{},
 			{
 				$currentDate: {
@@ -413,25 +413,67 @@ describe('mongodb queries', () => {
 
 	it.skip('does vairous things', async () => {
 		// find someone with a date before 2013-10-10:10:10.98Z
-		collection.find({ registeres: { $lte: new Date('2013-10-10:10:10.98Z') } })
+		docs.find({ registeres: { $lte: new Date('2013-10-10:10:10.98Z') } })
 
 		// age between 18 and 35
-		collection.find({ age: { $gt: 18, $lt: 35 } })
+		docs.find({ age: { $gt: 18, $lt: 35 } })
 
 		// anyone but joe
-		collection.find({ name: { $ne: 'joe' } })
+		docs.find({ name: { $ne: 'joe' } })
 
-		// find winning tickets
-		collection.find({ ticket_no: { $in: [12, 22, 23, 'winner'] } })
+		// find winning tickets, ticket is one of the listed values
+		docs.find({ ticket_no: { $in: [12, 22, 23, 'winner'] } })
 
 		// non winners
-		collection.find({ ticket_no: { $nin: [12, 22, 23, 'winner'] } })
+		docs.find({ ticket_no: { $nin: [12, 22, 23, 'winner'] } })
 
 		// or operator. ticket num above 12 or winner key
-		collection.find({ $or: [{ ticket: { $gt: 12 } }, { ticket: 'winner' }] })
+		docs.find({ $or: [{ ticket: { $gt: 12 } }, { ticket: 'winner' }] })
 
 		// $not meta operator
-		collection.find({ id_num: { $not: { $mod: [5, 3] } } })
+		docs.find({ id_num: { $not: { $mod: [5, 3] } } })
+
+		// null matches null or keys that does not exist
+		docs.find({ 'does.not.exists.or.is.set.to.null': null })
+
+		// if you want only match keys that are null but still exists
+		docs.find({ somekey: null, $exists: true })
+
+		// can use regular expressions too
+		docs.find({ name: /joe/i })
+		docs.find({ name: { $regex: /joe/i } })
+	})
+
+	it.skip('querying arrays', async () => {
+		// will match element
+		docs.insertOne({ fruits: ['banana', 'apple', 'orange'] })
+		docs.find({ fruit: 'orange' })
+
+		// match all elements, both banan and orange in the array
+		docs.find({ fruit: { $all: ['banana', 'orange'] } })
+
+		// exact array match. strictly equal array, order does not matter
+		docs.find({ fruits: ['apple', 'banana', 'orange'] })
+
+		// specific element in the array, use index, zero based
+		docs.find({ 'fruit.2': 'peach' })
+
+		// query for array size, returns documents where fruits length is 3
+		docs.find({ fruits: { $size: 3 } })
+		// this does not work apparently, size cannot be combined with other operators
+		docs.find({ fruits: { $size: { $gt: 3 } } })
+		// instead store the size and increment it when pushing into array
+		docs.updateOne({}, { $push: { fruit: 'strawberry' }, $inc: { size: 1 } })
+		// then query it with
+		docs.find({ size: { $gt: 3 } })
+
+		// slice - return subset of an array -10 slices from the end
+		docs.findOne({ comments: { $slice: 10 } })
+		// or skip / limit
+		docs.findOne({ comments: { $slice: [12, -3] } })
+
+		// TODO FIX: matching array element operator $
+		//docs.find({ 'comments.name': 'bob' }, { 'comments.$': 1 })
 	})
 
 	// end
