@@ -413,7 +413,7 @@ describe('mongodb queries', () => {
 
 	it.skip('does vairous things', async () => {
 		// find someone with a date before 2013-10-10:10:10.98Z
-		docs.find({ registeres: { $lte: new Date('2013-10-10:10:10.98Z') } })
+		docs.find({ registered: { $lte: new Date('2013-10-10:10:10.98Z') } })
 
 		// age between 18 and 35
 		docs.find({ age: { $gt: 18, $lt: 35 } })

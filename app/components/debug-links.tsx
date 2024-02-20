@@ -7,6 +7,7 @@ const links = [
 	{ to: '/dashboard', label: 'Dashboard' },
 	{ to: '/login', label: 'Login' },
 	{ to: '/stylebook', label: 'Stylebook' },
+	{ to: '/p', label: 'list' },
 ]
 
 const styles = css`
@@ -31,7 +32,7 @@ const DebugLinks = () => {
 					</Form>
 
 					<ul className={styles}>
-						{links.map((link) => (
+						{links.map(link => (
 							<li key={link.to}>
 								<NavLink to={link.to}>{link.label}</NavLink>
 							</li>

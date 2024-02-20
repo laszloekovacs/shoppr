@@ -28,8 +28,8 @@ export default function ProductDetailsPage() {
 		<div>
 			<Flex dir="column">
 				<Typography fontSize="4xl">{item.name}</Typography>
-				<Typography>gyarto: {item.brand}</Typography>
-				<Typography>termek csoport: {item.department}</Typography>
+				<Typography>gyártó: {item.brand}</Typography>
+				<Typography>termékcsoport: {item.department}</Typography>
 			</Flex>
 
 			<p>
@@ -39,47 +39,99 @@ export default function ProductDetailsPage() {
 			<hr />
 
 			<fetcher.Form method="post">
-				<label>
-					Kategória
-					<input type="text" name="department" defaultValue={item.department} />
-				</label>
-
 				<input type="hidden" name="name" value={item.name} />
-				<button type="submit" name="intent" value="SET_DEPARTMENT">
-					Rögzít
-				</button>
-			</fetcher.Form>
-
-			<fetcher.Form method="post">
-				<label>
-					Gyártó
-					<input type="text" name="brand" defaultValue={item.brand} />
-				</label>
 				<>
-					<input type="hidden" name="intent" value="SET_BRAND" />
-					<input type="hidden" name="name" value={item.name} />
-					<input type="submit" value="Rögzít" />
+					<label htmlFor="department">Kategória</label>
+					<input type="text" name="department" defaultValue={item.department} />
+
+					<button type="submit" name="intent" value="SET_DEPARTMENT">
+						Rögzít
+					</button>
+				</>
+				<br />
+				<>
+					<label htmlFor="brand">Gyártó</label>
+					<input type="text" name="brand" defaultValue={item.brand} />
+					<button type="submit" name="intent" value="SET_BRAND">
+						Rögzít
+					</button>
 				</>
 			</fetcher.Form>
 			<hr />
 
-			<Typography fontSize="2xl">Termek attribútumok</Typography>
+			<Typography fontSize="2xl">Termék attribútumok</Typography>
 			<fetcher.Form method="post">
-				<label>
-					kulcs
-					<input type="text" name="attribute" />
-				</label>
-				<label>
-					érték
-					<input type="text" name="attributeValue" />
-				</label>
+				<input type="hidden" name="name" value={item.name} />
 				<>
-					<input type="hidden" name="name" value={item.name} />
-					<button type="submit" name="intent" value="ADD_ATTRIBUTE">
-						Hozzáadás
-					</button>
+					<label htmlFor="attribute">kulcs</label>
+					<input type="text" name="attribute" />
 				</>
+				<>
+					<label htmlFor="attributeValue">érték</label>
+					<input type="text" name="attributeValue" />
+				</>
+
+				<button type="submit" name="intent" value="ADD_ATTRIBUTE">
+					Hozzáad
+				</button>
 			</fetcher.Form>
+
+			{/* list of existing attributes */}
+			<div>
+				<ul>
+					{item.attributes &&
+						Object.entries(item.attributes).map(([key, value]) => (
+							<li key={key}>
+								<div>
+									{key}: {value}
+								</div>
+								<div>
+									<fetcher.Form method="post">
+										<input type="hidden" name="name" value={item.name} />
+										<input type="hidden" name="attribute" value={key} />
+
+										<button
+											type="submit"
+											name="intent"
+											value="DELETE_ATTRIBUTE"
+										>
+											töröl
+										</button>
+									</fetcher.Form>
+								</div>
+							</li>
+						))}
+				</ul>
+			</div>
+
+			{/* variants */}
+			<div>
+				<Typography fontSize="2xl">Változatok</Typography>
+				<fetcher.Form method="post">
+					<input type="hidden" name="name" value={item.name} />
+
+					<label htmlFor="variant">Változat neve</label>
+					<input type="text" name="variant" />
+					<label htmlFor="price">Változat ára</label>
+					<input type="number" name="price" />
+
+					<button type="submit" name="intent" value="ADD_VARIANT">
+						Változat hozzáadása
+					</button>
+				</fetcher.Form>
+
+				{/* list of existing variants */}
+				<div>
+					<Flex as="ul" dir="column">
+						{item.variants &&
+							item.variants.map(({ kind, price }) => (
+								<li key={kind}>
+									{kind}: {price.toString()}
+								</li>
+							))}
+					</Flex>
+				</div>
+			</div>
 		</div>
 	)
 }
@@ -90,22 +142,28 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 	const name = body.get('name')?.toString()
 	const intent = body.get('intent')?.toString()
 
+	// TODO: validate and sanitize input
+
 	switch (intent) {
-		case 'SET_DEPARTMENT':
+		case 'SET_DEPARTMENT': {
 			const department = body.get('department')?.toString()
-			documents('products').updateOne({ name }, { $set: { department } })
-			break
+			await documents('products').updateOne({ name }, { $set: { department } })
 
-		case 'SET_BRAND':
+			break
+		}
+
+		case 'SET_BRAND': {
 			const brand = body.get('brand')?.toString()
-			documents('products').updateOne({ name }, { $set: { brand } })
-			break
+			await documents('products').updateOne({ name }, { $set: { brand } })
 
-		case 'ADD_ATTRIBUTE':
+			break
+		}
+
+		case 'ADD_ATTRIBUTE': {
 			const attribute = body.get('attribute')?.toString()
 			const attributeValue = body.get('attributeValue')?.toString()
 
-			documents('products').updateOne(
+			await documents('products').updateOne(
 				{ name },
 				{
 					$set: {
@@ -113,11 +171,51 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 					},
 				}
 			)
+
 			break
+		}
+
+		case 'DELETE_ATTRIBUTE': {
+			const attribute = body.get('attribute')?.toString()
+
+			const result = await documents('products').updateOne(
+				{ name },
+				{
+					$unset: {
+						[`attributes.${attribute}`]: '',
+					},
+				}
+			)
+
+			return result.modifiedCount == 1
+				? json({ status: 'ok' })
+				: json({ status: `failed to delete attribute: ${attribute}` })
+		}
+
+		case 'ADD_VARIANT': {
+			const variant = body.get('variant')?.toString()
+			const price = body.get('price')?.toString()
+
+			const result = await documents('products').updateOne(
+				{ name },
+				{
+					$addToSet: {
+						variants: {
+							kind: variant,
+							price: Number(price),
+						},
+					},
+				}
+			)
+
+			return result.modifiedCount == 1
+				? json({ status: 'ok' })
+				: json({ status: `failed to add variant: ${variant}` })
+		}
 
 		default:
-			throw new Error('invalid intent')
+			throw new Error(`invalid intent ${intent}`)
 	}
 
-	return json({ status: 'ok' })
+	return json({ status: 'should not happen, but ok' })
 }
