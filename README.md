@@ -5,6 +5,10 @@ https://react.fluentui.dev/?path=/docs/theme-fonts--page
 https://chakra-ui.com/
 https://styled-components.com/docs/basics#getting-started
 
+### stripe
+
+https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
+
 ## TODO
 
 - write a proper readme

@@ -26,7 +26,7 @@ export default function Checkout() {
 		<div>
 			<h1>Checkout</h1>
 
-			<div>
+			<div style={{ maxWidth: '200px' }}>
 				<PayPalScriptProvider
 					options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
 				>

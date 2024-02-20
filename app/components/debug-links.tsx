@@ -9,6 +9,7 @@ const links = [
 	{ to: '/stylebook', label: 'Stylebook' },
 	{ to: '/p', label: 'list' },
 	{ to: '/checkout', label: 'Checkout' },
+	{ to: '/paypalhosted', label: 'PayPal Hosted' },
 ]
 
 const styles = css`
