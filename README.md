@@ -1,3 +1,4 @@
+https://developer.paypal.com/docs/checkout/standard/integrate/
 https://developer.paypal.com/integration-builder/
 https://github.com/remix-run/examples/tree/main/emotion
 https://react.fluentui.dev/?path=/docs/theme-fonts--page
@@ -37,6 +38,7 @@ https://styled-components.com/docs/basics#getting-started
 - support for no account sessionStorage flow
 - set mongodb collation, utf8 check, undefined checking
 - trim inputs
+- encode user id, expose less data to client
 
 ## Notes
 

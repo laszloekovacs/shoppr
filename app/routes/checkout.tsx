@@ -16,8 +16,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 	const clientId = process.env.PAYPAL_CLIENT_ID as string
 
-	console.log(clientId)
-
 	return json({ account, clientId })
 }
 
@@ -30,43 +28,49 @@ export default function Checkout() {
 
 			<div>
 				<PayPalScriptProvider
-					options={{ clientId: 'test', currency: 'HUF', intent: 'capture' }}
+					options={{ clientId: clientId, currency: 'HUF', intent: 'capture' }}
 				>
 					<PayPalButtons
 						createOrder={async data => {
-							return fetch('/checkout', {
+							const response = await fetch('/api/checkout', {
 								method: 'POST',
 								headers: {
 									'Content-Type': 'application/json',
 								},
 								body: JSON.stringify({
-									intent: 'CREATE',
+									intent: 'CREATE_ORDER',
 									cart: [
 										{
-											this: 'item',
-											amount: 'zero',
+											id: 'item',
+											quantity: 'zero',
 										},
 									],
 								}),
 							})
-								.then(response => response.json())
-								.then(order => order.id)
+
+							const orderData = await response.json()
+
+							if (orderData.id) {
+								return orderData.id
+							}
 						}}
 						onApprove={async data => {
-							return fetch('/checkout', {
+							const response = await fetch('/api/checkout', {
 								method: 'POST',
 								headers: {
 									'Content-Type': 'application/json',
 								},
 								body: JSON.stringify({
-									intent: 'APPROVE',
+									intent: 'CAPTURE_ORDER',
 									orderID: data.orderID,
 								}),
 							})
-								.then(response => response.json())
-								.then(orderData => {
-									alert('ok')
-								})
+
+							if (!response.ok) {
+								console.error('failed to capture order')
+							}
+
+							// do whatever with the captured order
 						}}
 					/>
 				</PayPalScriptProvider>
@@ -75,18 +79,4 @@ export default function Checkout() {
 			<pre>{JSON.stringify({ account }, null, 2)}</pre>
 		</div>
 	)
-}
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-	const body = await request.json()
-	console.log(body)
-
-	switch (body.intent) {
-		case 'CREATE': {
-			return json({ status: 'created' })
-		}
-		case 'APPROVE': {
-			return json({ status: 'approved' })
-		}
-	}
 }
