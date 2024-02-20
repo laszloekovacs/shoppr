@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { Form, useLoaderData } from '@remix-run/react'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
+import { useEffect } from 'react'
 import invariant from 'tiny-invariant'
 import { Button, Flex, Typography } from '~/components/primitives'
 import { ProductSchema } from '~/db/product'
@@ -9,6 +10,10 @@ import { authenticator } from '~/services/session.server'
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 	invariant(params, 'params.item is required')
 
+	const user = await authenticator.isAuthenticated(request)
+
+	const account = await documents('accounts').findOne({ user: user?.id })
+
 	const item = await documents('products').findOne<ProductSchema>({
 		name: params.item,
 	})
@@ -17,11 +22,12 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 		throw new Error('failed to fetch item')
 	}
 
-	return json({ item })
+	return json({ item, account })
 }
 
 export default function ShopItemPage() {
-	const { item } = useLoaderData<typeof loader>()
+	const { item, account } = useLoaderData<typeof loader>()
+	const actionData = useActionData<typeof action>()
 
 	return (
 		<div>
@@ -37,12 +43,14 @@ export default function ShopItemPage() {
 			<Form method="post">
 				<input type="hidden" name="name" value={item.name} />
 				<Button type="submit" name="intent" value="FAVORITE">
-					favorite
+					kedvel
 				</Button>
 				<Button type="submit" name="intent" value="ADD_TO_CART">
 					kosárba
 				</Button>
 			</Form>
+
+			<pre>{JSON.stringify({ item, account }, null, 2)}</pre>
 		</div>
 	)
 }
@@ -52,42 +60,31 @@ export async function action({ request }: LoaderFunctionArgs) {
 	const formData = await request.formData()
 	const user = await authenticator.isAuthenticated(request)
 
-	const name = formData.get('name') as string
+	const name = formData.get('name')?.toString()
 	const intent = formData.get('intent')?.toString()
 
-	if (!user || name.length == 0) {
-		console.log('failed to fetch item')
-		return
+	if (!user) {
+		throw new Error('user is required')
 	}
 
 	switch (intent) {
-		case 'ADD_TO_CART':
-			console.log('adding to cart' + ' ' + name)
-			{
-				const result = await documents('accounts').updateOne(
-					{ user: user.id }, // find by user
-					{ $push: { cart: { name } } } // push into cart
-				)
-			}
-			break
+		case 'ADD_TO_CART': {
+			const result = await documents('accounts').updateOne(
+				{ user: user.id },
+				{ $addToSet: { cart: { name } } }
+			)
+			return result.modifiedCount == 1 ? json({ success: true }) : json({})
+		}
 
-		case 'FAVORITE':
-			console.log('adding to favorites' + ' ' + name)
-			{
-				const result = await documents('accounts').updateOne(
-					{ user: user.id }, // find by user
-					{ $push: { favorites: { name } } } // push into favorites
-				)
-
-				if (result.upsertedCount) {
-					console.log('upserted')
-				}
-			}
-			break
+		case 'FAVORITE': {
+			const result = await documents('accounts').updateOne(
+				{ user: user.id },
+				{ $addToSet: { favorites: { name } } }
+			)
+			return result.modifiedCount == 1 ? json({ success: true }) : json({})
+		}
 
 		default:
-			break
+			throw new Error(`ivalid intent: ${intent}`)
 	}
-
-	return json({})
 }

@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs, json } from '@remix-run/node'
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, Link, useLoaderData } from '@remix-run/react'
 import Card from '~/components/card'
 import { Button, Flex, Typography } from '~/components/primitives'
@@ -32,11 +32,7 @@ export default function CartPage() {
 		<Flex dir="column">
 			<Flex dir="column" gap="0.2rem" justifyContent="flex-start">
 				<Typography fontSize="4xl">Kosar</Typography>
-				<Form method="POST">
-					<Button type="submit" name="intent" value="TO_CHECKOUT">
-						tovább a penztarhoz
-					</Button>
-				</Form>
+				<Link to="/checkout">tovább a penztarhoz</Link>
 			</Flex>
 
 			<Flex dir="row">

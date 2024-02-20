@@ -8,6 +8,7 @@ const links = [
 	{ to: '/login', label: 'Login' },
 	{ to: '/stylebook', label: 'Stylebook' },
 	{ to: '/p', label: 'list' },
+	{ to: '/checkout', label: 'Checkout' },
 ]
 
 const styles = css`
