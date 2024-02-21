@@ -8,8 +8,7 @@ import {
 	isRouteErrorResponse,
 	useRouteError,
 } from '@remix-run/react'
-import { GlobalStyles } from './components/global-styles'
-import ThemeProviderWrapper from './components/theme-provider'
+
 import { Container } from './components/primitives'
 import DebugLinks from './components/debug-links'
 import { PropsWithChildren } from 'react'
@@ -28,13 +27,10 @@ const Document = ({
 				<Links />
 			</head>
 			<body>
-				<ThemeProviderWrapper>
-					<Container>
-						<GlobalStyles />
-						{children}
-						<DebugLinks />
-					</Container>
-				</ThemeProviderWrapper>
+				<Container>
+					{children}
+					<DebugLinks />
+				</Container>
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />

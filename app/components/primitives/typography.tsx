@@ -1,6 +1,3 @@
-import styled from '@emotion/styled'
-import { Theme } from './theme'
-
 type Props = {
 	fontSize?: keyof Theme['fontSize']
 	theme?: Theme
