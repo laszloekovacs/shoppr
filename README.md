@@ -47,6 +47,7 @@ https://github.com/styled-system/styled-system/tree/master
 - set mongodb collation, utf8 check, undefined checking
 - trim inputs
 - encode user id, expose less data to client
+- on error, push the history to reroute to home
 
 ## Notes
 
