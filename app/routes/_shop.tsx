@@ -1,9 +1,9 @@
 import { LoaderFunctionArgs } from '@remix-run/node'
 import { Link, Outlet, json, useLoaderData, useMatches } from '@remix-run/react'
 import Breadcrumps from '~/components/breadcrumps'
-import BrowsingBar from '~/components/browsing-bar'
-import DebugLinks from '~/components/debug-links'
-import ShopHeader from '~/components/shop-header'
+import BrowsingBar from '~/components/browsingbar'
+import DebugLinks from '~/components/debuglinks'
+import ShopHeader from '~/components/shopheader'
 import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 

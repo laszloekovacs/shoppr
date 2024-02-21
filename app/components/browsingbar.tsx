@@ -1,6 +1,3 @@
-import styled from '@emotion/styled'
-import { Flex, Typography } from './primitives'
-
 interface Props {
 	data: {
 		brands: string[]
@@ -9,21 +6,12 @@ interface Props {
 	}
 }
 
-const Container = styled.div`
-	border: 2px solid rgba(126, 80, 0, 0.2);
-	position: relative;
-`
-
 export default function BrowsingBar({ data }: Props) {
-	const groups = ['brands', 'departments'].map((group) => (
-		<Typography key={group} fontSize="2xl">
-			{group}
-		</Typography>
-	))
+	const groups = ['brands', 'departments'].map(group => <p>{group}</p>)
 
 	return (
-		<Container>
-			<Flex dir="row">{groups}</Flex>
+		<div>
+			<div>{groups}</div>
 
 			<ul>
 				{data.brands.map((brand: string) => (
@@ -36,6 +24,6 @@ export default function BrowsingBar({ data }: Props) {
 					<li key={department}>{department}</li>
 				))}
 			</ul>
-		</Container>
+		</div>
 	)
 }

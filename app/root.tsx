@@ -8,10 +8,14 @@ import {
 	isRouteErrorResponse,
 	useRouteError,
 } from '@remix-run/react'
-
-import { Container } from './components/primitives'
-import DebugLinks from './components/debug-links'
+import stylesheet from './tailwind.css'
+import DebugLinks from './components/debuglinks'
 import { PropsWithChildren } from 'react'
+import { LinksFunction } from '@remix-run/node'
+
+export const links: LinksFunction = () => [
+	{ rel: 'stylesheet', href: stylesheet },
+]
 
 const Document = ({
 	children,
@@ -27,10 +31,8 @@ const Document = ({
 				<Links />
 			</head>
 			<body>
-				<Container>
-					{children}
-					<DebugLinks />
-				</Container>
+				{children}
+				<DebugLinks />
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />
