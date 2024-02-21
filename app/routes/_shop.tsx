@@ -4,7 +4,7 @@ import Breadcrumps from '~/components/breadcrumps'
 import BrowsingBar from '~/components/browsing-bar'
 import DebugLinks from '~/components/debug-links'
 import ShopHeader from '~/components/shop-header'
-import { documents } from '~/services/db.server'
+import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export const handle = {
@@ -15,10 +15,10 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request)
 
 	// query the brands
-	const brands = await documents('products').distinct('brand')
+	const brands = await db.products.distinct('brand')
 
 	// query departments
-	const departments = await documents('products').distinct('department')
+	const departments = await db.products.distinct('department')
 
 	// TODO: get special queries
 

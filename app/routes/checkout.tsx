@@ -7,12 +7,12 @@ import {
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
-import { documents } from '~/services/db.server'
+import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request)
-	const account = await documents('accounts').findOne({ user: user?.id })
+	const account = await db.accounts.findOne({ user: user?.id })
 
 	const clientId = process.env.PAYPAL_CLIENT_ID as string
 

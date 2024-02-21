@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from '@remix-run/react'
-import { documents } from '~/services/db.server'
+import { db } from '~/services/db.server'
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { authenticator } from '~/services/session.server'
 import Card from '~/components/card'
@@ -14,7 +14,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 		failureRedirect: '/login',
 	})
 
-	const items = await documents('accounts').findOne(
+	const items = await db.accounts.findOne(
 		{
 			user: user?.id,
 		},
