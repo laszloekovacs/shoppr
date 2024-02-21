@@ -1,11 +1,23 @@
 import styled from '@emotion/styled'
-import type { Theme } from './theme-provider'
+import { space, layout, color, border, typography } from 'styled-system'
+import type {
+	SpaceProps,
+	LayoutProps,
+	TypographyProps,
+	ColorProps,
+	BorderProps,
+} from 'styled-system'
 
-interface Props {
-	theme?: Theme
-}
+type Props = SpaceProps &
+	LayoutProps &
+	TypographyProps &
+	ColorProps &
+	BorderProps
 
 export const Box = styled.div<Props>`
-	border: 1px solid ${(props) => props.theme.color.border};
-	background-color: rgba(230, 155, 93, 0.1);
+	${space}
+	${layout}
+	${typography}
+	${color}
+	${border}
 `

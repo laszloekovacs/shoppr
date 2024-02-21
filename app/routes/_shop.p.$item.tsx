@@ -29,6 +29,8 @@ export default function ShopItemPage() {
 	const { item, account } = useLoaderData<typeof loader>()
 	const actionData = useActionData<typeof action>()
 
+	const favorited = account?.favorites?.includes(item.name)
+
 	return (
 		<div>
 			<Flex dir="column">
@@ -42,8 +44,13 @@ export default function ShopItemPage() {
 
 			<Form method="post">
 				<input type="hidden" name="name" value={item.name} />
-				<Button type="submit" name="intent" value="FAVORITE">
-					kedvel
+
+				<Button
+					type="submit"
+					name="intent"
+					value={favorited ? 'UNFAVORITE' : 'FAVORITE'}
+				>
+					{favorited ? 'nemkedvel' : 'kedvel'}
 				</Button>
 				<Button type="submit" name="intent" value="ADD_TO_CART">
 					kosárba
@@ -79,7 +86,15 @@ export async function action({ request }: LoaderFunctionArgs) {
 		case 'FAVORITE': {
 			const result = await documents('accounts').updateOne(
 				{ user: user.id },
-				{ $addToSet: { favorites: { name } } }
+				{ $addToSet: { favorites: name } }
+			)
+			return result.modifiedCount == 1 ? json({ success: true }) : json({})
+		}
+
+		case 'UNFAVORITE': {
+			const result = await documents('accounts').updateOne(
+				{ user: user.id },
+				{ $pull: { favorites: name } }
 			)
 			return result.modifiedCount == 1 ? json({ success: true }) : json({})
 		}
