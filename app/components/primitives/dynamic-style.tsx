@@ -1,23 +1,30 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
-import theme from './theme'
+import type { Theme } from './theme'
+import { CssValueType, SpaceProps } from './dynamic-style.d'
 
-type Theme = typeof theme
+const system = (prop: CssValueType, theme: Theme) => {
+	if (typeof prop === 'undefined') {
+		return null
+	}
 
-type SizeProps = {
-	margin?: string | number
-	m?: string | number
-	padding?: string | number
-	p?: string | number
+	if (typeof prop === 'number') {
+		// try to look up in the theme definition
+	}
 }
 
-const dynamicStyle = (props: SizeProps & { theme?: Theme }) => {
-	const { margin, m, padding, p } = props
+const space = (props: SpaceProps & { theme?: Theme }) => {
+	return css`
+		margin: ${props.m};
+	`
+}
+
+const dynamicStyle = (props: SpaceProps & { theme?: Theme }) => {
+	const { m, p } = props
 
 	return css`
-		margin: ${margin ?? margin};
 		margin: ${m ?? m};
-		padding: ${padding ?? padding};
+
 		padding: ${p ?? p};
 	`
 }

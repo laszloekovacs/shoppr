@@ -1,4 +1,4 @@
-export default {
+const theme = {
 	space: {},
 	color: {
 		text: '#000',
@@ -35,3 +35,6 @@ export default {
 		'6xl': '4rem',
 	},
 }
+
+export default theme
+export type Theme = typeof theme
