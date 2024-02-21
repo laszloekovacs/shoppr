@@ -11,28 +11,27 @@ import {
 	ExpressCheckoutElement,
 	PaymentElement,
 } from '@stripe/react-stripe-js'
+import { constants } from '~/services/constants.server'
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-	const { STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY } = process.env
-	const stripe = new Stripe(STRIPE_SECRET_KEY!)
+	const { STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY } = constants
 
-	if (!STRIPE_SECRET_KEY || !STRIPE_PUBLISHABLE_KEY) {
-		throw new Error('Missing STRIPE_SECRET_KEY')
-	}
+	const stripe = new Stripe(STRIPE_SECRET_KEY!)
 
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: 40000,
 		currency: 'huf',
 	})
 
-	return json({ paymentIntent, publishableKey: STRIPE_PUBLISHABLE_KEY })
+	return json({ paymentIntent, STRIPE_PUBLISHABLE_KEY })
 }
 
 export default function StripeCheckout() {
-	const { paymentIntent, publishableKey } = useLoaderData<typeof loader>()
+	const { paymentIntent, STRIPE_PUBLISHABLE_KEY } =
+		useLoaderData<typeof loader>()
 
 	// move this to a context
-	const stripePromise = loadStripe(publishableKey)
+	const stripePromise = loadStripe(STRIPE_PUBLISHABLE_KEY!)
 
 	return (
 		<div>

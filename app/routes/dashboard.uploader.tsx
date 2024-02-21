@@ -5,12 +5,14 @@ import {
 	DefaultAzureCredential,
 	InteractiveBrowserCredential,
 } from '@azure/identity'
+import { constants } from '~/services/constants.server'
 
 export async function loader() {
-	// get the env from remix
+	const { AZURE_BLOB_CONNECTION_STRING, AZURE_BLOB_CONTAINER } = constants
+
 	const data = {
-		blobConnectionString: process.env.BLOB_CONNECTION_STRING as string,
-		blobContainerName: process.env.BLOB_CONTAINER as string,
+		blobConnectionString: AZURE_BLOB_CONNECTION_STRING!,
+		blobContainerName: AZURE_BLOB_CONTAINER!,
 	}
 
 	return json({ data })
@@ -52,7 +54,7 @@ const UploaderPage = () => {
 				blobHTTPHeaders: {
 					blobContentType: file.type,
 				},
-				onProgress: (ev) => {
+				onProgress: ev => {
 					setBytes(ev.loadedBytes)
 				},
 			})

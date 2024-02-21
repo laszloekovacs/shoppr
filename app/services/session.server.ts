@@ -2,6 +2,14 @@ import { createCookieSessionStorage } from '@remix-run/node'
 import { Authenticator } from 'remix-auth'
 import { Auth0Strategy } from 'remix-auth-auth0'
 import type { Auth0Profile } from 'remix-auth-auth0'
+import { constants } from './constants.server'
+
+const {
+	AUTH0_CLIENT_ID,
+	AUTH0_CALLBACK_URL,
+	AUTH0_CLIENT_SECRET,
+	AUTH0_DOMAIN,
+} = constants
 
 /*
 https://github.com/remix-run/examples/blob/main/remix-auth-auth0/app/routes/logout.tsx
@@ -22,10 +30,10 @@ export const sessionStorage = createCookieSessionStorage({
 
 const auth0Strategy = new Auth0Strategy(
 	{
-		clientID: process.env.AUTH0_CLIENT_ID as string,
-		callbackURL: process.env.AUTH0_CALLBACK_URL as string,
-		clientSecret: process.env.AUTH0_CLIENT_SECRET as string,
-		domain: process.env.AUTH0_DOMAIN as string,
+		clientID: AUTH0_CLIENT_ID!,
+		callbackURL: AUTH0_CALLBACK_URL!,
+		clientSecret: AUTH0_CLIENT_SECRET!,
+		domain: AUTH0_DOMAIN!,
 	},
 	async ({ profile }) => {
 		// verify function

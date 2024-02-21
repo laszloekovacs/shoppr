@@ -1,14 +1,17 @@
 import { MongoClient } from 'mongodb'
 import { singleton } from './singleton.server'
+import { constants } from './constants.server'
+
+const { MONGODB_CONNECTION_STRING, MONGODB_DATABASE } = constants
 
 export const mongodb = singleton(
 	'mongodb',
-	() => new MongoClient(process.env.CONNECTION_STRING!)
+	() => new MongoClient(MONGODB_CONNECTION_STRING!)
 )
 
 export const db = {
-	products: mongodb.db(process.env.DATABASE!).collection('products'),
-	orders: mongodb.db(process.env.DATABASE!).collection('orders'),
-	attributes: mongodb.db(process.env.DATABASE!).collection('attributes'),
-	accounts: mongodb.db(process.env.DATABASE!).collection('accounts'),
+	products: mongodb.db(MONGODB_DATABASE!).collection('products'),
+	orders: mongodb.db(MONGODB_DATABASE!).collection('orders'),
+	attributes: mongodb.db(MONGODB_DATABASE!).collection('attributes'),
+	accounts: mongodb.db(MONGODB_DATABASE!).collection('accounts'),
 }
