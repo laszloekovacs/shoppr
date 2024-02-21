@@ -1,7 +1,5 @@
-import { ThemeProvider } from '@emotion/react'
-import theme from './primitives/theme'
-
-const theme_old = {
+export default {
+	space: {},
 	color: {
 		text: '#000',
 		background: '#fff',
@@ -14,6 +12,19 @@ const theme_old = {
 		light: 'lightgrey',
 		dark: 'darkgrey',
 	},
+	colors: {
+		text: '#000',
+		background: '#fff',
+		border: 'grey',
+		brand: 'green',
+		success: 'green',
+		danger: 'red',
+		warning: 'orange',
+		info: 'blue',
+		light: 'lightgrey',
+		dark: 'darkgrey',
+	},
+	typography: {},
 	fontSize: {
 		xs: '0.75rem',
 		sm: '0.875rem',
@@ -23,12 +34,4 @@ const theme_old = {
 		'4xl': '2.25rem',
 		'6xl': '4rem',
 	},
-}
-
-export default function ThemeProviderWrapper({
-	children,
-}: {
-	children: React.ReactNode
-}) {
-	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }

@@ -1,6 +1,7 @@
 import { Flex } from '~/components/primitives/flex'
 import { Typography } from '../components/primitives/typography'
 import Card from '~/components/card'
+import { Box } from '~/components/primitives'
 
 const StyleBook = () => {
 	return (
@@ -57,6 +58,17 @@ const StyleBook = () => {
 					6xl size
 				</Typography>
 			</Flex>
+
+			<hr />
+			<Box>
+				<Box border="1px solid">
+					<p>hello</p>
+				</Box>
+
+				<Box color="brand">
+					<p>light background</p>
+				</Box>
+			</Box>
 		</div>
 	)
 }
