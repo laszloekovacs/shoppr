@@ -1,9 +1,11 @@
 import { BigText } from '~/components/bigtext'
+import { themeClass } from '~/components/bigtext.css'
 
 const StyleBook = () => {
 	return (
-		<div>
+		<div className={themeClass}>
 			<BigText></BigText>
+			<button className="btn-primary">primary</button>
 		</div>
 	)
 }

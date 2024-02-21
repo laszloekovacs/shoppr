@@ -8,15 +8,15 @@ import {
 	isRouteErrorResponse,
 	useRouteError,
 } from '@remix-run/react'
-import stylesheet from './tailwind.css'
+
 import DebugLinks from './components/debuglinks'
 import { PropsWithChildren } from 'react'
 import { LinksFunction } from '@remix-run/node'
+import { cssBundleHref } from '@remix-run/css-bundle'
 
 export const links: LinksFunction = () => [
-	{ rel: 'stylesheet', href: stylesheet },
+	...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
 ]
-
 const Document = ({
 	children,
 	title,

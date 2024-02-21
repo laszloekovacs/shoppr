@@ -4,7 +4,7 @@ const links = [
 	{ to: '/', label: 'Home' },
 	{ to: '/dashboard', label: 'Dashboard' },
 	{ to: '/login', label: 'Login' },
-	{ to: '/stylebook', label: 'Stylebook' },
+	{ to: '/stylesheet', label: 'stylesheet' },
 	{ to: '/p', label: 'list' },
 	{ to: '/checkout', label: 'Checkout' },
 	{ to: '/stripe/checkout', label: 'stripe Hosted' },
