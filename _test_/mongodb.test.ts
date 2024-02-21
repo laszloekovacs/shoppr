@@ -20,7 +20,7 @@ describe('mongodb queries', () => {
 		await client.close()
 	})
 
-	afterEach(async () => {
+	beforeEach(async () => {
 		await client.db('test').dropDatabase()
 	})
 
@@ -517,41 +517,48 @@ describe('mongodb queries', () => {
 	})
 
 	it('shows how to use aggregation', async () => {
-		const data = {
-			companies: [
-				{
-					name: 'apple',
-					founded: 2004,
-				},
-				{
-					name: 'samsung',
-					founded: 2006,
-				},
-				{
-					name: 'dell',
-					founded: 2004,
-				},
-			],
-		}
-
-		await docs.insertOne(data)
-
-		const result = await docs
-			.aggregate([
-				{ $match: { companies: { $elemMatch: { founded: 2004 } } } },
-				{
-					$project: {
-						_id: 0,
-						name: 1,
+		const data: any[] = [
+			{
+				name: 'apple',
+				founded: 2004,
+				funders: [
+					{
+						name: 'steeve',
 					},
-				},
-			])
-			.toArray()
+					{
+						name: 'frank',
+					},
+				],
+			},
+			{
+				name: 'samsung',
+				founded: 2006,
+			},
+			{
+				name: 'dell',
+				founded: 2004,
+			},
+		]
 
-		expect(result).toMatchInlineSnapshot(`
-			[
-			  {},
-			]
+		await docs.insertMany(data)
+
+		const query = await docs.findOne(
+			{
+				funders: { $elemMatch: { name: 'steeve' } },
+			},
+			{
+				projection: { _id: 0, name: '$funders.name', company: '$name' },
+			}
+		)
+
+		expect(query).toMatchInlineSnapshot(`
+			{
+			  "company": "apple",
+			  "name": [
+			    "steeve",
+			    "frank",
+			  ],
+			}
 		`)
 
 		//
@@ -691,5 +698,162 @@ describe('mongodb queries', () => {
 		`)
 	})
 
+	it('finds ssubdocument in array', async () => {
+		await docs.insertMany([
+			{
+				item: 'journal',
+				instock: [
+					{ warehouse: 'A', qty: 5 },
+					{ warehouse: 'C', qty: 15 },
+				],
+			},
+			{
+				item: 'notebook',
+				instock: [{ warehouse: 'C', qty: 5 }],
+			},
+			{
+				item: 'paper',
+				instock: [
+					{ warehouse: 'A', qty: 60 },
+					{ warehouse: 'B', qty: 15 },
+				],
+			},
+			{
+				item: 'planner',
+				instock: [
+					{ warehouse: 'A', qty: 40 },
+					{ warehouse: 'B', qty: 5 },
+				],
+			},
+			{
+				item: 'postcard',
+				instock: [
+					{ warehouse: 'B', qty: 15 },
+					{ warehouse: 'C', qty: 35 },
+				],
+			},
+		])
+
+		const res = await docs
+			.find({
+				'instock.qty': { $lte: 20 },
+			})
+			.project({ _id: 0 })
+			.toArray()
+
+		expect(res).toMatchInlineSnapshot(`
+			[
+			  {
+			    "instock": [
+			      {
+			        "qty": 5,
+			        "warehouse": "A",
+			      },
+			      {
+			        "qty": 15,
+			        "warehouse": "C",
+			      },
+			    ],
+			    "item": "journal",
+			  },
+			  {
+			    "instock": [
+			      {
+			        "qty": 5,
+			        "warehouse": "C",
+			      },
+			    ],
+			    "item": "notebook",
+			  },
+			  {
+			    "instock": [
+			      {
+			        "qty": 60,
+			        "warehouse": "A",
+			      },
+			      {
+			        "qty": 15,
+			        "warehouse": "B",
+			      },
+			    ],
+			    "item": "paper",
+			  },
+			  {
+			    "instock": [
+			      {
+			        "qty": 40,
+			        "warehouse": "A",
+			      },
+			      {
+			        "qty": 5,
+			        "warehouse": "B",
+			      },
+			    ],
+			    "item": "planner",
+			  },
+			  {
+			    "instock": [
+			      {
+			        "qty": 15,
+			        "warehouse": "B",
+			      },
+			      {
+			        "qty": 35,
+			        "warehouse": "C",
+			      },
+			    ],
+			    "item": "postcard",
+			  },
+			]
+		`)
+	})
+
+	it('uses $unwind', async () => {
+		const data = [
+			{
+				name: 'Alice',
+				score: [34, 56, 23],
+			},
+			{
+				name: 'Brad',
+				score: [12, 34, 43],
+			},
+		]
+
+		await docs.insertMany(data)
+
+		const res = await docs
+			.aggregate([
+				{ $match: { name: 'Alice' } },
+				{
+					$project: {
+						_id: 0,
+					},
+				},
+				{
+					$unwind: '$score',
+				},
+			])
+			.toArray()
+
+		expect(res).toMatchInlineSnapshot(`
+			[
+			  {
+			    "name": "Alice",
+			    "score": 34,
+			  },
+			  {
+			    "name": "Alice",
+			    "score": 56,
+			  },
+			  {
+			    "name": "Alice",
+			    "score": 23,
+			  },
+			]
+		`)
+
+		///
+	})
 	// end
 })
