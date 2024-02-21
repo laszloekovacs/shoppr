@@ -5,27 +5,33 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	isRouteErrorResponse,
+	useRouteError,
 } from '@remix-run/react'
-
 import { GlobalStyles } from './components/global-styles'
 import ThemeProviderWrapper from './components/theme-provider'
 import { Container } from './components/primitives'
 import DebugLinks from './components/debug-links'
+import { PropsWithChildren } from 'react'
 
-export default function App() {
+const Document = ({
+	children,
+	title,
+}: PropsWithChildren<{ title?: string }>) => {
 	return (
 		<html lang="en">
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<Meta />
+				{title ? <title>{title}</title> : null}
 				<Links />
 			</head>
 			<body>
 				<ThemeProviderWrapper>
 					<Container>
 						<GlobalStyles />
-						<Outlet />
+						{children}
 						<DebugLinks />
 					</Container>
 				</ThemeProviderWrapper>
@@ -34,5 +40,39 @@ export default function App() {
 				<LiveReload />
 			</body>
 		</html>
+	)
+}
+
+export default function App() {
+	return (
+		<Document>
+			<Outlet />
+		</Document>
+	)
+}
+
+export const ErrorBoundary = () => {
+	const error = useRouteError()
+	console.error(error)
+
+	if (isRouteErrorResponse(error)) {
+		return (
+			<Document title={`${error.status} ${error.statusText}`}>
+				<div>
+					{error.status} {error.statusText}
+				</div>
+			</Document>
+		)
+	}
+
+	const errorMessage = error instanceof Error ? error.message : 'Unknown Error'
+
+	return (
+		<Document title="Ouch...">
+			<div>
+				<h1>App Error</h1>
+				<pre>{errorMessage}</pre>
+			</div>
+		</Document>
 	)
 }

@@ -11,9 +11,7 @@ export default function handleRequest(
 	remixContext: EntryContext
 ) {
 	const markup = renderToString(
-		<>
-			<RemixServer context={remixContext} url={request.url} />
-		</>
+		<RemixServer context={remixContext} url={request.url} />
 	)
 
 	const html = renderStylesToString(markup)
