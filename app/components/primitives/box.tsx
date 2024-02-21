@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { space, layout, typography, color, border } from 'styled-system'
+import { space, layout, color, border, typography } from 'styled-system'
 import type {
 	SpaceProps,
 	LayoutProps,
@@ -9,10 +9,10 @@ import type {
 } from 'styled-system'
 
 type Props = SpaceProps &
-	BorderProps &
 	LayoutProps &
 	TypographyProps &
-	ColorProps
+	ColorProps &
+	BorderProps
 
 export const Box = styled.div<Props>`
 	${space}

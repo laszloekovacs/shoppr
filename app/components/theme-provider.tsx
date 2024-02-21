@@ -1,30 +1,6 @@
 import { ThemeProvider } from '@emotion/react'
 import theme from './primitives/theme'
 
-const theme_old = {
-	color: {
-		text: '#000',
-		background: '#fff',
-		border: 'grey',
-		brand: 'green',
-		success: 'green',
-		danger: 'red',
-		warning: 'orange',
-		info: 'blue',
-		light: 'lightgrey',
-		dark: 'darkgrey',
-	},
-	fontSize: {
-		xs: '0.75rem',
-		sm: '0.875rem',
-		base: '1rem',
-		lg: '1.125rem',
-		'2xl': '1.5rem',
-		'4xl': '2.25rem',
-		'6xl': '4rem',
-	},
-}
-
 export default function ThemeProviderWrapper({
 	children,
 }: {

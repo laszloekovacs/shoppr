@@ -2,6 +2,7 @@ import { Flex } from '~/components/primitives/flex'
 import { Typography } from '../components/primitives/typography'
 import Card from '~/components/card'
 import { Box } from '~/components/primitives'
+import { DynamicDiv } from '~/components/primitives/dynamic-style'
 
 const StyleBook = () => {
 	return (
@@ -59,14 +60,32 @@ const StyleBook = () => {
 				</Typography>
 			</Flex>
 
+			<Box backgroundColor="brand">
+				<DynamicDiv p="3rem">
+					<p>dynamic styled</p>
+				</DynamicDiv>
+			</Box>
+
 			<hr />
 			<Box>
 				<Box border="1px solid">
 					<p>hello</p>
 				</Box>
 
-				<Box color="brand">
-					<p>light background</p>
+				<Box backgroundColor="text">
+					<p>text</p>
+				</Box>
+
+				<Box backgroundColor="background">
+					<p>background</p>
+				</Box>
+
+				<Box backgroundColor="brand">
+					<p>brand</p>
+				</Box>
+
+				<Box backgroundColor="warning">
+					<p>warning</p>
 				</Box>
 			</Box>
 		</div>
