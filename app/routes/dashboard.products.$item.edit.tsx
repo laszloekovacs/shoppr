@@ -1,7 +1,7 @@
 import { ActionFunctionArgs, LoaderFunctionArgs, json } from '@remix-run/node'
 import { useFetcher, useLoaderData, useActionData } from '@remix-run/react'
-import { ProductSchema } from '~/db/product'
-import { documents, WithId } from '~/services/db.server'
+import { ProductSchema } from '~/model/product'
+import { db } from '~/services/db.server'
 import invariant from 'tiny-invariant'
 import { Flex, Typography } from '~/components/primitives'
 
@@ -9,7 +9,7 @@ import { Flex, Typography } from '~/components/primitives'
 export const loader = async ({ params }: LoaderFunctionArgs) => {
 	invariant(params.item, 'params.item is required')
 
-	const item = await documents('products').findOne<WithId<ProductSchema>>({
+	const item = await db.products.findOne<ProductSchema & { _id: string }>({
 		name: params.item,
 	})
 	if (item) {
@@ -147,14 +147,14 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 	switch (intent) {
 		case 'SET_DEPARTMENT': {
 			const department = body.get('department')?.toString()
-			await documents('products').updateOne({ name }, { $set: { department } })
+			await db.products.updateOne({ name }, { $set: { department } })
 
 			break
 		}
 
 		case 'SET_BRAND': {
 			const brand = body.get('brand')?.toString()
-			await documents('products').updateOne({ name }, { $set: { brand } })
+			await db.products.updateOne({ name }, { $set: { brand } })
 
 			break
 		}
@@ -163,7 +163,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 			const attribute = body.get('attribute')?.toString()
 			const attributeValue = body.get('attributeValue')?.toString()
 
-			await documents('products').updateOne(
+			await db.products.updateOne(
 				{ name },
 				{
 					$set: {
@@ -178,7 +178,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 		case 'DELETE_ATTRIBUTE': {
 			const attribute = body.get('attribute')?.toString()
 
-			const result = await documents('products').updateOne(
+			const result = await db.products.updateOne(
 				{ name },
 				{
 					$unset: {
@@ -196,7 +196,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 			const variant = body.get('variant')?.toString()
 			const price = body.get('price')?.toString()
 
-			const result = await documents('products').updateOne(
+			const result = await db.products.updateOne(
 				{ name },
 				{
 					$addToSet: {

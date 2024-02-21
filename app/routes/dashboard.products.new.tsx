@@ -1,10 +1,9 @@
-import { ActionFunction, ActionFunctionArgs } from '@remix-run/node'
+import { ActionFunctionArgs } from '@remix-run/node'
 import { Form, json, redirect, useActionData } from '@remix-run/react'
 import { Link } from '@remix-run/react'
 import { Typography } from '~/components/primitives'
-
-import { ProductSchema, isProductSchema } from '~/db/product'
-import { DATABASE, mongodb, MongoServerError } from '~/services/db.server'
+import { ProductSchema } from '~/model/product'
+import { db } from '~/services/db.server'
 
 export const handle = {
 	breadcrumb: () => <Link to="/dashboard/products/new">new</Link>,
@@ -38,9 +37,7 @@ const validateNewProduct = (obj: any) => {
 	return errors
 }
 
-/* create a new entry in the database */
 export async function action({ request }: ActionFunctionArgs) {
-	// extract data from form
 	const body = await request.formData()
 
 	const product: Partial<ProductSchema> = {
@@ -56,9 +53,7 @@ export async function action({ request }: ActionFunctionArgs) {
 	}
 
 	// store in the database
-
-	const collection = mongodb.db(DATABASE).collection('products')
-	const insertionResult = await collection.insertOne(product)
+	const insertionResult = await db.products.insertOne(product)
 
 	if (!insertionResult.acknowledged) {
 		return json({ error: 'insertion to database failed' })

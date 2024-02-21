@@ -3,8 +3,8 @@ import { Form, useActionData, useLoaderData } from '@remix-run/react'
 import { useEffect } from 'react'
 import invariant from 'tiny-invariant'
 import { Button, Flex, Typography } from '~/components/primitives'
-import { ProductSchema } from '~/db/product'
-import { documents } from '~/services/db.server'
+import { ProductSchema } from '~/model/product'
+import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
@@ -12,9 +12,9 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
 	const user = await authenticator.isAuthenticated(request)
 
-	const account = await documents('accounts').findOne({ user: user?.id })
+	const account = await db.accounts.findOne({ user: user?.id })
 
-	const item = await documents('products').findOne<ProductSchema>({
+	const item = await db.products.findOne<ProductSchema>({
 		name: params.item,
 	})
 
@@ -76,7 +76,7 @@ export async function action({ request }: LoaderFunctionArgs) {
 
 	switch (intent) {
 		case 'ADD_TO_CART': {
-			const result = await documents('accounts').updateOne(
+			const result = await db.accounts.updateOne(
 				{ user: user.id },
 				{ $addToSet: { cart: { name } } }
 			)
@@ -84,7 +84,7 @@ export async function action({ request }: LoaderFunctionArgs) {
 		}
 
 		case 'FAVORITE': {
-			const result = await documents('accounts').updateOne(
+			const result = await db.accounts.updateOne(
 				{ user: user.id },
 				{ $addToSet: { favorites: name } }
 			)
@@ -92,7 +92,7 @@ export async function action({ request }: LoaderFunctionArgs) {
 		}
 
 		case 'UNFAVORITE': {
-			const result = await documents('accounts').updateOne(
+			const result = await db.accounts.updateOne(
 				{ user: user.id },
 				{ $pull: { favorites: name } }
 			)

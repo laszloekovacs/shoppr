@@ -2,13 +2,13 @@ import { json, redirect, type LoaderFunctionArgs } from '@remix-run/node'
 import { Form, Link, useLoaderData } from '@remix-run/react'
 import invariant from 'tiny-invariant'
 import RawData from '~/components/raw-data'
-import { documents } from '~/services/db.server'
+import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export async function loader({ request }: LoaderFunctionArgs) {
 	const user = await authenticator.isAuthenticated(request)
 
-	const account = await documents('accounts').findOne({ user: user?.id })
+	const account = await db.accounts.findOne({ user: user?.id })
 
 	if (account) {
 		return redirect('/account')
@@ -48,7 +48,7 @@ export async function action({ request }: LoaderFunctionArgs) {
 
 	const id = formData.get('id') as string
 
-	await documents('accounts').insertOne({ user: id })
+	await db.accounts.insertOne({ user: id })
 
 	return redirect('/account')
 }
