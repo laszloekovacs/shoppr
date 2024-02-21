@@ -1,25 +1,13 @@
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 import type { Theme } from './theme'
-import { CssValueType, SpaceProps } from './dynamic-style.d'
 
-const system = (prop: CssValueType, theme: Theme) => {
-	if (typeof prop === 'undefined') {
-		return null
-	}
+const breakpoints = ['32px', '768px', '1024px']
+const mq = breakpoints.map(bp => `@media (min-width: ${bp})`)
 
-	if (typeof prop === 'number') {
-		// try to look up in the theme definition
-	}
-}
-
-const space = (props: SpaceProps & { theme?: Theme }) => {
-	return css`
-		margin: ${props.m};
-	`
-}
-
-const dynamicStyle = (props: SpaceProps & { theme?: Theme }) => {
+const dynamicStyle = (
+	props: { m?: string; p?: string } & { theme?: Theme }
+) => {
 	const { m, p } = props
 
 	return css`

@@ -1,5 +1,16 @@
 const theme = {
-	space: {},
+	space: [
+		'0',
+		'0.2rem',
+		'0.4rem',
+		'0.8rem',
+		'1rem',
+		'1.2rem',
+		'1.4rem',
+		'1.8rem',
+		'2rem',
+	],
+	breakpoints: ['320px', '768px', '1024px'],
 	color: {
 		text: '#000',
 		background: '#fff',
