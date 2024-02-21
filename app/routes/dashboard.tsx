@@ -3,7 +3,6 @@ import { Link, Outlet, useMatches } from '@remix-run/react'
 
 import Breadcrumps from '~/components/breadcrumps'
 import { authenticator } from '~/services/session.server'
-import { Flex, Nav, Typography } from '~/components/primitives'
 
 export const handle = {
 	breadcrumb: () => <Link to="/dashboard">dashboard</Link>,
@@ -26,22 +25,22 @@ const dashboard = () => {
 	const matches = useMatches()
 
 	return (
-		<Flex dir="column">
+		<div>
 			<header>
-				<Typography fontSize="4xl">Dashboard</Typography>
+				<h2>Dashboard</h2>
 				<Breadcrumps matches={matches} />
 			</header>
-			<Flex dir="row">
-				<Nav>
-					{dashboardLinks.map((link) => (
+			<div>
+				<div>
+					{dashboardLinks.map(link => (
 						<Link key={link.name} to={link.href}>
 							{link.name}
 						</Link>
 					))}
-				</Nav>
+				</div>
 				<Outlet />
-			</Flex>
-		</Flex>
+			</div>
+		</div>
 	)
 }
 

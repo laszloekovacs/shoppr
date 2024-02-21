@@ -1,7 +1,6 @@
 import { ActionFunctionArgs } from '@remix-run/node'
 import { Form, json, redirect, useActionData } from '@remix-run/react'
 import { Link } from '@remix-run/react'
-import { Typography } from '~/components/primitives'
 import { ProductSchema } from '~/model/product'
 import { db } from '~/services/db.server'
 
@@ -69,7 +68,7 @@ export default function NewProductPage() {
 
 	return (
 		<div>
-			<Typography fontSize="4xl">Uj termék letrehozasa</Typography>
+			<h1>Uj termék letrehozasa</h1>
 			<Form method="POST" action="/dashboard/products/new">
 				<input type="text" name="name" placeholder="termek neve" />
 
