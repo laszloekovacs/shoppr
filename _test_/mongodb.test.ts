@@ -516,5 +516,180 @@ describe('mongodb queries', () => {
 		// end
 	})
 
+	it('shows how to use aggregation', async () => {
+		const data = {
+			companies: [
+				{
+					name: 'apple',
+					founded: 2004,
+				},
+				{
+					name: 'samsung',
+					founded: 2006,
+				},
+				{
+					name: 'dell',
+					founded: 2004,
+				},
+			],
+		}
+
+		await docs.insertOne(data)
+
+		const result = await docs
+			.aggregate([
+				{ $match: { companies: { $elemMatch: { founded: 2004 } } } },
+				{
+					$project: {
+						_id: 0,
+						name: 1,
+					},
+				},
+			])
+			.toArray()
+
+		expect(result).toMatchInlineSnapshot(`
+			[
+			  {},
+			]
+		`)
+
+		//
+	})
+
+	it('ads an array of reviews', async () => {
+		const data = { title: 'the movie', year: 2011 }
+
+		await docs.insertOne(data)
+
+		// add an array of reviews
+		const res = await docs.updateOne({}, { $set: { reviews: [] } })
+		const rd = await docs.find({}).project({ _id: 0 }).toArray()
+
+		expect(res.modifiedCount).toBe(1)
+		expect(rd).toMatchInlineSnapshot(`
+			[
+			  {
+			    "reviews": [],
+			    "title": "the movie",
+			    "year": 2011,
+			  },
+			]
+		`)
+	})
+
+	it('treating arrays as sets', async () => {
+		const data = { user: 'steeve', emails: ['joe@here.com', 'joe@there.com'] }
+
+		await docs.insertOne(data)
+
+		const res = await docs.updateOne(
+			{},
+			{
+				$addToSet: {
+					emails: 'joe@smoe.com',
+				},
+			}
+		)
+
+		const rd = await docs.find({}).project({ _id: 0 }).toArray()
+
+		expect(res.modifiedCount).toBe(1)
+		expect(rd).toMatchInlineSnapshot(`
+			[
+			  {
+			    "emails": [
+			      "joe@here.com",
+			      "joe@there.com",
+			      "joe@smoe.com",
+			    ],
+			    "user": "steeve",
+			  },
+			]
+		`)
+	})
+
+	it('uses the positional operator', async () => {
+		const data = {
+			comments: [
+				{
+					comment: 'good post',
+					author: 'John',
+					votes: 0,
+				},
+				{
+					comment: 'i thought it was too short',
+					author: 'Claire',
+					votes: 3,
+				},
+				{
+					comment: 'free watches',
+					author: 'Alice',
+					votes: -5,
+				},
+				{
+					comment: 'vacation getaways',
+					author: 'Lynn',
+					votes: -7,
+				},
+			],
+		}
+
+		await docs.insertOne(data)
+
+		// increment votes in the first one
+		await docs.updateOne({}, { $inc: { 'comments.0.votes': 1 } })
+
+		// imcrement Alices votes, this will only modify the firs one matched
+		await docs.updateOne(
+			{ 'comments.author': 'Alice' },
+			{
+				$inc: { 'comments.$.votes': 1 },
+			}
+		)
+
+		// array filter. allows to modify array elements based on criteria
+		await docs.updateOne(
+			{},
+			{ $set: { 'comments.$[elem].hidden': true } }, // elem is the index arrayFilter matched
+			{
+				arrayFilters: [{ 'elem.votes': { $lt: 0 } }],
+			}
+		)
+
+		const res = await docs.find({}).project({ _id: 0 }).toArray()
+
+		expect(res).toMatchInlineSnapshot(`
+			[
+			  {
+			    "comments": [
+			      {
+			        "author": "John",
+			        "comment": "good post",
+			        "votes": 1,
+			      },
+			      {
+			        "author": "Claire",
+			        "comment": "i thought it was too short",
+			        "votes": 3,
+			      },
+			      {
+			        "author": "Alice",
+			        "comment": "free watches",
+			        "hidden": true,
+			        "votes": -4,
+			      },
+			      {
+			        "author": "Lynn",
+			        "comment": "vacation getaways",
+			        "hidden": true,
+			        "votes": -7,
+			      },
+			    ],
+			  },
+			]
+		`)
+	})
+
 	// end
 })
