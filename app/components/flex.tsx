@@ -1,5 +1,4 @@
-import { flexRecipe } from './box.css'
-import type { flexVariants } from './box.css'
+import { flexRecipe, type flexVariants } from './flex.css'
 
 type Props = {
 	children: React.ReactNode
