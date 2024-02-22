@@ -3,7 +3,6 @@ import { useFetcher, useLoaderData, useActionData } from '@remix-run/react'
 import { ProductSchema } from '~/model/product'
 import { db } from '~/services/db.server'
 import invariant from 'tiny-invariant'
-import { Flex, Typography } from '~/components/primitives'
 
 // find the product by name in the database
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -26,11 +25,11 @@ export default function ProductDetailsPage() {
 
 	return (
 		<div>
-			<Flex dir="column">
-				<Typography fontSize="4xl">{item.name}</Typography>
-				<Typography>gyártó: {item.brand}</Typography>
-				<Typography>termékcsoport: {item.department}</Typography>
-			</Flex>
+			<div>
+				<p>{item.name}</p>
+				<p>gyártó: {item.brand}</p>
+				<p>termékcsoport: {item.department}</p>
+			</div>
 
 			<p>
 				<span>adatbázis index: </span>
@@ -59,7 +58,7 @@ export default function ProductDetailsPage() {
 			</fetcher.Form>
 			<hr />
 
-			<Typography fontSize="2xl">Termék attribútumok</Typography>
+			<h2>Termék attribútumok</h2>
 			<fetcher.Form method="post">
 				<input type="hidden" name="name" value={item.name} />
 				<>
@@ -106,7 +105,7 @@ export default function ProductDetailsPage() {
 
 			{/* variants */}
 			<div>
-				<Typography fontSize="2xl">Változatok</Typography>
+				<p>Változatok</p>
 				<fetcher.Form method="post">
 					<input type="hidden" name="name" value={item.name} />
 
@@ -122,14 +121,14 @@ export default function ProductDetailsPage() {
 
 				{/* list of existing variants */}
 				<div>
-					<Flex as="ul" dir="column">
+					<ul>
 						{item.variants &&
 							item.variants.map(({ kind, price }) => (
 								<li key={kind}>
 									{kind}: {price.toString()}
 								</li>
 							))}
-					</Flex>
+					</ul>
 				</div>
 			</div>
 		</div>

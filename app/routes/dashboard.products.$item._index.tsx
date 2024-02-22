@@ -1,13 +1,11 @@
 import { Link } from '@remix-run/react'
-import React from 'react'
-import { Typography } from '~/components/primitives'
 
 const ItemOverviewPage = () => {
 	return (
 		<div>
-			<Typography fontSize="4xl">Termek adatai</Typography>
+			<h2>Termek adatai</h2>
 			<Link to="edit">
-				<Typography bold>Edit</Typography>
+				<p>Edit</p>
 			</Link>
 		</div>
 	)

@@ -6,35 +6,53 @@ import {
 	Scripts,
 	ScrollRestoration,
 	isRouteErrorResponse,
-	useRouteError,
+	useRouteError
 } from '@remix-run/react'
-import { GlobalStyles } from './components/global-styles'
-import ThemeProviderWrapper from './components/theme-provider'
-import { Container } from './components/primitives'
-import DebugLinks from './components/debug-links'
+import DebugLinks from './components/debuglinks'
 import { PropsWithChildren } from 'react'
+import { LinksFunction } from '@remix-run/node'
+import { cssBundleHref } from '@remix-run/css-bundle'
+import style from './style.css'
+
+export const links: LinksFunction = () => [
+	...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+	{
+		rel: 'preconnect',
+		href: 'https://fonts.gstatic.com',
+		crossOrigin: 'anonymous'
+	},
+	{
+		rel: 'stylesheet',
+		href: style
+	},
+	{
+		rel: 'stylesheet',
+		href: 'https://unpkg.com/open-props'
+	},
+	{
+		rel: 'stylesheet',
+		href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap'
+	}
+]
 
 const Document = ({
 	children,
-	title,
+	title
 }: PropsWithChildren<{ title?: string }>) => {
 	return (
-		<html lang="en">
+		<html lang='en'>
 			<head>
-				<meta charSet="utf-8" />
-				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<meta charSet='utf-8' />
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<Meta />
 				{title ? <title>{title}</title> : null}
+
 				<Links />
 			</head>
 			<body>
-				<ThemeProviderWrapper>
-					<Container>
-						<GlobalStyles />
-						{children}
-						<DebugLinks />
-					</Container>
-				</ThemeProviderWrapper>
+				{children}
+				<DebugLinks />
 				<ScrollRestoration />
 				<Scripts />
 				<LiveReload />
@@ -68,7 +86,7 @@ export const ErrorBoundary = () => {
 	const errorMessage = error instanceof Error ? error.message : 'Unknown Error'
 
 	return (
-		<Document title="Ouch...">
+		<Document title='Ouch...'>
 			<div>
 				<h1>App Error</h1>
 				<pre>{errorMessage}</pre>

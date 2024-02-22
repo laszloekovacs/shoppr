@@ -1,7 +1,6 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
 import Card from '~/components/card'
-import { Typography } from '~/components/primitives'
 import { db } from '~/services/db.server'
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
@@ -19,7 +18,7 @@ const ProductsListPage = () => {
 
 	return (
 		<div data-page={ProductsListPage.name}>
-			<Typography fontSize="4xl">Products</Typography>
+			<p>Products</p>
 			<ul>
 				{products &&
 					products.map(product => (

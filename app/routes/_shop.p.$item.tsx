@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, json } from '@remix-run/node'
 import { Form, useActionData, useLoaderData } from '@remix-run/react'
-import { useEffect } from 'react'
+
 import invariant from 'tiny-invariant'
-import { Button, Flex, Typography } from '~/components/primitives'
+
 import { ProductSchema } from '~/model/product'
 import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
@@ -33,11 +33,11 @@ export default function ShopItemPage() {
 
 	return (
 		<div>
-			<Flex dir="column">
-				<Typography fontSize="4xl">{item.name}</Typography>
-				<Typography fontSize="lg">{item.brand}</Typography>
-				<Typography>{item.department}</Typography>
-			</Flex>
+			<div dir="column">
+				<p>{item.name}</p>
+				<p>{item.brand}</p>
+				<p>{item.department}</p>
+			</div>
 			<div>
 				<img src="https://picsum.photos/200" />
 			</div>
@@ -45,16 +45,16 @@ export default function ShopItemPage() {
 			<Form method="post">
 				<input type="hidden" name="name" value={item.name} />
 
-				<Button
+				<button
 					type="submit"
 					name="intent"
 					value={favorited ? 'UNFAVORITE' : 'FAVORITE'}
 				>
 					{favorited ? 'nemkedvel' : 'kedvel'}
-				</Button>
-				<Button type="submit" name="intent" value="ADD_TO_CART">
+				</button>
+				<button type="submit" name="intent" value="ADD_TO_CART">
 					kosárba
-				</Button>
+				</button>
 			</Form>
 
 			<pre>{JSON.stringify({ item, account }, null, 2)}</pre>
