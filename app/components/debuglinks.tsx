@@ -1,5 +1,4 @@
 import { Form, NavLink } from '@remix-run/react'
-import { container, nav } from './debuglinks.css'
 
 const DebugLinks = () => {
 	const links = [
@@ -12,12 +11,12 @@ const DebugLinks = () => {
 	]
 
 	return (
-		<div className={container}>
+		<div>
 			<Form action="/api/auth0/logout" method="POST">
 				<button type="submit">Logout</button>
 			</Form>
 
-			<nav className={nav}>
+			<nav>
 				{links.map(link => (
 					<NavLink key={link.to} to={link.to}>
 						{link.label}

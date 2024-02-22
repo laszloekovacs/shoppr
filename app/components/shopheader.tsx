@@ -1,6 +1,5 @@
 import { Form, Link } from '@remix-run/react'
 import { Auth0Profile } from 'remix-auth-auth0'
-import { Flex } from './flex'
 
 type Props = {
 	user?: Auth0Profile
@@ -9,11 +8,11 @@ type Props = {
 const ShopHeader = ({ user }: Props) => {
 	return (
 		<div>
-			<Flex justify="between">
+			<div>
 				<div>
 					<Link to="/dashboard">Dashboard</Link>
 				</div>
-				<Flex>
+				<div>
 					{user && <span>{user.displayName}</span>}
 					<Link to="/account/favorites">Kedvencek</Link>
 					<Link to="/account">Fiókom</Link>
@@ -24,15 +23,15 @@ const ShopHeader = ({ user }: Props) => {
 					) : (
 						<Link to="/login">bejelentkezés</Link>
 					)}
-				</Flex>
-			</Flex>
-			<Flex justify="between">
+				</div>
+			</div>
+			<div>
 				<Link to="/">
 					<img src="https://picsum.photos/70/40" alt="logo" />
 				</Link>
 				<input type="search" placeholder="kereses" />
 				<Link to="/account/cart">Kosar</Link>
-			</Flex>
+			</div>
 		</div>
 	)
 }

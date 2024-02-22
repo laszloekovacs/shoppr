@@ -1,5 +1,4 @@
 import { UIMatch } from '@remix-run/react'
-import { Flex } from './flex'
 
 interface Props {
 	matches: UIMatch<unknown, any>[]
@@ -7,7 +6,7 @@ interface Props {
 
 const Breadcrumps = ({ matches }: Props) => {
 	return (
-		<Flex>
+		<div>
 			{matches
 				.filter(match => match.handle && match.handle.breadcrumb)
 				.map((match, index) => (
@@ -16,7 +15,7 @@ const Breadcrumps = ({ matches }: Props) => {
 						<span>{match.handle.breadcrumb(match)}</span>
 					</li>
 				))}
-		</Flex>
+		</div>
 	)
 }
 

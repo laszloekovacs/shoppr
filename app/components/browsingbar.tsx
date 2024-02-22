@@ -14,8 +14,8 @@ export default function BrowsingBar({ data }: Props) {
 			<div>{groups}</div>
 
 			<ul>
-				{data.brands.map((brand: string) => (
-					<li key={brand}>{brand}</li>
+				{data.brands.map((brand: string, i: number) => (
+					<li key={i}>{brand}</li>
 				))}
 			</ul>
 
