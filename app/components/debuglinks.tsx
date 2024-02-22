@@ -16,7 +16,9 @@ const DebugLinks = () => {
 			<div>
 				<div>
 					<Form action="/api/auth0/logout" method="post">
-						<button type="submit">Logout</button>
+						<button className="w3-button" type="submit">
+							Logout
+						</button>
 					</Form>
 
 					<ul>

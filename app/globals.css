@@ -1,0 +1,28 @@
+html {
+	box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 0;
+}
+
+a {
+	color: inherit;
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	padding-inline: 2em;
+	padding-block: 0.5em;
+	background-color: aliceblue;
+}
+button:hover {
+	background-color: tomato;
+}

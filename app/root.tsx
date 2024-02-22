@@ -12,11 +12,12 @@ import {
 import DebugLinks from './components/debuglinks'
 import { PropsWithChildren } from 'react'
 import { LinksFunction } from '@remix-run/node'
-import { cssBundleHref } from '@remix-run/css-bundle'
+import globalcss from './globals.css'
 
 export const links: LinksFunction = () => [
-	...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+	{ rel: 'stylesheet', href: globalcss },
 ]
+
 const Document = ({
 	children,
 	title,
