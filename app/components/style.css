@@ -1,7 +1,0 @@
-@import 'open-props/open-props.min.css';
-
-.card {
-	--helo: 'red';
-
-	color: var(--);
-}

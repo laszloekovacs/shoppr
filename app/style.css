@@ -16,3 +16,16 @@ body {
 	color: var(--theme-color-bg);
 	font-family: var(--theme-font);
 }
+
+button {
+	border: none;
+	color: var(--theme-color-text);
+	background-color: var(--stone-11);
+	padding-block: var(--size-2);
+	padding-inline: var(--size-3);
+}
+
+button:hover {
+	color: var(--theme-color-bg);
+	background-color: var(--camo-0);
+}
