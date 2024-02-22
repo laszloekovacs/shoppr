@@ -1,10 +1,10 @@
 import { BigText } from '~/components/bigtext'
-import { themeClass } from '~/components/bigtext.css'
+
 import { Flex } from '~/components/flex'
 
 const StyleBook = () => {
 	return (
-		<div className={themeClass}>
+		<div>
 			<BigText></BigText>
 
 			<div>

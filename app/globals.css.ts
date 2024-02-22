@@ -27,3 +27,7 @@ globalStyle('button, input', {
 	fontSize: 'inherit',
 	fontWeight: 'inherit',
 })
+
+globalStyle('li', {
+	listStyle: 'none',
+})

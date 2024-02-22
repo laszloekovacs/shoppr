@@ -1,3 +1,3 @@
-import * as styles from './bigtext.css'
+import styles from './bigtext.module.css'
 
-export const BigText = () => <h1 className={styles.bigText}>Big text</h1>
+export const BigText = () => <h1 className={styles.bigtext}>Big text</h1>
