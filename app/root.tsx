@@ -8,14 +8,24 @@ import {
 	isRouteErrorResponse,
 	useRouteError,
 } from '@remix-run/react'
-
 import DebugLinks from './components/debuglinks'
 import { PropsWithChildren } from 'react'
 import { LinksFunction } from '@remix-run/node'
-import globalcss from './globals.css'
+import { cssBundleHref } from '@remix-run/css-bundle'
+import './globals.css'
 
 export const links: LinksFunction = () => [
-	{ rel: 'stylesheet', href: globalcss },
+	...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),
+	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+	{
+		rel: 'preconnect',
+		href: 'https://fonts.gstatic.com',
+		crossOrigin: 'anonymous',
+	},
+	{
+		rel: 'stylesheet',
+		href: 'https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap',
+	},
 ]
 
 const Document = ({
@@ -29,6 +39,7 @@ const Document = ({
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<Meta />
 				{title ? <title>{title}</title> : null}
+
 				<Links />
 			</head>
 			<body>

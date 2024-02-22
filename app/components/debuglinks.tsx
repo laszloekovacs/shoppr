@@ -1,35 +1,29 @@
 import { Form, NavLink } from '@remix-run/react'
-
-const links = [
-	{ to: '/', label: 'Home' },
-	{ to: '/dashboard', label: 'Dashboard' },
-	{ to: '/login', label: 'Login' },
-	{ to: '/stylesheet', label: 'stylesheet' },
-	{ to: '/p', label: 'list' },
-	{ to: '/checkout', label: 'Checkout' },
-	{ to: '/stripe/checkout', label: 'stripe Hosted' },
-]
+import { container, nav } from './debuglinks.css'
 
 const DebugLinks = () => {
-	return (
-		<div>
-			<div>
-				<div>
-					<Form action="/api/auth0/logout" method="post">
-						<button className="w3-button" type="submit">
-							Logout
-						</button>
-					</Form>
+	const links = [
+		{ to: '/', label: 'Home' },
+		{ to: '/dashboard', label: 'Dashboard' },
+		{ to: '/login', label: 'Login' },
+		{ to: '/p', label: 'Shoppinglist' },
+		{ to: '/stripe/checkout', label: 'Stripe' },
+		{ to: '/stylesheet', label: 'Stylesheet' },
+	]
 
-					<ul>
-						{links.map(link => (
-							<li key={link.to}>
-								<NavLink to={link.to}>{link.label}</NavLink>
-							</li>
-						))}
-					</ul>
-				</div>
-			</div>
+	return (
+		<div className={container}>
+			<Form action="/api/auth0/logout" method="POST">
+				<button type="submit">Logout</button>
+			</Form>
+
+			<nav className={nav}>
+				{links.map(link => (
+					<NavLink key={link.to} to={link.to}>
+						{link.label}
+					</NavLink>
+				))}
+			</nav>
 		</div>
 	)
 }
