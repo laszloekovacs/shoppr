@@ -8,7 +8,9 @@ globalStyle('html, body', {
 	padding: 0,
 
 	fontSize: 16,
-	fontFamily: 'Manrope, sans-serif',
+	fontFamily: 'inter, sans-serif',
+	fontWeight: 400,
+	fontStyle: 'normal',
 })
 
 globalStyle('*, *::before, *::after', {
@@ -23,4 +25,5 @@ globalStyle('img', {
 globalStyle('button, input', {
 	fontFamily: 'inherit',
 	fontSize: 'inherit',
+	fontWeight: 'inherit',
 })
