@@ -1,5 +1,10 @@
-html {
+html,
+body {
 	box-sizing: border-box;
+	overflow-x: hidden;
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
 *,
@@ -8,21 +13,18 @@ html {
 	box-sizing: inherit;
 }
 
-body {
-	margin: 0;
-}
-
 a {
 	color: inherit;
 }
 
-button {
-	cursor: pointer;
-	border: none;
-	padding-inline: 2em;
-	padding-block: 0.5em;
-	background-color: aliceblue;
+button,
+input {
+	font-size: inherit;
+	font-family: inherit;
+	margin: 0;
 }
-button:hover {
-	background-color: tomato;
+
+img {
+	max-width: 100%;
+	height: auto;
 }
