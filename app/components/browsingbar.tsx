@@ -7,7 +7,9 @@ interface Props {
 }
 
 export default function BrowsingBar({ data }: Props) {
-	const groups = ['brands', 'departments'].map(group => <p>{group}</p>)
+	const groups = ['brands', 'departments'].map(group => (
+		<p key={group}>{group}</p>
+	))
 
 	return (
 		<div>

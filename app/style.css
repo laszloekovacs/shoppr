@@ -1,0 +1,18 @@
+body,
+html {
+	box-sizing: border-box;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+:root {
+	--theme-color-text: var(--sand-0);
+	--theme-color-bg: var(--sand-11);
+	--theme-font: var(--font-sans);
+}
+
+body {
+	background-color: var(--theme-color-text);
+	color: var(--theme-color-bg);
+	font-family: var(--theme-font);
+}
