@@ -40,7 +40,6 @@ export default function CheckoutForm() {
 					<EmbeddedCheckout />
 				</EmbeddedCheckoutProvider>
 			)}
-			<span>checkout</span>
 		</div>
 	)
 }

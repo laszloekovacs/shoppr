@@ -41,7 +41,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 				quantity: 1
 			}
 		],
-
+		shipping_address_collection: {
+			allowed_countries: ['HU']
+		},
 		mode: 'payment',
 		ui_mode: 'embedded',
 		return_url: `${constants.SHOPPR_DOMAIN}/stripe/return?session_id={CHECKOUT_SESSION_ID}`
