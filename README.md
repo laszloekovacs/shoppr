@@ -10,6 +10,7 @@ https://styled-components.com/docs/basics#getting-started
 https://docs.stripe.com/payments/accept-a-payment?platform=web&ui=elements
 https://docs.stripe.com/testing
 https://docs.stripe.com/checkout/embedded/quickstart
+https://dashboard.stripe.com/test/payments
 https://dev.to/stripe/how-to-accept-payments-in-a-remix-application-with-stripe-20k0
 ### styled-system
 

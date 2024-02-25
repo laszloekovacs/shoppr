@@ -6,14 +6,14 @@ const DebugLinks = () => {
 		{ to: '/dashboard', label: 'Dashboard' },
 		{ to: '/login', label: 'Login' },
 		{ to: '/p', label: 'Shoppinglist' },
-		{ to: '/stripe/checkout', label: 'Stripe' },
-		{ to: '/stylesheet', label: 'Stylesheet' },
+		{ to: '/checkout', label: 'Stripe' },
+		{ to: '/stylesheet', label: 'Stylesheet' }
 	]
 
 	return (
 		<div>
-			<Form action="/api/auth0/logout" method="POST">
-				<button type="submit">Logout</button>
+			<Form action='/api/auth0/logout' method='POST'>
+				<button type='submit'>Logout</button>
 			</Form>
 
 			<nav>
