@@ -12,6 +12,10 @@ https://docs.stripe.com/testing
 https://docs.stripe.com/checkout/embedded/quickstart
 https://dashboard.stripe.com/test/payments
 https://dev.to/stripe/how-to-accept-payments-in-a-remix-application-with-stripe-20k0
+
+success card
+4242424242424242
+
 ### styled-system
 
 https://github.com/styled-system/styled-system/tree/master

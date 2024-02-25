@@ -9,7 +9,7 @@ const {
 	AUTH0_CALLBACK_URL,
 	AUTH0_LOGOUT_URL,
 	AUTH0_SECRET,
-	AUTH0_BASE_URL,
+	AUTH0_BASE_URL
 } = process.env
 
 // azure
@@ -17,6 +17,9 @@ const { AZURE_BLOB_CONNECTION_STRING, AZURE_BLOB_CONTAINER } = process.env
 
 // stripe
 const { STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY } = process.env
+
+// misc
+const { SHOPPR_DOMAIN } = process.env
 
 export const constants = {
 	// mongodb
@@ -39,6 +42,9 @@ export const constants = {
 	// stripe
 	STRIPE_SECRET_KEY,
 	STRIPE_PUBLISHABLE_KEY,
+
+	// misc
+	SHOPPR_DOMAIN
 }
 
 for (const [key, value] of Object.entries(constants)) {
