@@ -47,7 +47,6 @@ const Document = ({
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<Meta />
 				{title ? <title>{title}</title> : null}
-
 				<Links />
 			</head>
 			<body>
