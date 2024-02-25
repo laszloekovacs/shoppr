@@ -5,20 +5,20 @@ import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export const handle = {
-	breadcrumb: () => <Link to="/account/cart">cart</Link>,
+	breadcrumb: () => <Link to='/account/cart'>cart</Link>
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request, {
-		failureRedirect: '/login',
+		failureRedirect: '/login'
 	})
 
 	const items = await db.accounts.findOne(
 		{
-			user: user?.id,
+			user: user?.id
 		},
 		{
-			projection: { cart: 1 },
+			projection: { cart: 1 }
 		}
 	)
 
@@ -31,7 +31,7 @@ export default function CartPage() {
 		<div>
 			<div>
 				<p>Kosar</p>
-				<Link to="/checkout">tovább a penztarhoz</Link>
+				<Link to='/stripe/checkout'>tovább a penztarhoz</Link>
 			</div>
 
 			<div>

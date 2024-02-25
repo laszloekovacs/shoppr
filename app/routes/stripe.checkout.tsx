@@ -3,13 +3,13 @@ import { useLoaderData } from '@remix-run/react'
 import Stripe from 'stripe'
 import {
 	StripeExpressCheckoutElementConfirmEvent,
-	loadStripe,
+	loadStripe
 } from '@stripe/stripe-js'
 import {
 	AddressElement,
 	Elements,
 	ExpressCheckoutElement,
-	PaymentElement,
+	PaymentElement
 } from '@stripe/react-stripe-js'
 import { constants } from '~/services/constants.server'
 
@@ -20,7 +20,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 	const paymentIntent = await stripe.paymentIntents.create({
 		amount: 40000,
-		currency: 'huf',
+		currency: 'huf'
 	})
 
 	return json({ paymentIntent, STRIPE_PUBLISHABLE_KEY })
@@ -36,16 +36,15 @@ export default function StripeCheckout() {
 	return (
 		<div>
 			<h1>Stripe Checkout</h1>
-
+			<span>use 424242</span>
 			<Elements
 				stripe={stripePromise}
 				options={{
 					clientSecret: paymentIntent.client_secret!,
 					appearance: {
-						theme: 'flat',
-					},
-				}}
-			>
+						theme: 'flat'
+					}
+				}}>
 				<form>
 					<ExpressCheckoutElement
 						onConfirm={function (
