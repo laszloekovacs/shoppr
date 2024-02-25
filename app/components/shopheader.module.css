@@ -1,0 +1,10 @@
+.container {
+	display: grid;
+	height: min-content;
+}
+
+.account {
+	display: flex;
+	gap: 0.4rem;
+	justify-content: flex-end;
+}

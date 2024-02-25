@@ -11,6 +11,8 @@ export default function BrowsingBar({ data }: Props) {
 		<p key={group}>{group}</p>
 	))
 
+	return null
+
 	return (
 		<div>
 			<div>{groups}</div>
