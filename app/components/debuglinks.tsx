@@ -7,7 +7,7 @@ const DebugLinks = () => {
 		{ to: '/dashboard', label: 'dashboard' },
 		{ to: '/login', label: 'login' },
 		{ to: '/p', label: 'list' },
-		{ to: '/checkout', label: 'checkout' },
+		{ to: '/stripe/checkout', label: 'checkout' },
 		{ to: '/stylesheet', label: 'stylesheet' }
 	]
 

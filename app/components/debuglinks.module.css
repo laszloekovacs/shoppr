@@ -2,8 +2,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.3rem;
-	position: sticky;
-	bottom: 0;
 	padding: 0.4rem;
 	background-color: beige;
+	height: min-content;
+	margin-top: auto;
 }

@@ -1,4 +1,5 @@
 import {
+	Link,
 	Links,
 	LiveReload,
 	Meta,
@@ -8,11 +9,11 @@ import {
 	isRouteErrorResponse,
 	useRouteError
 } from '@remix-run/react'
-import DebugLinks from './components/debuglinks'
 import { PropsWithChildren } from 'react'
 import { LinksFunction } from '@remix-run/node'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import styles from './global.css'
+import DebugLinks from './components/debuglinks'
 
 export const links: LinksFunction = () => [
 	{ rel: 'stylesheet', href: styles },
@@ -69,9 +70,11 @@ export const ErrorBoundary = () => {
 
 	return (
 		<Document title='Ouch...'>
-			<div>
+			<div className='error_container'>
 				<h1>App Error</h1>
-				<pre>{errorMessage}</pre>
+				<div>{errorMessage}</div>
+
+				<Link to='/'>Return to shop</Link>
 			</div>
 		</Document>
 	)

@@ -1,5 +1,7 @@
 .container {
 	display: grid;
+	grid-template-rows: min-content min-content auto;
+	padding: 0.4rem;
 }
 
 .container > nav {

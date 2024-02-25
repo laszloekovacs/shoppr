@@ -3,13 +3,10 @@ import { Form, json, redirect, useActionData } from '@remix-run/react'
 import { Link } from '@remix-run/react'
 import { ProductSchema } from '~/model/product'
 import { db } from '~/services/db.server'
+import styles from '~/css/dashboard.products.new.module.css'
 
 export const handle = {
-	breadcrumb: () => <Link to="/dashboard/products/new">new</Link>,
-}
-
-export async function loader() {
-	return json({})
+	breadcrumb: () => <Link to='/dashboard/products/new'>new</Link>
 }
 
 const validateNewProduct = (obj: any) => {
@@ -29,7 +26,7 @@ const validateNewProduct = (obj: any) => {
 	if (typeof obj.department == 'string' && obj.department.length == 0) {
 		errors.push({
 			field: 'department',
-			message: 'must be more than 0 characters',
+			message: 'must be more than 0 characters'
 		})
 	}
 
@@ -39,10 +36,12 @@ const validateNewProduct = (obj: any) => {
 export async function action({ request }: ActionFunctionArgs) {
 	const body = await request.formData()
 
+	const data = Object.fromEntries(body)
+
 	const product: Partial<ProductSchema> = {
 		name: body.get('name')?.toString(),
 		brand: body.get('brand')?.toString(),
-		department: body.get('department')?.toString(),
+		department: body.get('department')?.toString()
 	}
 
 	// validate and return complains to client
@@ -63,21 +62,18 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function NewProductPage() {
-	//const { data } = useLoaderData<typeof loader>()
-	const actionData = useActionData<typeof action>()
+	const actionResult = useActionData<typeof action>()
 
 	return (
-		<div>
-			<h1>Uj termék letrehozasa</h1>
-			<Form method="POST" action="/dashboard/products/new">
-				<input type="text" name="name" placeholder="termek neve" />
+		<section className={styles.container}>
+			<h2>Create new product</h2>
 
-				<input type="text" name="brand" placeholder="gyarto" />
-
-				<input type="text" name="department" placeholder="kategoria" />
-
-				<input type="submit" value="Létrehozás" />
+			<Form method='POST' action='/dashboard/products/new'>
+				<input type='text' name='name' placeholder='product name' />
+				<input type='text' name='brand' placeholder='manufacturer' />
+				<input type='text' name='department' placeholder='category' />
+				<input type='submit' value='create' />
 			</Form>
-		</div>
+		</section>
 	)
 }

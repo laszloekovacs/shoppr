@@ -13,11 +13,11 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 	return json({ products })
 }
 
-const ProductsListPage = () => {
+export default function ProductsListPage() {
 	const { products } = useLoaderData<typeof loader>()
 
 	return (
-		<div data-page={ProductsListPage.name}>
+		<div>
 			<p>Products</p>
 			<ul>
 				{products &&
@@ -32,5 +32,3 @@ const ProductsListPage = () => {
 		</div>
 	)
 }
-
-export default ProductsListPage

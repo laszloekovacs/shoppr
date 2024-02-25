@@ -17,11 +17,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 	return user
 }
 
-const dashboardLinks = [
-	{ name: 'products', href: '/dashboard/products' },
-	{ name: 'create product', href: '/dashboard/products/new' }
-]
-
 const dashLinks = {
 	'/dashboard/products': 'products',
 	'/dashboard/products/new': 'new product'
@@ -31,12 +26,12 @@ const dashboard = () => {
 	const matches = useMatches()
 
 	return (
-		<section className={styles.container}>
+		<section id='dashboard' className={styles.container}>
 			<header>
+				<Breadcrumps matches={matches} />
 				<Link to='/dashboard'>
 					<h1>Dashboard</h1>
 				</Link>
-				<Breadcrumps matches={matches} />
 			</header>
 
 			<nav>
