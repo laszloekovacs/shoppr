@@ -16,7 +16,8 @@ const {
 const { AZURE_BLOB_CONNECTION_STRING, AZURE_BLOB_CONTAINER } = process.env
 
 // stripe
-const { STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY } = process.env
+const { STRIPE_SECRET_KEY, STRIPE_PUBLISHABLE_KEY, STRIPE_WEBHOOK_KEY } =
+	process.env
 
 // misc
 const { SHOPPR_DOMAIN } = process.env
@@ -42,6 +43,7 @@ export const constants = {
 	// stripe
 	STRIPE_SECRET_KEY,
 	STRIPE_PUBLISHABLE_KEY,
+	STRIPE_WEBHOOK_KEY,
 
 	// misc
 	SHOPPR_DOMAIN
