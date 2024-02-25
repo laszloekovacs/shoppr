@@ -1,0 +1,10 @@
+.container {
+	display: grid;
+}
+
+.container > nav {
+	display: flex;
+	background: #c7c5c5;
+	padding: 0.5rem;
+	gap: 0.5rem;
+}

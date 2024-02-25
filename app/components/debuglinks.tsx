@@ -1,29 +1,24 @@
 import { Form, NavLink } from '@remix-run/react'
+import styles from './debuglinks.module.css'
 
 const DebugLinks = () => {
 	const links = [
-		{ to: '/', label: 'Home' },
-		{ to: '/dashboard', label: 'Dashboard' },
-		{ to: '/login', label: 'Login' },
-		{ to: '/p', label: 'Shoppinglist' },
-		{ to: '/checkout', label: 'Stripe' },
-		{ to: '/stylesheet', label: 'Stylesheet' }
+		{ to: '/', label: 'home' },
+		{ to: '/dashboard', label: 'dashboard' },
+		{ to: '/login', label: 'login' },
+		{ to: '/p', label: 'list' },
+		{ to: '/checkout', label: 'checkout' },
+		{ to: '/stylesheet', label: 'stylesheet' }
 	]
 
 	return (
-		<div>
-			<Form action='/api/auth0/logout' method='POST'>
-				<button type='submit'>Logout</button>
-			</Form>
-
-			<nav>
-				{links.map(link => (
-					<NavLink key={link.to} to={link.to}>
-						{link.label}
-					</NavLink>
-				))}
-			</nav>
-		</div>
+		<section className={styles.container}>
+			{links.map(link => (
+				<NavLink key={link.to} to={link.to}>
+					{link.label}
+				</NavLink>
+			))}
+		</section>
 	)
 }
 

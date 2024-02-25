@@ -3,14 +3,15 @@ import { Link, Outlet, useMatches } from '@remix-run/react'
 
 import Breadcrumps from '~/components/breadcrumps'
 import { authenticator } from '~/services/session.server'
+import styles from '~/css/dashboard.module.css'
 
 export const handle = {
-	breadcrumb: () => <Link to="/dashboard">dashboard</Link>,
+	breadcrumb: () => <Link to='/dashboard'>dashboard</Link>
 }
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	const user = await authenticator.isAuthenticated(request, {
-		failureRedirect: '/login',
+		failureRedirect: '/login'
 	})
 
 	return user
@@ -18,29 +19,34 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 const dashboardLinks = [
 	{ name: 'products', href: '/dashboard/products' },
-	{ name: 'create product', href: '/dashboard/products/new' },
+	{ name: 'create product', href: '/dashboard/products/new' }
 ]
+
+const dashLinks = {
+	'/dashboard/products': 'products',
+	'/dashboard/products/new': 'new product'
+}
 
 const dashboard = () => {
 	const matches = useMatches()
 
 	return (
-		<div>
+		<section className={styles.container}>
 			<header>
-				<h2>Dashboard</h2>
+				<h1>Dashboard</h1>
 				<Breadcrumps matches={matches} />
 			</header>
-			<div>
-				<div>
-					{dashboardLinks.map(link => (
-						<Link key={link.name} to={link.href}>
-							{link.name}
-						</Link>
-					))}
-				</div>
-				<Outlet />
-			</div>
-		</div>
+
+			<nav>
+				{Object.entries(dashLinks).map(([href, name]) => (
+					<Link key={href} to={href}>
+						{name}
+					</Link>
+				))}
+			</nav>
+
+			<Outlet />
+		</section>
 	)
 }
 
