@@ -33,7 +33,9 @@ const dashboard = () => {
 	return (
 		<section className={styles.container}>
 			<header>
-				<h1>Dashboard</h1>
+				<Link to='/dashboard'>
+					<h1>Dashboard</h1>
+				</Link>
 				<Breadcrumps matches={matches} />
 			</header>
 

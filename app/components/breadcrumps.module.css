@@ -1,0 +1,10 @@
+.container {
+	display: flex;
+	gap: 0.4rem;
+	background: antiquewhite;
+	padding: 0.4rem;
+}
+
+li {
+	list-style: none;
+}
