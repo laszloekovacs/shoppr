@@ -10,7 +10,7 @@ body {
 
 	font-family: 'Fira Sans', sans-serif;
 	font-optical-sizing: auto;
-	font-weight: 400;
+	font-weight: 300;
 	font-style: normal;
 	color: black;
 }
@@ -79,4 +79,16 @@ input[type='submit']:hover,
 input[type='submit']:focus-visible {
 	outline: 2px solid turquoise;
 	outline-offset: -2px;
+}
+
+.error {
+	display: inline-block;
+	height: 1rem;
+	color: orangered;
+}
+
+hr {
+	border: none;
+	border-bottom: 1px dashed #ccc;
+	margin-block: 1rem;
 }
