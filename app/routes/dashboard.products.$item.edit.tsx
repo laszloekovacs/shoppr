@@ -9,7 +9,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 	invariant(params.item, 'params.item is required')
 
 	const item = await db.products.findOne<ProductSchema & { _id: string }>({
-		name: params.item,
+		name: params.item
 	})
 	if (item) {
 		return json({ item })
@@ -37,21 +37,21 @@ export default function ProductDetailsPage() {
 			</p>
 			<hr />
 
-			<fetcher.Form method="post">
-				<input type="hidden" name="name" value={item.name} />
+			<fetcher.Form method='post'>
+				<input type='hidden' name='name' value={item.name} />
 				<>
-					<label htmlFor="department">Kategória</label>
-					<input type="text" name="department" defaultValue={item.department} />
+					<label htmlFor='department'>Kategória</label>
+					<input type='text' name='department' defaultValue={item.department} />
 
-					<button type="submit" name="intent" value="SET_DEPARTMENT">
+					<button type='submit' name='intent' value='SET_DEPARTMENT'>
 						Rögzít
 					</button>
 				</>
 				<br />
 				<>
-					<label htmlFor="brand">Gyártó</label>
-					<input type="text" name="brand" defaultValue={item.brand} />
-					<button type="submit" name="intent" value="SET_BRAND">
+					<label htmlFor='brand'>Gyártó</label>
+					<input type='text' name='brand' defaultValue={item.brand} />
+					<button type='submit' name='intent' value='SET_BRAND'>
 						Rögzít
 					</button>
 				</>
@@ -59,18 +59,18 @@ export default function ProductDetailsPage() {
 			<hr />
 
 			<h2>Termék attribútumok</h2>
-			<fetcher.Form method="post">
-				<input type="hidden" name="name" value={item.name} />
+			<fetcher.Form method='post'>
+				<input type='hidden' name='name' value={item.name} />
 				<>
-					<label htmlFor="attribute">kulcs</label>
-					<input type="text" name="attribute" />
+					<label htmlFor='attribute'>kulcs</label>
+					<input type='text' name='attribute' />
 				</>
 				<>
-					<label htmlFor="attributeValue">érték</label>
-					<input type="text" name="attributeValue" />
+					<label htmlFor='attributeValue'>érték</label>
+					<input type='text' name='attributeValue' />
 				</>
 
-				<button type="submit" name="intent" value="ADD_ATTRIBUTE">
+				<button type='submit' name='intent' value='ADD_ATTRIBUTE'>
 					Hozzáad
 				</button>
 			</fetcher.Form>
@@ -85,15 +85,14 @@ export default function ProductDetailsPage() {
 									{key}: {value}
 								</div>
 								<div>
-									<fetcher.Form method="post">
-										<input type="hidden" name="name" value={item.name} />
-										<input type="hidden" name="attribute" value={key} />
+									<fetcher.Form method='post'>
+										<input type='hidden' name='name' value={item.name} />
+										<input type='hidden' name='attribute' value={key} />
 
 										<button
-											type="submit"
-											name="intent"
-											value="DELETE_ATTRIBUTE"
-										>
+											type='submit'
+											name='intent'
+											value='DELETE_ATTRIBUTE'>
 											töröl
 										</button>
 									</fetcher.Form>
@@ -106,15 +105,15 @@ export default function ProductDetailsPage() {
 			{/* variants */}
 			<div>
 				<p>Változatok</p>
-				<fetcher.Form method="post">
-					<input type="hidden" name="name" value={item.name} />
+				<fetcher.Form method='post'>
+					<input type='hidden' name='name' value={item.name} />
 
-					<label htmlFor="variant">Változat neve</label>
-					<input type="text" name="variant" />
-					<label htmlFor="price">Változat ára</label>
-					<input type="number" name="price" />
+					<label htmlFor='variant'>Változat neve</label>
+					<input type='text' name='variant' />
+					<label htmlFor='price'>Változat ára</label>
+					<input type='number' name='price' />
 
-					<button type="submit" name="intent" value="ADD_VARIANT">
+					<button type='submit' name='intent' value='ADD_VARIANT'>
 						Változat hozzáadása
 					</button>
 				</fetcher.Form>
@@ -166,8 +165,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 				{ name },
 				{
 					$set: {
-						[`attributes.${attribute}`]: attributeValue,
-					},
+						[`attributes.${attribute}`]: attributeValue
+					}
 				}
 			)
 
@@ -181,8 +180,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 				{ name },
 				{
 					$unset: {
-						[`attributes.${attribute}`]: '',
-					},
+						[`attributes.${attribute}`]: ''
+					}
 				}
 			)
 
@@ -201,9 +200,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 					$addToSet: {
 						variants: {
 							kind: variant,
-							price: Number(price),
-						},
-					},
+							price: Number(price)
+						}
+					}
 				}
 			)
 

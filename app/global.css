@@ -42,7 +42,8 @@ form {
 	display: grid;
 }
 
-input:not([type='radio'], [type='checkbox']) {
+input:not([type='radio'], [type='checkbox']),
+button {
 	border: 1px solid var(--color-gray);
 	padding: 0.5rem;
 	border-radius: 2px;

@@ -1,9 +1,12 @@
+
 https://developer.paypal.com/docs/checkout/standard/integrate/
 https://developer.paypal.com/integration-builder/
 https://github.com/remix-run/examples/tree/main/emotion
 https://react.fluentui.dev/?path=/docs/theme-fonts--page
 https://chakra-ui.com/
 https://styled-components.com/docs/basics#getting-started
+## Icons
+https://heroicons.com/
 
 ### stripe
 
@@ -55,39 +58,12 @@ https://themes.getbootstrap.com/preview/?theme_id=148345
 - trim inputs
 - encode user id, expose less data to client
 - on error, push the history to reroute to home
+- create an input, when disabled, look like a span
+
 
 ## Notes
 
 - Storybook has some dependency issues, it's safe to ignore
 
 
-## Theme 
 
-{
-  "themePrimary": "#1f825b",
-  "themeLighterAlt": "#f2faf7",
-  "themeLighter": "#ceebe0",
-  "themeLight": "#a8dac6",
-  "themeTertiary": "#62b493",
-  "themeSecondary": "#30916a",
-  "themeDarkAlt": "#1c7551",
-  "themeDark": "#186345",
-  "themeDarker": "#114933",
-  "neutralLighterAlt": "#faf9f8",
-  "neutralLighter": "#f3f2f1",
-  "neutralLight": "#edebe9",
-  "neutralQuaternaryAlt": "#e1dfdd",
-  "neutralQuaternary": "#d0d0d0",
-  "neutralTertiaryAlt": "#c8c6c4",
-  "neutralTertiary": "#a19f9d",
-  "neutralSecondary": "#605e5c",
-  "neutralSecondaryAlt": "#8a8886",
-  "neutralPrimaryAlt": "#3b3a39",
-  "neutralPrimary": "#323130",
-  "neutralDark": "#201f1e",
-  "black": "#000000",
-  "white": "#ffffff"
-}
-
-##icons
-https://heroicons.com/
