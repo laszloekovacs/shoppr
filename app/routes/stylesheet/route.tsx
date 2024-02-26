@@ -1,15 +1,16 @@
 import { BigText } from '~/components/bigtext'
-import * as styles from './stylesheet.css'
-import { ChevronRightIcon } from '@heroicons/react/24/solid'
+import styles from './stylesheet.module.css'
 
 const StyleSheet = () => {
 	return (
 		<div className={styles.container}>
-			<div className={styles.card}>
+			<div>
 				<BigText />
 			</div>
 
-			<ChevronRightIcon className='w-1' />
+			<div>
+				<p>hello</p>
+			</div>
 		</div>
 	)
 }

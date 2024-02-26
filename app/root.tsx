@@ -13,7 +13,7 @@ import { PropsWithChildren } from 'react'
 import { LinksFunction } from '@remix-run/node'
 import { cssBundleHref } from '@remix-run/css-bundle'
 import DebugLinks from './components/debuglinks'
-import './global.css'
+import './global.module.css'
 
 export const links: LinksFunction = () =>
 	cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []
