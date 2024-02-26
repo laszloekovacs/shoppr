@@ -26,14 +26,24 @@ h1 {
 	font-weight: 500;
 }
 
+input {
+	font-size: inherit;
+}
+
+form {
+	display: grid;
+}
+
 input:not([type='radio'], [type='checkbox']) {
 	border: 1px solid #ccc;
 	padding: 0.5rem;
 	border-radius: 2px;
+	margin-block: 0.5rem;
 }
 
-input {
-	font-size: inherit;
+input:focus-visible {
+	outline: 2px solid turquoise;
+	outline-offset: -2px;
 }
 
 li {
@@ -48,4 +58,25 @@ a {
 a:hover,
 a:focus-visible {
 	text-decoration: underline black dotted 1px;
+}
+
+h1,
+h2,
+h3 {
+	color: #bbb;
+	font-weight: 300;
+	margin-bottom: 0.4em;
+}
+
+input[type='submit'],
+button {
+	background-color: transparent;
+	color: turquoise;
+	cursor: pointer;
+}
+
+input[type='submit']:hover,
+input[type='submit']:focus-visible {
+	outline: 2px solid turquoise;
+	outline-offset: -2px;
 }

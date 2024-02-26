@@ -13,7 +13,7 @@
 
 .breadcrumps {
 	display: flex;
-	background-color: #c7c5c5;
+	border: 1px solid #c7c5c5;
 	padding: 0.4rem;
 }
 
@@ -26,4 +26,10 @@
 
 .breadcrumps a {
 	text-decoration: underline black dotted 1px;
+}
+
+.navigation {
+	padding-block: 1rem;
+	display: flex;
+	gap: 0.4rem;
 }

@@ -28,13 +28,13 @@ const dashboard = () => {
 	return (
 		<section id='dashboard' className={styles.container}>
 			<header>
-				<Breadcrumps matches={matches} />
 				<Link to='/dashboard'>
 					<h1>Dashboard</h1>
 				</Link>
+				<Breadcrumps matches={matches} />
 			</header>
 
-			<nav>
+			<nav className={styles.navigation}>
 				{Object.entries(dashLinks).map(([href, name]) => (
 					<Link key={href} to={href}>
 						{name}
