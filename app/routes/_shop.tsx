@@ -1,13 +1,13 @@
 import { LoaderFunctionArgs } from '@remix-run/node'
 import { Link, Outlet, json, useLoaderData, useMatches } from '@remix-run/react'
-import Breadcrumps from '~/components/breadcrumps'
+import Breadcrumps from '~/routes/dashboard/breadcrumps'
 import BrowsingBar from '~/components/browsingbar'
 import ShopHeader from '~/components/shopheader'
 import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
 export const handle = {
-	breadcrumb: () => <Link to="/">shop</Link>,
+	breadcrumb: () => <Link to='/'>shop</Link>
 }
 export const loader = async ({ request }: LoaderFunctionArgs) => {
 	// get the user if logged in
