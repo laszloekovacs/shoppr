@@ -4,6 +4,7 @@ import { Link } from '@remix-run/react'
 import { ProductSchema } from '~/model/product'
 import { db } from '~/services/db.server'
 import styles from './dashboard.products.new.module.css'
+import invariant from 'tiny-invariant'
 
 export const handle = {
 	breadcrumb: () => <Link to='/dashboard/products/new'>new</Link>
@@ -15,20 +16,19 @@ type Inputs = {
 	department: string
 }
 
-
-const validateNewProduct = (obj: Partial<Inputs>): => {
-	let errors: any[]
+const validateNewProduct = (obj: Partial<Inputs>) => {
+	const errors: { key: string; message: string }[] = []
 
 	if (typeof obj.name == 'string' && obj.name.length == 2) {
-		errors['name'] = 'must be more than 2 characters'
+		errors.set('name', 'must be more than 2 characters')
 	}
 
 	if (typeof obj.brand == 'string' && obj.brand.length == 2) {
-		errors['brand'] = 'must be more than 2 characters'
+		errors.set('brand', 'must be more than 2 characters')
 	}
 
 	if (typeof obj.department == 'string' && obj.department.length == 2) {
-		errors['department'] = 'must be more than 2 characters'
+		errors.set('department', 'must be more than 2 characters')
 	}
 
 	return errors
@@ -36,6 +36,7 @@ const validateNewProduct = (obj: Partial<Inputs>): => {
 
 export async function action({ request }: ActionFunctionArgs) {
 	const body = await request.formData()
+	const errors: { key: string; message: string }[] = []
 
 	// unpack inputs
 	const product = {
@@ -45,10 +46,10 @@ export async function action({ request }: ActionFunctionArgs) {
 	}
 
 	// validate and return complains to client
-	const validationErrors = validateNewProduct(product)
+	validateNewProduct(product, errors)
 
-	if (validationErrors.keys.length > 0) {
-		return json({ errors: validationErrors })
+	if (errors.size > 0) {
+		return json({ errors })
 	}
 
 	// store in the database, if schema is enforced on the db,
@@ -56,7 +57,8 @@ export async function action({ request }: ActionFunctionArgs) {
 	const insertionResult = await db.products.insertOne(product)
 
 	if (!insertionResult.acknowledged) {
-		return json({ error: 'insertion to database failed' })
+		errors.set('insertion', 'insertion to database failed')
+		return json({ errors })
 	}
 
 	// go to second stage to fill out extra data on success
@@ -65,7 +67,8 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function NewProductPage() {
-	const actionResult = useActionData<typeof action>()
+	const data = useActionData<typeof action>()
+	invariant(data, 'should not arrive here without a valid data object')
 
 	return (
 		<section className={styles.container}>
