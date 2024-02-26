@@ -1,5 +1,5 @@
 import { UIMatch } from '@remix-run/react'
-import styles from './breadcrumps.module.css'
+import * as styles from './breadcrumps.css'
 
 interface Props {
 	matches: UIMatch<unknown, any>[]
@@ -12,7 +12,9 @@ const Breadcrumps = ({ matches }: Props) => {
 				.filter(match => match.handle && match.handle.breadcrumb)
 				.map((match, index) => (
 					<li key={index}>
-						<span>{match.handle.breadcrumb(match)}</span>
+						<span className={styles.link}>
+							{match.handle.breadcrumb(match)}
+						</span>
 					</li>
 				))}
 		</nav>

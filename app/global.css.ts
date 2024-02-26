@@ -14,16 +14,25 @@ export const theme = createTheme({
 	})
 })
 
+const CairoFont = 'Cairo'
+globalFontFace(CairoFont, {
+	src: 'url(https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap)'
+})
+
+globalStyle('html', {
+	boxSizing: 'border-box',
+	fontFamily: [CairoFont, 'sans-serif'].join(', ')
+})
+
 globalStyle('body', {
 	margin: 0,
 	backgroundColor: 'beige'
 })
 
-globalStyle('html', {
-	boxSizing: 'border-box',
-	fontFamily: 'Roboto'
+globalStyle('.w-1', {
+	width: '1em'
 })
 
-globalFontFace('Roboto', {
-	src: 'url(https://fonts.googleapis.com/css2?family=Roboto&display=swap)'
+globalStyle('li', {
+	listStyle: 'none'
 })
