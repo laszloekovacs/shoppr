@@ -17,7 +17,7 @@ success card
 4242424242424242
 
 ### styled-system
-
+https://codesandbox.io/p/devbox/remix-run-examples-vanilla-extract-1vdv0y?file=%2Fapp%2Fglobal.css.ts
 https://github.com/styled-system/styled-system/tree/master
 
 ## TODO
