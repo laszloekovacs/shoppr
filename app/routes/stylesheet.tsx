@@ -1,9 +1,12 @@
 import { BigText } from '~/components/bigtext'
+import * as styles from './stylesheet.css'
 
 const StyleSheet = () => {
 	return (
-		<div>
-			<BigText></BigText>
+		<div className={styles.container}>
+			<div className={styles.card}>
+				<BigText />
+			</div>
 		</div>
 	)
 }
