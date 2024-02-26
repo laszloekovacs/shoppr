@@ -1,10 +1,8 @@
 import { ActionFunctionArgs } from '@remix-run/node'
 import { Form, json, redirect, useActionData } from '@remix-run/react'
 import { Link } from '@remix-run/react'
-import { ProductSchema } from '~/model/product'
 import { db } from '~/services/db.server'
 import styles from './dashboard.products.new.module.css'
-import invariant from 'tiny-invariant'
 
 export const handle = {
 	breadcrumb: () => <Link to='/dashboard/products/new'>new</Link>
@@ -17,18 +15,18 @@ type Inputs = {
 }
 
 const validateNewProduct = (obj: Partial<Inputs>) => {
-	const errors: { key: string; message: string }[] = []
+	const errors: Partial<Inputs> = {}
 
-	if (typeof obj.name == 'string' && obj.name.length == 2) {
-		errors.set('name', 'must be more than 2 characters')
+	if (typeof obj.name != 'string' || obj.name.length < 3) {
+		errors['name'] = 'must be more than 3 characters'
 	}
 
-	if (typeof obj.brand == 'string' && obj.brand.length == 2) {
-		errors.set('brand', 'must be more than 2 characters')
+	if (typeof obj.brand != 'string' || obj.brand.length < 3) {
+		errors['brand'] = 'must be more than 3 characters'
 	}
 
-	if (typeof obj.department == 'string' && obj.department.length == 2) {
-		errors.set('department', 'must be more than 2 characters')
+	if (typeof obj.department != 'string' || obj.department.length < 3) {
+		errors['department'] = 'must be more than 3 characters'
 	}
 
 	return errors
@@ -36,7 +34,6 @@ const validateNewProduct = (obj: Partial<Inputs>) => {
 
 export async function action({ request }: ActionFunctionArgs) {
 	const body = await request.formData()
-	const errors: { key: string; message: string }[] = []
 
 	// unpack inputs
 	const product = {
@@ -46,10 +43,10 @@ export async function action({ request }: ActionFunctionArgs) {
 	}
 
 	// validate and return complains to client
-	validateNewProduct(product, errors)
+	const errors = validateNewProduct(product)
 
-	if (errors.size > 0) {
-		return json({ errors })
+	if (errors.brand || errors.name || errors.department) {
+		return json(errors)
 	}
 
 	// store in the database, if schema is enforced on the db,
@@ -57,8 +54,7 @@ export async function action({ request }: ActionFunctionArgs) {
 	const insertionResult = await db.products.insertOne(product)
 
 	if (!insertionResult.acknowledged) {
-		errors.set('insertion', 'insertion to database failed')
-		return json({ errors })
+		throw new Error('failed to insert product')
 	}
 
 	// go to second stage to fill out extra data on success
@@ -67,8 +63,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function NewProductPage() {
-	const data = useActionData<typeof action>()
-	invariant(data, 'should not arrive here without a valid data object')
+	const errors = useActionData<typeof action>()
 
 	return (
 		<section className={styles.container}>
@@ -83,24 +78,27 @@ export default function NewProductPage() {
 					name='name'
 					placeholder='eg. iPhone, flower print dress'
 					autoFocus
+					required
 				/>
-				<span className='error'></span>
+				<span className='error'>{errors?.name}</span>
 
 				<label htmlFor='brand'>manufacturer</label>
 				<input
 					type='text'
 					name='brand'
 					placeholder='eg. nike, citizen, nokia'
+					required
 				/>
-				<span className='error'></span>
+				<span className='error'>{errors?.brand}</span>
 
 				<label htmlFor='department'>category</label>
 				<input
 					type='text'
 					name='department'
 					placeholder='eg.: shoes, watches'
+					required
 				/>
-				<span className='error'></span>
+				<span className='error'>{errors?.department}</span>
 
 				<hr />
 				<input type='submit' value='create' />
