@@ -11,6 +11,12 @@ const StyleSheet = () => {
 			<div>
 				<p>hello</p>
 			</div>
+
+			<div>
+				<input type='text' placeholder='hello' />
+				<input type='radio' checked />
+				<input type='submit' checked />
+			</div>
 		</div>
 	)
 }

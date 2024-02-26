@@ -10,11 +10,42 @@ body {
 
 	font-family: 'Fira Sans', sans-serif;
 	font-optical-sizing: auto;
-	font-weight: 300;
+	font-weight: 400;
 	font-style: normal;
+	color: black;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
 }
 
 h1 {
 	font-family: 'Quicksand', sans-serif;
 	font-weight: 500;
+}
+
+input:not([type='radio'], [type='checkbox']) {
+	border: 1px solid #ccc;
+	padding: 0.5rem;
+	border-radius: 2px;
+}
+
+input {
+	font-size: inherit;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+	text-decoration: underline black dotted 1px;
 }
