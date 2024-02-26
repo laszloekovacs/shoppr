@@ -1,5 +1,6 @@
 import { BigText } from '~/components/bigtext'
 import styles from './stylesheet.module.css'
+import { Display } from '~/components/display'
 
 const StyleSheet = () => {
 	return (
@@ -11,6 +12,8 @@ const StyleSheet = () => {
 			<div>
 				<p>hello</p>
 			</div>
+
+			<Display>hello</Display>
 
 			<div>
 				<input type='text' placeholder='hello' />
