@@ -1,14 +1,9 @@
-import { BigText } from '~/components/bigtext'
 import styles from './stylesheet.module.css'
 import { Display } from '~/components/display'
 
 const StyleSheet = () => {
 	return (
 		<div className={styles.container}>
-			<div>
-				<BigText />
-			</div>
-
 			<div>
 				<p>hello</p>
 			</div>

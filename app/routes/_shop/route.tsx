@@ -2,7 +2,7 @@ import { LoaderFunctionArgs } from '@remix-run/node'
 import { Link, Outlet, json, useLoaderData, useMatches } from '@remix-run/react'
 import Breadcrumps from '~/routes/dashboard/breadcrumps'
 import BrowsingBar from '~/components/browsingbar'
-import ShopHeader from '~/components/shopheader'
+import ShopHeader from '~/routes/_shop/shopheader'
 import { db } from '~/services/db.server'
 import { authenticator } from '~/services/session.server'
 
