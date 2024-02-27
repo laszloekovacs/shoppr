@@ -1,3 +1,6 @@
 export const Display = ({ children }: { children: React.ReactNode }) => (
-	<h1>{children}</h1>
+	<>
+		<input type='text' />
+		<h1>{children}</h1>
+	</>
 )
